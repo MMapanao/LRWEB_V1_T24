@@ -1,0 +1,270 @@
+﻿@model LRWEB_V1_ADMIN_T24.Areas.Admin.ViewModel.ViewModel_NewGroupCode
+@using LRWEB_V1_ADMIN_T24.Areas.Admin
+@foreach (var obj in Model.vm_EPAY_V2_CLIENTS)
+{
+
+    <div class="mainboard" style="width:100%;min-height:100vh;height:auto;padding:25px;">
+        <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+            <li>
+                <label style="padding-top:15px;font-size:3rem;width:100px;height:100px;background-color:#faa634;color:#fff;text-align:center;vertical-align:central;border:3px solid #faa634;">
+                    @(obj.clientName.Substring(0,2).ToString() )
+                </label>
+            </li>
+            <li style="        width: calc(100% - 100px);
+        padding: 8px 8px 8px 25px;">
+                <div style="width:100%;margin-bottom:3px;">
+                    <h3 style="color:#4f2683;"><b>@obj.clientName</b></h3>
+                </div>
+                <hr />
+                <label style="margin:0px;padding:0px;color:#4f2683">
+                 <b>@("Group Code: ") <u>@obj.groupCode</u></b>   
+                </label>
+            </li>
+        </ul>
+        <ul class="" style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+            <li style="width:150px;padding-top:20px;">
+                <button class="btn btn-outline-secondary" name="btnclientside" id="btndetails" style="width:100%;background-color:#faa634;color:#fff">
+                    <i class="fa fa-info-circle"></i> Company Info
+                </button>
+                <button class="btn btn-outline-secondary" name="btnclientside" id="btnschemecode" style="width:100%;color:#4f2683;">
+                    <i class="fa fa-list"></i> Account Details
+                </button>
+                @*<button class="btn btn-outline-secondary" name="btnclientside" id="btnbranches" style="width:100%;color:#4f2683">
+                    <i class="fa fa-table"></i> Branches 
+                </button>*@
+                @*<button class="btn btn-outline-secondary" name="btnclientside" id="btnhraccess" style="width:100%;color:#4f2683">
+                    <i class="fa fa-user"></i> HR Access
+                </button>*@
+                <br />
+                @{ 
+                    string valurl = Request.QueryString["content"].ToString();
+                    string present_url = Request.QueryString["content"].ToString();
+                    string content_url = Request.QueryString["content"].ToString();
+                    if (valurl == "PendingClients")
+                    {
+                        present_url = "VerifyClients";
+                    }else if(valurl == "EnrollClient")
+                    {
+                        present_url = "EnrollClients";
+                    }
+                }
+                <a href="@GlobalVariableClass.FolderName/Admin/@present_url/Index?content=@content_url" class="btn" style="width:100%;margin-top:20px;background-color:#faa634;color:#fff"><i class="fa fa-backward"></i> BACK</a>
+            </li>
+            <li style="width: 100%; padding-left: 15px; padding-top: 20px;">
+                <div id="content_details" name="gp_contents" style="">
+                    <p style="margin:0px;padding:3px;color:#fff;min-width:100%;padding-left:10px;background-color:#4f2683;"><i class="fa fa-info-circle"></i><b> COMPANY INFO</b></p>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:200px;">Title</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ln in Model.vm_info_table)
+                            {
+                                <tr>
+                                    <td>@ln.title</td>
+                                    <td style="text-align:left;padding-left:10px;">@ln.info</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="content_scheme_code" name="gp_contents" style="display:none;">
+                    <p style="margin:0px;padding:3px;color:#fff;min-width:100%;padding-left:10px;background-color:#4f2683;"><i class="fa fa-info-circle"></i><b> ACCOUNT DETAILS</b></p>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:200px;">Title</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="">Account Number</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.accountNumber</td>
+                            </tr>
+                            <tr>
+                                <td style="">Customer ID</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.customerID</td>
+                            </tr>
+                            <tr>
+                                <td style="">CSB Branch</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.csbBranch</td>
+                            </tr>
+                            <tr>
+                                <td style="">Group Code</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.groupCode</td>
+                            </tr>
+                            <tr>
+                                <td style="">Agency Code</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.agencyCode</td>
+                            </tr>
+                            <tr>
+                                <td style="">Scheme Code</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.schemeCode</td>
+                            </tr>
+                            <tr>
+                                <td style="">Credit Ratio</td>
+                                <td style="text-align:left;padding-left:15px;">@obj.creditRatio %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                @*<div id="content_scheme_code" name="gp_contents" style="display:none;">
+            <p style="margin:0px;padding:3px;color:#fff;min-width:100%;padding-left:10px;background-color:#4f2683;"><i class="fa fa-info-circle"></i><b> SELECTED SCHEME CODES</b></p>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:200px;">Scheme Code</th>
+                        <th>Definition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var gc in Model.vm_scheme_code)
+                    {
+                        <tr>
+                            <td style="">@gc.Schemecode</td>
+                            <td style="text-align:left;padding-left:15px;">@gc.Definitions</td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>*@
+
+                @*<div id="content_branches" name="gp_contents" style="display:none;">
+            <p style="margin:0px;padding:3px;color:#fff;min-width:100%;padding-left:10px;background-color:#4f2683;"><i class="fa fa-info-circle"></i><b> CORPORATE CLIENT BRANCHES</b></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="min-width:200px;">Site Name</th>
+                        <th style="min-width:200px;">Street</th>
+                        <th style="min-width:100px;">Zip Code</th>
+                        <th style="min-width:100px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tblbranches">
+                    @foreach (var ld in Model.vm_branches)
+                    {
+
+                        <tr>
+                            <td>@ld.SiteName</td>
+                            <td>@ld.Street</td>
+                            <td>@ld.ZipCode</td>
+                            <td>@ld.Status</td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>*@
+
+                @*<div id="content_hraccess" name="gp_contents" style="display:none;">
+            <p style="margin:0px;padding:3px;color:#fff;min-width:100%;padding-left:10px;background-color:#4f2683;"><i class="fa fa-info-circle"></i><b> CORPORATE CLIENT HR ACCESS</b></p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="min-width:200px;">Full Name</th>
+                        <th style="min-width:200px;">Contact Number</th>
+                        <th style="min-width:150px;">Email</th>
+                        <th style="min-width:100px;">Checker</th>
+                        <th style="min-width:100px;">Maker</th>
+                        <th style="min-width:100px;">Send Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tblbranches">
+                    @foreach (var ld in Model.vm_access_id)
+                    {
+
+                        <tr>
+                            <td>@(ld.first_name +" " + ld.last_name)</td>
+                            <td>@ld.contact_no</td>
+                            <td>@ld.email</td>
+                            @if (ld.checker == "0")
+                            {
+                                <td>NO</td>
+                            }
+                            else
+                            {
+                                <td>YES</td>
+                            }
+
+                            @if (ld.maker == "0")
+                            {
+                                <td>NO</td>
+                            }
+                            else
+                            {
+                                <td>YES</td>
+                            }
+                            @if (ld.status == "0"){
+                                <td>NOT SENT</td>
+                            }else{
+                                <td>SENT</td>
+                            }
+
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>*@
+            </li>
+        </ul>
+        
+    </div>
+
+
+    break;
+}
+
+<script>
+    $(document).on('click', 'button[name="btnclientside"]', function () {
+        var thisid = this.id;
+
+        //$('button[name = "btnclientside"]').removeClass("btn-outline-secondary").removeClass("btn-secondary").addClass("btn-outline-secondary");
+        $('button[name = "btnclientside"]').css("background-color", "").css("color", "#4f2683");
+        $("#" + thisid).css("background-color", "#faa634").css("color", "#fff");
+        
+        if (thisid == "btnschemecode") {
+            $('div[name="gp_contents"]').css('display', 'none');
+            $('#content_scheme_code').css('display', 'block'); 
+        } else if (thisid == "btndetails") {
+            $('div[name="gp_contents"]').css('display', 'none');
+            $('#content_details').css('display', 'block');
+        } else if (thisid == "btnbranches") {
+            $('div[name="gp_contents"]').css('display', 'none');
+            $('#content_branches').css('display', 'block');
+        } else if (thisid == "btnhraccess") {
+            $('div[name="gp_contents"]').css('display', 'none');
+            $('#content_hraccess').css('display', 'block');
+        }
+    });
+
+
+
+</script>
+
+<style>
+        .table td {
+    padding:4px;
+    font-size:14px;
+    text-align:center;
+    /*border-bottom:2px solid #FF8108;*/
+}
+.table th{
+    padding:5px;
+    text-align:center;
+    font-size:15px;
+    color:#4e4e4e;
+ 
+}
+</style>

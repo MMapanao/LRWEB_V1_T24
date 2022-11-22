@@ -1,0 +1,598 @@
+﻿@model LRWEB_V1_ADMIN_T24.Areas.Admin.ViewModel.ViewModel_NewGroupCode
+@{
+    ViewBag.Title = "NewGroupCode";
+}
+@using LRWEB_V1_ADMIN_T24.Areas.Admin
+<style>
+    .form-group {
+        margin: 0px;
+    }
+
+    .form-control {
+        border-radius: 1px;
+    }
+
+    small[name="txtmessage"] {
+        visibility: hidden;
+    }
+</style>
+
+<div style="padding:10px;">
+    <div class="mainboard" style="overflow-x:hidden;padding:25px;">
+        <h4 style="color:#4f2683;margin-bottom:5px;"><i class="fa fa-plus"></i> UPDATE GROUP CODE</h4>
+        <hr /><br />
+              <form id="regForm">
+                  <div class="row">
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                          <label for="ddgroupcode">Group Code <b style="color:#eb0101; ">*</b></label>
+                          <div class="" style="display:flex;">
+                              <input class="form-control" placeholder="Enter group code" id="groupCode" name="newclient" maxlength="5" style="max-width:100%;" disabled />
+                              @*<button class="btn" style="background-color:#faa634;color:#fff" id="btncheckgroupcode"><i class="fa fa-check"></i></button>*@
+                          </div>
+                          <small id="GroupCode_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                          <label for="schemeCode">Scheme Code</label>
+                          <input type="text" class="form-control" id="schemeCode" name="newclient" placeholder="Assign Scheme Code" style="min-width:100%;" disabled>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                          <label for="txtcompany">Client Name</label>
+                          <input type="text" class="form-control" id="clientName" name="newclient" placeholder="Assign Client Name " style="min-width:100%;" disabled>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                          <label for="creditRatio">Credit Ratio (%)</label>
+                          <input type="text" class="form-control" id="creditRatio" value="30" name="newclient" placeholder="Assign Scheme Code" style="min-width:100%;">
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="csbBranch">CSB Branch <b style="color:#eb0101; ">*</b></label>
+                          <select class="form-control" id="csbBranch" style="min-width:100%;color:#4f2683;">
+                              
+                          </select>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="AED">Agreement Effectivity Date <b style="color:#eb0101; ">*</b></label>
+                          <input type="date" class="form-control" id="AED" style="min-width:100%;" required>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="mobileNumber">Mobile Number <b style="color:#eb0101; ">*</b></label>
+                          <input type="number" class="form-control" id="mobileNumber" name="newclient" maxlength="11" placeholder="Assign Mobile Number" style="min-width:100%;" required>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="officeNumber">Office Number <b style="color:#eb0101; ">*</b></label>
+                          <input type="number" class="form-control" id="officeNumber" name="newclient" maxlength="11" placeholder="Assign Office Number" style="min-width:100%;" required>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="emailAddress">Email Address <b style="color:#eb0101; ">*</b></label>
+                          <input type="email" class="form-control" id="emailAddress" name="newclient" placeholder="Assign Company Email" style="min-width:100%;" required>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="emailFormat">Email Domain <b style="color:#eb0101; ">*</b></label>
+                          <div class="input-group">
+                              <input type="text" class="form-control" id="emailFormat" placeholder="Assign Email Domain">
+                              <div class="input-group-append">
+                                  <span class="input-group-text" id="basic-addon2">ex(@@domain.com.ph)</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="classification">Institution Classification <b style="color:#eb0101; ">*</b></label>
+                          <select class="form-control" id="classification" style="color:#4f2683;">
+                              <option value="Private Schools, Universities and Colleges">Private Schools, Universities and Colleges</option>
+                              <option value="Private Companies">Private Companies</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="structure">Business Type <b style="color:#eb0101; ">*</b></label>
+                          <select class="form-control" id="structure" style="color:#4f2683;">
+                              <option value="Sole proprietorship">Sole proprietorship</option>
+                              <option value="Partnership">Partnership</option>
+                              <option value="Corporation">Corporation</option>
+                              <option value="One-person Corporation">One-person Corporation</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="accountNumber">Account Number:</label>
+                          <input type="text" class="form-control" id="accountNumber" name="newclient" placeholder="" style="min-width:100%;">
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                          <label for="customerID">Customer ID:</label>
+                          <input type="text" class="form-control" id="customerID" name="newclient" placeholder="" style="min-width:100%;">
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                          <h5 style="margin-top:10px;margin-bottom:5px;"><label>BUSINESS ADDRESS</label></h5>
+                          <p style="width:100%;height:1px;background-color:#aeaeae;margin-bottom:15px;"></p>
+                      </div>
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                          <div class="form-group">
+                              <label for="usr4" class="toplabel">Address Line (Unit Number / House/Building/Street Number,Street Name)<b style="color:#eb0101; ">*</b></label>
+                              <input class="form-control" placeholder="Home Number/ Street/ Subdivision" maxlength="150" id="addressLine" name="newclient" required />
+                              <small class="text-danger" id="Present_Address_msg" style="display:none;"></small>
+                          </div>
+                      </div>
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                          <div class="form-group">
+                              <label for="usr5" class="toplabel">Province <b style="color:#eb0101; ">*</b></label>
+                              <select class="form-control" id="province" style="color:#4f2683;" required>
+                              </select>
+                              <small class="text-danger" id="Present_City_msg" style="display:none;"></small>
+                          </div>
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                          <div class="form-group">
+                              <label for="usr6" class="toplabel">City <b style="color:#eb0101; ">*</b></label>
+                              <select class="form-control" id="city" style="color:#4f2683;" required>
+                              </select>
+                              <small class="text-danger" id="Present_State_msg" style="display:none;"></small>
+                          </div>
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                          <div class="form-group">
+                              <label for="usr4" class="toplabel">Barangay<b style="color:#eb0101; ">*</b></label>
+                              <select class="form-control" id="barangay" style="color:#4f2683;" required>
+                              </select>
+                              <small class="text-danger" id="Present_Address_msg" style="display:none;"></small>
+                          </div>
+                      </div>
+
+                  </div>
+                  <hr />
+                  <div style="width:100%;text-align:right;width:100%;padding-top:10px;">
+                      <a href="@GlobalVariableClass.FolderName/Admin/EnrollClients/Index?content=EnrollClient" class="btn" style="background-color:#faa634;color:#fff;">Cancel</a>  &nbsp;
+                      <button class="btn" style="background-color:#faa634;color:#fff" id="btnsubmit">Submit</button>
+                  </div>
+              </form>
+        @*<hr />
+        <div style="width:100%;text-align:right;width:100%;padding-top:10px;">
+            <a href="@GlobalVariableClass.FolderName/Admin/EnrollClients/Index?content=EnrollClient" class="btn" style="background-color:#faa634;color:#fff;">Cancel</a>  &nbsp;
+            <button class="btn" style="background-color:#faa634;color:#fff"id="btnsubmit">Submit</button>
+        </div>*@
+    </div>
+</div>
+
+<style>
+    h3{
+        color:#4e4e4e;
+    }
+
+</style>
+@*@foreach (var sc in Model.vm_scheme_code)
+{
+    <script>
+        $("#" + '@sc.Schemecode').attr('checked', 'checked');
+    </script>
+}*@
+
+    @foreach (var cl in Model.vm_EPAY_V2_CLIENTS)
+    {
+<script>
+
+    @*var d = '@cl.AED';
+    console.log(d);
+    d = d.split(' ')[0];*@
+    var d = new Date('@cl.AED');
+    var n = d.toISOString().split('T')[0];
+    $("#AED").val(n);
+    $("#creditRatio").val('@cl.creditRatio');
+    $("#accountNumber").val('@cl.accountNumber');
+    $("#addressLine").val('@cl.addressLine');
+    $("#classification").val('@cl.classification');
+    $("#clientName").val('@cl.clientName');
+    $("#customerID").val('@cl.customerID');
+    $("#emailAddress").val('@cl.emailAddress');
+    $("#emailFormat").val('@cl.emailFormat');
+    $("#groupCode").val('@cl.groupCode');
+    $("#mobileNumber").val('@cl.mobileNumber');
+    $("#officeNumber").val('@cl.officeNumber');
+    $("#schemeCode").val('@cl.schemeCode');
+    $("#structure").val('@cl.structure');
+
+    $(document).ready(function () {
+        $("#loadingmodal").show();
+        loaddropdownprovincewithval();
+        loadsol();
+        //loaddropdownbrgy();
+        $("#province").change(function () {
+            loaddropdowncity();
+        });
+
+        $("#city").change(function () {
+            loaddropdownbrgy();
+        });
+
+        function loaddropdownprovincewithval() {
+            var province = $("#province")
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getProvince",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    $("#province").empty();
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        province.append(`<option value="${res[key].MappingId}"> ${res[key].Title}</option>`)
+                    });
+                    $("#province").val('@cl.provinceId');
+                    $("#city").empty();
+                    loaddropdowncitywithval()
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+        function loaddropdowncitywithval() {
+            var city = $("#city")
+            var provinceId = $("#province").val();
+            var provinceDesc = $("#province option:selected").html();
+
+
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getCity",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                data: JSON.stringify({ provinceId: provinceId }),
+                cache: false,
+                success: function (data) {
+                    $("#city").empty();
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        city.append(`<option value="${res[key].MappingId}"> ${res[key].Title}</option>`)
+                    });
+                    $("#city").val('@cl.cityId')
+                    $("#barangay").empty();
+                    loaddropdownbrgywithval();
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+        function loaddropdownbrgywithval() {
+            var barangay = $("#barangay")
+            var cityId = $("#city").val();
+
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getBarangay",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                data: JSON.stringify({ cityId: cityId }),
+                cache: false,
+                success: function (data) {
+                    $("#barangay").empty();
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        barangay.append(`<option value="${res[key].SysId}"> ${res[key].Title}</option>`)
+                    });
+                    $("#barangay").val('@cl.barangayId');
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+        function loaddropdownprovince() {
+            $("#loadingmodal").show();
+            var province = $("#province")
+            var city = $("#city")
+            city.empty();
+            city.append(`<option disabled selected value="">--Please select--</option>`)
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getProvince",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    $("#province").empty();
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        province.append(`<option value="${res[key].MappingId}"> ${res[key].Title}</option>`)
+                    });
+                    setTimeout(function () {
+                        $("#loadingmodal").hide();
+                    }, 1000)
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+        function loaddropdowncity() {
+            $("#loadingmodal").show();
+            var city = $("#city")
+            var barangay = $("#barangay")
+            var provinceId = $("#province").val();
+            var provinceDesc = $("#province option:selected").html();
+            barangay.empty();
+            barangay.append(`<option disabled selected value="">--Please select--</option>`)
+
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getCity",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                data: JSON.stringify({ provinceId: provinceId }),
+                cache: false,
+                success: function (data) {
+                    city.empty();
+                    city.append(`<option disabled selected value="">--Please select--</option>`)
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        city.append(`<option value="${res[key].MappingId}"> ${res[key].Title}</option>`)
+                    });
+                    setTimeout(function () {
+                        $("#loadingmodal").hide();
+                    }, 1000)
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+        function loaddropdownbrgy() {
+            $("#loadingmodal").show();
+            var barangay = $("#barangay")
+            var cityId = $("#city").val();
+
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getBarangay",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                data: JSON.stringify({ cityId: cityId }),
+                cache: false,
+                success: function (data) {
+                    barangay.empty();
+                    barangay.append(`<option disabled selected value="">--Please select--</option>`)
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        barangay.append(`<option value="${res[key].SysId}"> ${res[key].Title}</option>`)
+                    });
+                    setTimeout(function () {
+                        $("#loadingmodal").hide();
+                    }, 1000)
+                    
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+        function loadsol() {
+            var csb = $("#csbBranch")
+            $.ajax({
+                url: FolderName + "/Admin/EnrollClients/getSol",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    csb.empty();
+                    var res = jQuery.parseJSON(data);
+                    $.each(res, function (key, value) {
+                        csb.append(`<option value="${res[key].sol_id}-${res[key].finacle_sol_id}"> ${res[key].branch_name}</option>`)
+                    });
+                    $("#csbBranch").val('@cl.sol_id-@cl.finacle_sol_id');
+                    setTimeout(function () {
+                        $("#loadingmodal").hide();
+                    }, 1000);
+                },
+                error: function (ex) {
+                    alert("Internal Server Error");
+                }
+            });
+        }
+
+    });
+
+
+
+
+
+            //$(document).on('change', '#ZipCode', getcities);
+            //function getcities() {
+            //    var selval = $("#ZipCode").val();
+            //    var getloc = "zipcode" + selval;
+            //    var cityloc = $("#" + getloc).attr('name');
+            //    $("#CityProvince").val(cityloc.substr(0, cityloc.indexOf(",")));
+            //    $("#DistrictBarangay").val(cityloc.split(",").pop());
+            //}
+</script>
+    }
+
+<script>
+    
+
+    $(document).on('focusout', 'input[name="newclient"]', function () {
+        var thisid = this.id;
+        if (thisid != "emailAddress") {
+            $(this).val($(this).val().toUpperCase());
+        }
+    });
+    $(document).on('input', 'input[name="newclient"]', function () {
+        var thisid = this.id;
+        if (thisid != "emailAddress") {
+            $(this).val($(this).val().replace(/[^\w\s]/gi, ''));
+        }
+    });
+    $("#regForm").submit(function (e) {
+        $("#loadingmodal").show();
+        e.preventDefault();
+        $.confirm({
+            title: '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Update client details',
+            content: "Are you sure?",
+            type: "green",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Yes',
+                    btnClass: "btn-dark",
+                    action: function () {
+                        var model_state = JModel_UpdateClients();
+                        $.ajax({
+                            url: FolderName + "/Admin/EnrollClients/UpdateClient",
+                            dataType: "json",
+                            type: "POST",
+                            //contentType: 'application/json; charset=utf-8',
+                            data: model_state,
+                            async: true,
+                            cache: false,
+                            success: function (data) {
+                               //console.log(data);
+                                setTimeout(function () {
+                                    $("#loadingmodal").hide();
+                                }, 1000)
+                                MessageResults(data);
+                            },
+                            error: function (ex) {
+                                msgbox("Error", ex, "red");
+
+                            }
+                        });
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-red",
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+    });
+
+    function JModel_UpdateClients() {
+
+        var modelstate = {
+            ID: "N/A",
+            groupCode: $("#groupCode").val(),
+            schemeCode: $("#schemeCode").val(),
+            creditRatio: $("#creditRatio").val(),
+            clientName: $("#clientName").val(),
+            csbBranch: $("#csbBranch option:selected").html(),
+            sol_id: $("#csbBranch").val().split("-")[0],
+            finacle_sol_id: $("#csbBranch").val().split("-")[1],
+            AED: $("#AED").val(),
+            addressLine: $("#addressLine").val(),
+            barangayId: $("#barangay").val(),
+            cityId: $("#city").val(),
+            provinceId: $("#province").val(),
+            barangay: $("#barangay option:selected").html(),
+            city: $("#city option:selected").html(),
+            province: $("#province option:selected").html(),
+            mobileNumber: $("#mobileNumber").val(),
+            officeNumber: $("#officeNumber").val(),
+            emailAddress: $("#emailAddress").val(),
+            emailFormat: $("#emailFormat").val(),
+            classification: $("#classification").val(),
+            structure: $("#structure").val(),
+            accountNumber: $("#accountNumber").val(),
+            customerID: $("#customerID").val(),
+            status: "PENDING",
+            contentMark: "@Request.QueryString["content"].ToString()"
+        };
+        return modelstate;
+    }
+
+    function MessageResults(params) {
+        if (params == "") {
+            swal({
+                title: 'Save Group Code Data',
+                text: "Successfully Submit Group Code.",
+                type: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+            }).then((result) => {
+                if (result.value) {
+                    window.location = FolderName + "/Admin/EnrollClients/Index";
+                }
+            })
+            setTimeout(
+            window.location = FolderName + "/Admin/EnrollClients/Index?content=EnrollClient"
+            , 3000);
+        } else {
+            ClearAllValidate();
+            $(params).each(function (index, item) {
+                if (item.error_message != null) {
+                    $("#" + item.content_id).css('border-color', '#D32F2F');
+                    $("#" + item.content_id + "_message").css('visibility', 'visible');
+                    $("#" + item.content_id + "_message").text(item.error_message);
+                }
+            });
+        }
+    }
+
+    function ClearAllValidate() {
+        $("input").css("border-color", "");
+        $("small").css("visibility", "hidden");
+        $("select").css("border-color", "");
+    }
+
+
+    //$(document).on('click', '#btnadddeliverysol', function () {
+    //    var x = 0;
+    //    $('td[name="carddelsollist"]').each(function () {
+    //        if ($(this).text() == $("#txtcarddeliverysol option:selected").val()) {
+    //            x = 1;
+    //        }
+    //    });
+    //    if (x == 0) {
+    //        $("#CardDeliverySol").append('<tr id="row' + $("#txtcarddeliverysol option:selected").val() + '">' +
+    //                              '<td name="carddelsollist">' + $("#txtcarddeliverysol option:selected").val() + '</td>' +
+    //                              '<td>' + $("#txtcarddeliverysol option:selected").text() + '</td>' +
+    //                              '<td><a href="#" name="removesol" id="' + $("#txtcarddeliverysol option:selected").val() + '"><i class="fa fa-trash"></i> REMOVE ROW</a></td>' +
+    //                          '</tr>');
+
+    //    } else {
+    //        $.alert("selected branch is already taken");
+    //    }
+    //});
+
+    //$(document).on('click', 'a[name="removesol"]', function () {
+    //    var thisid = this.id;
+    //    $("#row" + thisid).remove();
+    //});
+</script>
+
+<style>
+    .table td {
+    padding:4px;
+    font-size:13px;
+    text-align:center;
+    /*border-bottom:2px solid #FF8108;*/
+}
+.table th{
+    padding:5px;
+    text-align:center;
+    font-size:13px;
+    color:#4e4e4e;
+ 
+}
+</style>

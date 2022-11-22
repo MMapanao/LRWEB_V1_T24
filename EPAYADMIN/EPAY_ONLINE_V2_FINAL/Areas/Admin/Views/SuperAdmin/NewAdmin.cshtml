@@ -1,0 +1,178 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/SuperAdminLayout.cshtml";
+    ViewBag.Title = "New Admin";
+}
+
+ <div class="mainboard" style="padding:25px;width:100%;height:100vh;overflow-y:auto;">
+     <h3 style="color:#4F2683;"><i class="fa fa-pencil"></i> Create New Admin</h3>
+     <hr style="margin-top:7px;margin-bottom:7px;" />
+     <br />
+     <form id="newadminform">
+         <div style="min-width:300px;max-width:400px;margin-left:10%;padding-bottom:35px;">
+             <div class="form-group">
+                 <label for="firstname1">First Name:</label>
+                 <input name="text" type="text" class="form-control" id="firstname" placeholder="Enter First name" autocomplete="off" maxlength="50" required>
+                 <small class="text-danger" id="firstname_msg"></small>
+             </div>
+             <div class="form-group">
+                 <label for="lastname1">Last Name:</label>
+                 <input name="text" type="text" class="form-control" id="lastname" placeholder="Enter Last name" autocomplete="off" maxlength="50" required>
+                 <small class="text-danger" id="lastname_msg"></small>
+             </div>
+             <div class="form-group">
+                 <label for="middlename1">Middle Name:</label>
+                 <input name="text" type="text" class="form-control" id="middlename" placeholder="Enter Middle name" autocomplete="off" maxlength="50">
+                 <small class="text-danger" id="middlename_msg"></small>
+             </div>
+
+             <div class="form-group">
+                 <label for="contactnumber1">Mobile number:</label>
+                 <input type="number" class="form-control" id="contactnumber" placeholder="9xxxxxxxxx" required>
+                 <small class="text-danger" id="contactnumber_msg"></small>
+             </div>
+             <div class="form-group">
+                 <label for="email1">Email:</label>
+                 <div class="input-group">
+                     <input type="text" class="form-control" id="email" placeholder="Enter Email" autocomplete="off" maxlength="50" required>
+                     <div class="input-group-append">
+                         <span class="input-group-text" id="basic-addon2">@@citysavings.com.ph</span>
+                     </div>
+                     <small class="text-danger" id="email_msg"></small>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label for="accesslevel1">Access Level:</label>
+                 <select class="form-control" id="accesslevel">
+                     <option value="ON-BOARDING USER">ON-BOARDING USER</option>
+                     <option value="ADMIN">ADMIN</option>
+                 </select>
+                 <small class="text-danger" id="accesslevel_msg"></small>
+             </div>
+             <button class="btn" id="btnsubmit" style="padding-left:35px;padding-right:35px;color:white;background-color:#FAA634;" type="submit"><i class="fa fa-save"></i> Submit</button>
+             <a href="/Admin/SuperAdmin/Index?content=admin" class="btn" style="padding-left:35px;padding-right:35px;color:white;background-color:#FAA634;"><i class="fa fa-ban"></i> Cancel</a>
+         </div>
+     </form>
+     <hr style="margin-top:7px;margin-bottom:7px;" />
+ </div>
+
+
+<style>
+    body{
+        overflow:hidden;
+    }
+ #main{
+     padding:0px;
+ }
+    label {
+        font-size: 14px;
+        color: #4F2683;
+        font-weight: bold;
+    }
+ small{
+     margin:0px;
+     padding:0px;
+     width:100%;
+     text-align:right;
+ }
+</style>
+<script>
+    function JModelSubmit() {
+        var email = $("#email").val() + "@@citysavings.com.ph"
+        var model_state = {
+            IntRecord:'N/A',
+            firstname: $("#firstname").val(),
+            lastname: $("#lastname").val(),
+            middlename: $("#middlename").val(),
+            contactnumber: $("#contactnumber").val(),
+            email: email,
+            password: 'N/A',
+            status: 'N/A',
+            accesslevel: $("#accesslevel").val()
+        };
+        return model_state;
+    }
+    $("#newadminform").submit(function (e) {
+        e.preventDefault();
+        $.confirm({
+            title: '<i class="fa fa-save"></i> Create New Admin',
+            content: "Are you sure?",
+            type: "dark",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Yes',
+                    btnClass: "btn-orange",
+                    action: function () {
+                        var model_state = JModelSubmit();
+                   //     console.log(JModelSubmit());
+                        $("#loadingmodal").show();
+                        $.ajax({
+                            url: FolderName + "/Admin/SuperAdmin/SubmitNewAdmin",
+                            dataType: "json",
+                            type: "POST",
+                            //contentType: 'application/json; charset=utf-8',
+                            data: model_state,
+                            async: true,
+                            cache: false,
+                            //processData: false,
+                            success: function (data) {
+                                ActionResult(data);
+ 
+                            },
+                            error: function (ex) {
+                                msgbox("Error", ex, "red");
+
+                            }
+                        });
+
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-orange",
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+    });
+
+    function ActionResult(params) {
+        if (params == "") {
+
+            swal({
+                title: 'Save New Admin Data',
+                text: "Successfully Submit Admin Data",
+                type: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+            }).then((result) => {
+                if (result.value) {
+                    window.location = FolderName + "/Admin/SuperAdmin/Index?content=admin";
+                }
+            })
+            setTimeout(
+                window.location = FolderName + "/Admin/SuperAdmin/Index?content=admin"
+                , 2500);
+        } else {
+            var kk = params.toString();
+            var arr_post = kk.split(',');
+            for (var x = 0; x < 9; x = x + 1) {
+                if (arr_post[(x + 9)] != "") {
+                    $("#" + arr_post[x]).css("border-color", "#dd2c00");
+                    $("#" + arr_post[x] + "_msg").css("visibility", "visible");
+                    $("#" + arr_post[x] + "_msg").text(arr_post[(x + 9)]);
+                } else {
+                    $("#" + arr_post[x]).css("border-color", "");
+                    $("#" + arr_post[x] + "_msg").css("visibility", "hidden");
+                }
+            }
+        }
+    }
+
+    $(document).on('focusout', 'input[name="text"]', function () {
+        $(this).val($(this).val().toUpperCase());
+    });
+</script>

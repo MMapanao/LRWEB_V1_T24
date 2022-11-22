@@ -1,0 +1,212 @@
+﻿@model LRWEB_V1_ADMIN_T24.Areas.Admin.Models._EPAY_V2_CLIENTS
+
+<div class="mainboard" style="width:100%;height:100vh;padding:25px;">
+    <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+        <li style="width:calc(100% - 350px);">
+            <h4 style="color:#4f2683;"><i class="fa fa-users"></i> @(Model.clientName.ToUpper() +" (" + Model.groupCode +") ")</h4>
+        </li>
+        <li style="width:350px;">
+            <button class="btn" id="btnsubmit" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;background-color:#4f2683;color:#fff;"><i class="fa fa-save"></i> Submit</button> &nbsp;
+            <a href="~/Admin/ClientAccess/Index?content=ClientAccess" class="btn" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;background-color:#4f2683;color:#fff;"><i class="fa fa-unlink"></i> Cancel</a> &nbsp;
+            <button class="btn" id="btnnewrow" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;background-color:#4f2683;color:#fff;"><i class="fa fa-plus"></i> New Row</button> 
+        </li>
+
+
+    </ul>
+
+    <label style="width:100%;padding:3px 10px 3px 15px;color:#fff;margin-top:20px;background-color:#4f2683;"><i class="fa fa-table"></i> New Client Access ID</label>
+    <div style="width:100%;height:calc(100vh - 145px);overflow:auto;">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="min-width:200px;">Last Name</th>
+                    <th style="min-width:200px;">First Name</th>
+                    <th style="min-width:150px;">Middle Name</th>
+                    <th style="min-width:150px;">Mobile #</th>
+                    <th style="min-width:220px">Email Address</th>
+                    <th style="min-width:90px" hidden>Checker</th>
+                    <th style="min-width:90px" hidden>Maker</th>
+                    <th style="min-width:50px;"><i class="fa fa-pencil"></i></th>
+                </tr>
+            </thead>
+            <tbody id="tblclientid">
+                <tr id="row0">
+                    <td><input type="text" id="lastname0" class="form-control" placeholder="Last name" name="" /></td>
+                    <td><input type="text" id="firstname0" class="form-control" placeholder="First name" name="txtclientid" /></td> 
+                    <td><input type="text" id="middlename0" class="form-control" placeholder="Middle name" name="" /></td>
+                    <td><input type="number" id="mobilenumber0" class="form-control" placeholder="9xxxxxxxxx" name="" /></td>
+                    <td><input type="email" id="emailaddress0" class="form-control" placeholder="Email Address" name="" /></td>
+                    <td hidden>
+                        <select class="form-control" id="checker0" name="">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </td>
+                    <td hidden>
+                        <select class="form-control" id="maker0" name="">
+                            <option value="1">YES</option>
+                            <option value="0">NO</option>
+                        </select>
+                    </td>
+                    <td><button class="btn btn-danger" id="0" name="btndeleterow"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+        .table td {
+    padding:4px;
+    font-size:13px;
+    vertical-align:middle;
+    text-align:center;
+    /*border-bottom:2px solid #FF8108;*/
+}
+.table th{
+    padding:5px;
+    text-align:center;
+    font-size:13px;
+    color:#4e4e4e;
+ 
+}
+</style>
+
+<script>
+    var rowcount = 0;
+    $(document).on('click', '#btnnewrow', function () {
+        rowcount = rowcount + 1;
+        var htmltags = '<tr id="row' + rowcount + '">' +
+                            '<td><input type="text" id="lastname' + rowcount + '" class="form-control" placeholder="Last name" name="" /></td>' +
+                            '<td><input type="text" id="firstname' + rowcount + '" class="form-control" placeholder="First name" name="txtclientid" /></td> ' +                           
+                            '<td><input type="text" id="middlename' + rowcount + '" class="form-control" placeholder="Middle name" name="" /></td>' +
+                            '<td><input type="number" id="mobilenumber' + rowcount + '" class="form-control" placeholder="9xxxxxxxxx" name="" /></td>' +
+                            '<td><input type="email" id="emailaddress' + rowcount + '" class="form-control" placeholder="Email Address" name="" /></td>' +
+                            '<td hidden>'+
+                                '<select class="form-control" id="checker' + rowcount + '" name="">' +
+                                    '<option value="1">YES</option>'+
+                                    '<option value="0">NO</option>'+
+                                '</select>'+
+                            '</td>'+
+                            '<td hidden>'+
+                                '<select class="form-control" id="maker' + rowcount + '" name="">' +
+                                    '<option value="1">YES</option>'+
+                                    '<option value="0">NO</option>'+
+                                '</select>'+
+                            '</td>'+
+                            '<td><button class="btn btn-danger" id="' + rowcount + '" name="btndeleterow"><i class="fa fa-trash"></i></button></td>' +
+                        '</tr>';
+        $("#tblclientid").append(htmltags);
+    });
+
+    $(document).on('click', '#btnsubmit', function () {
+        $("#loadingmodal").show();
+ 
+        $.confirm({
+            title: '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Submit New Access ID',
+            content: "Are you sure?",
+            type: "green",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Yes',
+                    btnClass: "btn-orange",
+                    action: function () {
+                        var model_state = JModel();
+
+                        $.ajax({
+                            url: FolderName + "/Admin/VerifyClients/SubmitAccess",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(model_state),
+                            async: true,
+                            cache: false,
+                            success: function (data) {
+                                if (data != null) {
+                                    $("input").css('border-color', '');
+                                    $("select").css('border-color', '');
+                                    $(data).each(function (index, item) {   
+                                        $("#" + item.content_id).css('border-color', '#D32F2F');
+                                    });
+                                }
+
+                                if ("Maximum of 3 access IDs per client" == data) {
+                                    $.alert(data);
+                                }
+
+                                if (data == "") {
+                                    swal({
+                                        title: 'Saved Client ID',
+                                        text: "Successfully Submit Record.",
+                                        type: 'success',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'Okay'
+                                    }).then((result) => {
+                                        if (result.value) {
+
+                                        }
+                                    })
+                                    setTimeout(function () {
+                                        window.location.href = FolderName + "/Admin/ClientAccess/Index?content=ClientAccess&GroupCode=@Model.groupCode";
+                                    }, 3000);
+                                }
+                            },
+                            error: function (ex) {
+                                msgbox("Error", ex, "red");
+
+                            }
+                        });
+
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-red",
+                    action: function () {
+                        setTimeout(function () {
+                            $("#loadingmodal").hide();
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    });
+
+    function JModel() {
+        var arrdata = [];
+        var count = 0;
+        $('[name="txtclientid"]').each(function () {
+            var json ={
+                groupcode : getUrlParameter("GroupCode"),
+                firstname: $("#firstname" + count).val(),
+                lastname: $("#lastname" + count).val(),
+                middlename: $("#middlename" + count).val(),
+                mobilenumber: $("#mobilenumber" + count).val(),
+                emailaddress: $("#emailaddress" + count).val(),
+                checker: $("#checker" + count).val(),
+                maker: $("#maker" + count).val()
+            };
+            arrdata.push(json);
+            count = count + 1;
+        });
+
+        return arrdata;
+    }
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+    $(document).on('click', 'button[name="btndeleterow"]', function () {
+        var thisid = this.id;
+        $('#row' + thisid).remove();
+    });
+
+    $(document).on('focusout', 'input[type="text"]', function () {
+        $(this).val($(this).val().toUpperCase());
+    });
+
+</script>

@@ -1,0 +1,6 @@
+[{"UserCode":"1000063","GroupCode":"121","email":"benedictsuarez888@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500129","time":"2020-02-12 10:37","Before":"20200218160834","After":"20200219103745","DeclineReason":null,"EnrolledID":[]}}
+,
+{"UserCode":"1000080","GroupCode":"NEWCO","email":"knrivera@gmail.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-02-12 15:53","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500130","1500131"]}},
+{"UserCode":"1000081","GroupCode":"NEWCO","email":"kath@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500130","time":"2020-02-12 15:56","Before":"20200219155328","After":"20200219155619","DeclineReason":null,"EnrolledID":[]}},
+{"UserCode":"1000082","GroupCode":"NMGC","email":"jtrante@unionbankph.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-02-12 16:24","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500132","1500133"]}},
+{"UserCode":"1000082","GroupCode":"NMGC","email":"jtrante@unionbankph.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-02-12 16:52","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500134"]}}

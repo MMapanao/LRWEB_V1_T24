@@ -1,0 +1,1125 @@
+﻿@{
+    Layout = "~/Areas/LRForms/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "LRWEB";
+}
+<div class="container" style="height:calc(100vh - 100px);background-color:#fff;padding:0px;">
+    <div class="" style="background-color:#4f2683;padding:15px;">
+        <img src="~/Areas/LRForms/Resources/Images/ublogoviolet.jpg" alt="" style="object-fit:contain;width:150px;" />
+    </div>
+    <div id="loadingmodal" class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-sm" style="width:100%;height:100%;background:none">
+            <div class="modal-content" style="color:#f1f1f1;text-align:center;width:auto;min-height:100%;background-color:transparent;border:none;">
+                <span class="fa fa-spinner fa-spin fa-3x" style="color:#f1f1f1;"></span>  Loading...
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-color:#fff;padding-bottom:10px;" id="page-content">
+        <div class="row">
+            <div class="col-12" style="text-align:center;">
+                <img src="~/Areas/LRForms/Resources/Images/loanrangerlogo.png" alt="" style="width:150px;margin-top:25px;margin-bottom:25px;" />
+            </div>
+
+            <div class="col-12">
+                <div class="col-10 offset-1" style="text-align:justify;">
+                    <p><b>Congratulations! Your CitySavings loan application has been approved! In order to proceed with your loan disbursement, kindly: </b></p>
+                    <ol>
+                        <li>Review the loan documents provided below.</li>
+                        <li>Read the “Terms & Conditions” and “Privacy Policy”.</li>
+                        <li>Sign the loan document by requesting for an OTP (One-time Password).</li>
+                        <li>Once you receive the OTP, click “OK” to submit.</li>
+                    </ol>
+                </div>
+                <br />
+                <!-- amort -->
+                <div style="border-style:dotted;padding-bottom:30px;">
+                    <div style="max-width:auto; max-height:auto;margin-left:auto;margin-right:auto;background-color:#fff;font-family:Arial, Helvetica, sans-serif;" id="amortSheet">
+                        <div style="text-align:center">
+                            <img src="~/Areas/LRForms/Resources/Images/ublogowhite.jpg" alt="logo" style="width:310px;height:75px;margin-top:55px;">
+                        </div>
+                        <p style="padding-right:85px;text-align:right;">Loan Account No. <input type="text" name="accountNumber" value="" /></p>
+                        <p style="text-align:center;"><b style="font-size:16px">AMORTIZATION SCHEDULE</b></p>
+                        <div style="margin-left:70px;margin-right:70px;text-align:justify;font-size:14px">
+                            <table class="table table-striped table-bordered" id="amort" width="100%" cellspacing="0">
+                                <tr>
+                                    <th style="width:120px;text-align:left;">Installment</th>
+                                    <th style="width:120px;text-align:left;">Loan</th>
+                                    <th style="width:120px;text-align:left;">Principal</th>
+                                    <th style="width:120px;text-align:left;">Interest</th>
+                                    <th style="width:120px;text-align:left;">Monthly Amoritization</th>
+                                    <th style="width:120px;text-align:left;">O/S Balance</th>
+                                </tr>
+                            </table>
+                            <p>Conforme</p>
+
+                            <div class="row">
+                                <div class="col-6" style="text-align:center;font-size:12px;">
+                                    <i name="signature">&nbsp;</i>
+                                    <p><i name="otp">&nbsp;</i></p>
+                                    <input type="text" name="borrowerName" value="" style="text-align:center;width:400px;">
+                                    <p>Signature over Printed Name of Borrower</p>
+                                </div>
+                                <div class="col-6" style="text-align:center;font-size:12px;">
+                                    <i>&nbsp;</i>
+                                    <p>&nbsp;</p>
+                                    <input type="text" name="dateGranted" value="" style="text-align:center;width:400px;">
+                                    <p>Date</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end amort -->
+                <br />
+                <!-- prom -->
+                <div style="border-style:dotted;padding-bottom:30px;">
+                    <div style="max-width:auto; max-height:auto;margin-left:auto;margin-right:auto;background-color:#fff;font-family:Arial, Helvetica, sans-serif;" id="promisorrySheet">
+                        <div style="text-align:center">
+                            <img src="~/Areas/LRForms/Resources/Images/ublogowhite.jpg" alt="logo" style="width:310px;height:75px;margin-top:55px;">
+                        </div>
+                        <p style="padding-right:85px;text-align:right;margin-top:-25px;" id="accountNumber"></p>
+                        <p style="text-align:center;"><b style="font-size:16px">PROMISSORY NOTE</b></p>
+                        <div style="margin-left:115px;margin-right:115px;text-align:justify;font-size:14px">
+                            <p>AMOUNT: &#8369;<input type="text" name="loanAmount" value="" style="width:180px">&nbsp;DATE OF NOTE: <input type="text" name="dateGranted" value="" style="width:170px">&nbsp;MATURITY: <input type="text" name="dateMatured" value="" style="width:170px"></p>
+                            <p>FOR VALUE RECEIVED, I, the undersigned, promise to pay to CITY SAVINGS BANK, INC. (the "BANK"), or ORDER, at its Head Office in Cebu City, or at any of its branches or offices, the principal amount of this promissory note (the "NOTE") plus interest and other charges indicated in detail in the Disclosure Statement on Loan/Credit Transactions and made an integral part hereof as well as any applicable penalty imposed herein or in other related documents (hereinafter collectively referred to as the "LOAN").</p>
+                            <p>This LOAN is granted under the following terms and conditions:</p>
+                            <p>1.&nbsp;&nbsp;&nbsp;&nbsp;Finance and other applicable charges (as reflected/shown in the Disclosure Statement) as to be deducted in advance.</p>
+                            <p>2.&nbsp;&nbsp;&nbsp;&nbsp;Timely payment is the essence of this LOAN. Should the LOAN or any portion thereof be not paid upon maturity, I agree to pay a penalty or liquidated damages equivalent to two percent (2%) of the total amount due per month or fraction thereof; a past due collection charge equivalent to 0.50% of the original loan amount; and a past due interest penalty equivalent to the monthly Effective Interest Rate applied on the outstanding principal balance.</p>
+                            <p>3.&nbsp;&nbsp;&nbsp;&nbsp;Delay in payment of installments shall subject me to the Penalty Charge on Late Installments of two percent (2%) of the total amount due for the period for every month or fraction thereof of delay.</p>
+                            <p>4.&nbsp;&nbsp;&nbsp;&nbsp;Default in payment of at least one (1) installment shall make the remaining balance of the LOAN immediately due and payable, without necessity of notice or demand, and as a consequence of such default, the BANK is hereby authorized to apply in payment such amount of money that I may have in deposit with the BANK, whether in the nature of savings, current or time deposits, or such amount of stocks, bonds, or other personal property owned by me in the possession of the BANK. The foregoing remedies available to the BANK shall be without prejudice to the right of the BANK to institute whatever legal action it deems appropriate under the circumstances, including but not limited to the filing of the proper action in court.</p>
+                            <p>5.&nbsp;&nbsp;&nbsp;&nbsp;The entire obligation under this note shall become due and payable if borrower defaults in any indebtedness or obligation after an applicable grace period; or any default in the performance or observance of any instrument, contract or agreement pursuant to which any other obligation of the borrower was created, which default results in the acceleration or declaration of the whole obligation thereunder to be due and payable prior to the stated normal date of maturity.</p>
+                            <p>6.&nbsp;&nbsp;&nbsp;&nbsp;Interests and other charges may be correspondingly increased or decreased based on the prevailing rates by the banks in the Philippines, as sanctioned by the rules and regulations promulgated by the Monetary Board of the Bangko Sentral ng Pilipinas.</p>
+                            <p>7.&nbsp;&nbsp;&nbsp;&nbsp;In case of my death or resignation, retirement,  or separation from employment for whatever reason, the remaining balance of the LOAN shall immediately become due and payable without necessity of notice or demand, and as a consequence thereof, my employer, heirs, assigns, and/or successors is hereby authorized to deduct the outstanding balance of the LOAN from whatever monetary benefits, pensions, insurance proceeds, or any other emoluments which I may be entitled to, and to turn over or deliver such proceeds to the BANK for the latter to apply against the outstanding LOAN. This authority shall likewise apply and be given to my subsequent employer in case the LOAN is not fully settled after application of all amounts due to me from my first employer. In this connection, I hereby appoint my employer/s, whether present or future, and the BANK, as my attorneys-in-fact with full and absolute authority to do the foregoing acts without need of further action or authority from me. I hereby agree to indemnify and hold the BANK and its representatives, agents and employees free and harmless from and against any claims, actions, suits, and liabilities resulting from any action that the BANK, its representatives, agents or employees may undertake pursuant to the authority herein given. This power of attorney shall be irrevocable and coupled with interest.</p>
+                            <p>8.&nbsp;&nbsp;&nbsp;&nbsp;If any material variation in the value of the currency supervenes due to extraordinary inflation or deflation, the BANK has authority to make the necessary adjustments so that payment shall be made on the balance of the LOAN adjusted based on the currency prevailing at the time of the establishment of the LOAN (Art. 1250, Civil Code). A material variation is deemed to exist when there is diminution of the value of the currency to the extent of at least fifteen percent (15%) in the purchasing power of the Philippine peso as reflected in the official report of the Bangko Sentral ng Pilipinas or when there is an official devaluation of the currency.</p>
+                            <p>9.&nbsp;&nbsp;&nbsp;&nbsp;I hereby consent and agree that the BANK may assign this NOTE and all its rights and obligations appurtenant hereto to any third party that the BANK may choose. No prior notice to or consent from me shall be needed for such assignment. I shall not assign this NOTE or any of my/our rights or obligations hereunder without the prior written consent of the BANK, and any such purported assignments shall be null and void and of no effect whatsoever.</p>
+                            <p>10.&nbsp;&nbsp;&nbsp;&nbsp;Should it become necessary to endorse this NOTE to an attorney for collection, an attorney's fee equivalent to twenty-five (25%) of the total amount collectible, plus the cost of the expenses of litigation (if applicable), shall be charged against me. In case of execution, I hereby expressly waive the benefits of Section 13, Rule 39 of the Rules of Court.</p>
+                            <p>11.&nbsp;&nbsp;&nbsp;&nbsp;I acknowledge receipt of a copy of this NOTE and the Disclosure Statement on Loan/Credit Transactions attached hereto and made an integral part thereof, and that I understand and fully agree with the terms and conditions hereof.</p>
+                            <p>12.&nbsp;&nbsp;&nbsp;&nbsp;This NOTE shall also be binding upon my/our heirs, successors, executors and/or assigns.</p>
+                            <p>13.&nbsp;&nbsp;&nbsp;&nbsp;This NOTE shall be binding only upon the bank's approval of the LOAN and the actual release of the proceeds.</p>
+                            <p style="margin-top: 50px">Signed This <input type="text" name="dateGrantedDay" style="width:50px" value="">day of <input type="text" name="dateGrantedMonthYear" style="width: 200px" value=""> at <input type="text" style="width: 300px">, Philippines.</p>
+                            <div style="text-align:left;">
+                                <div style="width: 400px;font-size:12px;">
+                                    <div style="text-align: center;">
+                                        <i name="signature">&nbsp;</i>
+                                        <p><i name="otp">&nbsp;</i></p>
+                                        <input type="text" name="borrowerName" value="" style="text-align:center;width:400px;">
+                                        <p>Signature of borrower over printed name</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>This is generated through: &nbsp;<input type="text" value="Loan Ranger Web" style="width:300px;text-align:center;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:300px"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end prom -->
+                <br />
+                <!-- voucher -->
+                <div style="border-style:dotted;">
+                    <div style="max-width:auto; min-height:1200px;margin-left:auto;margin-right:auto;padding-bottom:30px;background-color:#fff;font-family:Arial, Helvetica, sans-serif;" id="loanReleaseSheet">
+                        <p style="padding-right:85px;text-align:right;padding-top:125px;" id="creditAccount1">CREDIT:</p>
+                        <div style="text-align:center">
+                            <img src="~/Areas/LRForms/Resources/Images/ublogowhite.jpg" alt="logo" style="width:310px;height:75px;margin-top:-35px;">
+                        </div>
+                        <p style="text-align:center;"><b style="font-size:16px">LOAN RELEASE VOUCHER</b></p>
+                        <div style="text-align:right;padding-right:115px">
+                            <p>Date & Time: <input type="text" name="dateGranted" value="" style="width:200px"></p>
+                            <p>Voucher No.: <input type="text" name="voucherNumber" value="" style="width:200px"></p>
+                        </div>
+                        <div style="margin-left:115px;margin-right:115px;">
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Received the amount of PESOS: <input type="text" name="amountInWords" style="width:600px" value=""></p>
+                            <p>(&#8369;<input type="text" name="netProceeds" style="width:150px;" value="">) representing NET PROCEEDS OF MY AGENCY EMPLOYEE LOAN with City Savings Bank.</p>
+                            <p style="margin-top:30px">Loan Acct No.: <input type="text" name="accountNumber" style="width:300px" value=""></p>
+                            <div>
+                                <div style="display: inline-grid;">
+                                    <div style="width: 400px;font-size:12px;">
+                                        <div style="text-align: center;float:left;">
+                                            <p><i>&nbsp;</i></p>
+                                            <p style="padding-bottom: 10px"><i>(This is a system-generated form and does not require a signature.)</i></p>
+                                            <p>Prepared By: <input type="text" name="createdBy" value="" style="text-align:center;width:300px;"></p>
+                                            <p>Signature over printed name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display:inline-grid;float: right">
+                                    <div style="width: 400px;font-size:12px;">
+                                        <div style="text-align: center;">
+                                            <i name="signature">&nbsp;</i>
+                                            <p><i name="otp">&nbsp;</i></p>
+                                            <p>Received By: <input type="text" name="borrowerName" value="" style="text-align:center;width:300px;"></p>
+                                            <p>Signature over printed name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 400px;font-size:12px;">
+                                <div style="text-align: center;float:left;">
+                                    <i>&nbsp;</i>
+                                    <p>&nbsp;</p>
+                                    <p>Approved By: <input type="text" value="" style="text-align:center;width:300px;"></p>
+                                    <p>Signature over printed name</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="border-bottom: 1px dotted black; padding-top: 125px"></div>
+                        <p style="padding-right:85px;text-align:right;padding-top:125px;" id="creditAccount2">CREDIT:</p>
+                        <div style="text-align:center">
+                            <img src="~/Areas/LRForms/Resources/Images/ublogowhite.jpg" alt="logo" style="width:310px;height:75px;margin-top:-35px;">
+                        </div>
+                        <p style="text-align:center;"><b style="font-size:16px">LOAN RELEASE VOUCHER</b></p>
+                        <div style="text-align:right;padding-right:115px">
+                            <p>Date & Time: <input type="text" name="dateGranted" value="" style="width:200px"></p>
+                            <p>Voucher No.: <input type="text" name="voucherNumber" value="" style="width:200px"></p>
+                        </div>
+                        <div style="margin-left:115px;margin-right:115px;">
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Received the amount of PESOS: <input type="text" name="amountInWords" style="width:600px" value=""></p>
+                            <p>(&#8369;<input type="text" name="netProceeds" style="width:150px;" value="">) representing NET PROCEEDS OF MY AGENCY EMPLOYEE LOAN with City Savings Bank.</p>
+                            <p style="margin-top:30px">Loan Acct No.: <input type="text" name="accountNumber" style="width:300px" value=""></p>
+                            <div>
+                                <div style="display: inline-grid;">
+                                    <div style="width: 400px;font-size:12px;">
+                                        <div style="text-align: center;float:left;">
+                                            <p><i>&nbsp;</i></p>
+                                            <p style="padding-bottom: 10px"><i>(This is a system-generated form and does not require a signature.)</i></p>
+                                            <p>Prepared By: <input type="text" name="createdBy" value="" style="text-align:center;width:300px;"></p>
+                                            <p>Signature over printed name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display:inline-grid;float: right">
+                                    <div style="width: 400px;font-size:12px;">
+                                        <div style="text-align: center;">
+                                            <i name="signature">&nbsp;</i>
+                                            <p><i name="otp">&nbsp;</i></p>
+                                            <p>Received By: <input type="text" name="borrowerName" value="" style="text-align:center;width:300px;"></p>
+                                            <p>Signature over printed name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 400px;font-size:12px;">
+                                <div style="text-align: center;float:left;">
+                                    <i>&nbsp;</i>
+                                    <p>&nbsp;</p>
+                                    <p>Approved By: <input type="text" value="" style="text-align:center;width:300px;"></p>
+                                    <p>Signature over printed name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end voucher -->
+                <br />
+                <br />
+                <!-- disclosure -->
+                <div style="border-style:dotted;">
+                    <div style="padding-bottom: 30px;max-width: auto; min-height: auto; margin-left: auto; margin-right: auto; background-color: #fff; font-family: Arial, Helvetica, sans-serif;" id="disclosureSheet">
+                        <div style="text-align:right;padding-right:75px;padding-top:50px">
+                            <p>Maturity Date: <input type="text" name="dateMatured" style="width: 200px" value=""></p>
+                        </div>
+                        <div style="text-align:center">
+                            <img src="~/Areas/LRForms/Resources/Images/ublogowhite.jpg" alt="logo" style="width:310px;height:75px;margin-top:-40px;">
+                        </div>
+                        <div style="text-align:center;padding-top:10px;">
+                            <p><b style="font-size:16px;">DISCLOSURE STATEMENT ON LOAN/CREDIT TRANSACTION<br>(As Required under R.A. 3765, Truth in Lending Act)</b></p>
+
+                        </div>
+
+                        <div style="margin-left:115px;margin-right:115px;">
+
+                            <div class="row" style="width: 100%">
+                                <div class="col-3 text-left">
+                                    <b>NAME OF BORROWER :</b>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <input type="text" name="lastName" value="last_name" style="width:100%">
+                                </div>
+                                <div class="col-3 text-center">
+                                    <input type="text" name="firstName" value="first_name" style="width:100%">
+                                </div>
+                                <div class="col-3 text-center">
+                                    <input type="text" name="middleName" value="middle_name" style="width:100%">
+                                </div>
+                                <div class="col-3 text-center">
+
+                                </div>
+                                <div class="col-3 text-center">
+                                    <small>lastname</small>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <small>firstname</small>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <small>middlename</small>
+                                </div>
+                                <div class="col-3">
+                                    <b>ADDRESS :</b>
+                                </div>
+
+                                <div class="col-9">
+                                    <input type="text" name="address" value="" style="width:100%;">
+                                </div>
+                            </div>
+                            <div class="row content">
+                                <div class="col-1 text-left">
+                                    <b>1.</b>
+                                </div>
+                                <div class="col-5">
+                                    <b>LOAN AMOUNT</b>
+                                </div>
+                                <div class="col-3">
+                                    <b></b>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="loanAmount" value="" style="width: 100%;border: 1px solid black;">
+                                </div>
+                                <div class="col-1 text-left">
+                                    <b>2.</b>
+                                </div>
+                                <div class="col-5">
+                                    <b>OTHER BANK CHARGES/DEDUCTIONS COLLECTED</b>
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="totalCharges" value="" style="width: 100%;border: 1px solid black;">
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    a.Taxes
+                                </div>
+                                <div class="col-3" id="subcontent">
+                                    <input type="text" name="taxes" value="" style="width: 100%;">
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    b.Processing Fee
+                                </div>
+                                <div class="col-3" id="subcontent">
+                                    <input type="text" name="processingFee" value="" style="width: 100%">
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    c.Mandatory Credit Life Insurance
+                                </div>
+                                <div class="col-3" id="subcontent">
+                                    <input type="text" value="" style="width: 100%;">
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    d.Others (Specify)
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    <input type="text" name="" style="width: 100%">
+                                </div>
+                                <div class="col-3" id="subcontent">
+                                    <input type="text" name="" style="width: 100%">
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    <input type="text" name="" style="width: 100%">
+                                </div>
+                                <div class="col-3" id="subcontent">
+                                    <input type="text" name="" style="width: 100%">
+                                </div>
+                                <div class="col-3" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left">
+                                    <b>3.</b>
+                                </div>
+                                <div class="col-5">
+                                    <b>Mandatory Credit Life Insurance Refund (if applicable)</b>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="" style="width: 100%">
+                                </div>
+                                <div class="col-3">
+                                    <b></b>
+                                </div>
+                                <div class="col-1 text-left">
+                                    <b>4.</b>
+                                </div>
+                                <div class="col-8">
+                                    <b>NET PROCEEDS OF LOAN (Item 1 less Item 2; add Item 3)</b>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="netProceeds" value="" style="width: 100%;border: 1px solid black;">
+                                </div>
+                                <div class="col-1 text-left">
+                                    <b>5.</b>
+                                </div>
+                                <div class="col-5">
+                                    <b>SCHEDULE OF PAYMENTS</b>
+                                </div>
+                                <div class="col-3">
+                                    <b></b>
+                                </div>
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-11" id="subcontent">
+                                    a. Single payment due on: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="startPayDate" style="border: 1px solid black;width:200px;" value=""><input type="text" name="newDeduction" style="border: 1px solid black;width:200px;" value="">
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-11" id="subcontent">
+                                    b. Installment Payments: Monthly installment of &#8369;<input type="text" name="newDeduction" style="width: 150px;" value=""> payable in <input type="text" name="term" style="width: 40px;" value=""> months to start on <input type="text" name="startPayDate" style="width: 120px;" value="">
+                                </div>
+                                <div class="col-1 text-left">
+                                    <b>6.</b>
+                                </div>
+                                <div class="col-5">
+                                    <b>EFFECTIVE INTEREST RATE</b>
+                                </div>
+                                <div class="col-3">
+                                    <b></b>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="computedEIR" style="width:100%;border: 1px solid black;" value="">
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-11" id="subcontent">
+                                    <p>Explanation: The effective interestrate is higher than the contractual interest <br>rate of <input type="text" name="interestRate" style="width:60px" value=""> because of Item 2 deductions above (excluding items pertaining to the credit life insurance).</b>
+                                </div>
+                                <div class="col-1 text-left">
+                                    <b>7.</b>
+                                </div>
+                                <div class="col-11">
+                                    <b>Additional charges in case certain stipulations are not met by the borrower except if the failure to comply is caused by reasons enumerated in the Promissory Note.</b>
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    a. Penalty Charge on Late Installments
+                                </div>
+                                <div class="col-6" id="subcontent">
+                                    : 2% per Month of Overdue Amount
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    b. Past Due Penalty
+                                </div>
+                                <div class="col-6" id="subcontent">
+                                    : 2% Past Due Penalty based on Total Outstanding Balance
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    c. Past Due Interest
+                                </div>
+                                <div class="col-6" id="subcontent">
+                                    : Past Due Interest (based on Effective Rate) on Outstanding Balance
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    d. Past Due Collection
+                                </div>
+                                <div class="col-6" id="subcontent">
+                                    : 0.5% of the Loan Amount
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    e. Others (Specify)
+                                </div>
+                                <div class="col-6" id="subcontent">
+
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    <input type="text" name="" style="width:100%;">
+                                </div>
+                                <div class="col-6" id="subcontent">
+                                    <input type="text" name="" style="width:100%;">
+                                </div>
+                                <div class="col-1 text-left" id="subcontent">
+                                    <b></b>
+                                </div>
+                                <div class="col-5" id="subcontent">
+                                    <input type="text" name="" style="width:100%;">
+                                </div>
+                                <div class="col-6" id="subcontent">
+                                    <input type="text" name="" style="width:100%;">
+                                </div>
+                                <div class="col-12">CERTIFIED CORRECT :</div>
+
+                                <div class="col-8 text-center" style="font-size:12px;">
+                                    <p><input type="text" id="" value="" style="text-align:center;width:500px;"></p>
+                                    <small>SIGNATURE OF CREDITOR/AUTHORIZED REPRESENTATIVE OVER PRINTED NAME</small>
+                                </div>
+
+                                <div class="col-4 text-center" style="font-size:12px;">
+                                    <p><input type="text" value="" style="text-align:center;width:300px;"></p>
+                                    <small>POSITION</small>
+                                </div>
+                                <div class="col-12" style="font-size:12px;">
+                                    I ACKNOWLEDGE RECEIPT OF A COPY OF THIS STATEMENT PRIOR TO THE CONSUMMATION OF THE CREDIT TRANSACTION.
+                                </div>
+                                <div class="col-8 text-center" style="font-size:12px;">
+                                    <i name="signature">&nbsp;</i>
+                                    <p><i name="otp">&nbsp;</i></p>
+                                    <p><input type="text" name="borrowerName" value="" style="text-align:center;width:100%;"></p>
+                                    <small>SIGNATURE OF BORROWER OVER PRINTED NAME</small>
+                                </div>
+                                <div class="col-4 text-center" style="font-size:12px;">
+                                    <i>&nbsp;</i>
+                                    <p>&nbsp;</p>
+                                    <p><input type="text" name="dateGranted" value="" style="text-align:center;width:100%;"></p>
+                                    <small>DATE</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end disclosure -->
+                <br />
+                <br />
+                <div class="col-10 offset-1" style="text-align:justify;">
+                    <h4>Terms and Conditions for Use of Loan Ranger Web Facility</h4><br />
+                    <h4>Definition of Terms </h4><br />
+                    <p>This Terms and Conditions for the Use of Loan Ranger Web Facility (the “Agreement”) governs your use of the Web Services provided to you by City Savings Bank, Inc. (“CitySavings” or the “Bank”). In this Agreement:</p><br />
+                    <ul>
+                        <li><b>“Loan Ranger Web”</b> or <b>“Facility”</b> refers to CitySavings’ web-based platform that enables employees of accredited institutions to submit loan applications, provide information, and submit documentary requirements.</li>
+                        <li><b>“Web Services”</b> refers to the various online transactions available to the accredited institutions of the Bank and their employees through the Loan Ranger Web such as but not limited to request for links to loan applications, accomplish, review, and submit loan application forms, and monitor the status of their loans.</li>
+                        <li><b>“Account”</b> refers to the bank accounts such as but not limited to loan account with CitySavings in your name, whether solely or jointly with another person. </li>
+                        <li><b>“We”</b>, <b>“Us”</b>, <b>“Our”</b>, and <b>“Bank”</b> refer to City Savings Bank, Inc. </li>
+                        <li><b>“You”</b> and <b>“Your”</b> refer to the loan applicant. </li>
+                        <li><b>"One-Time Password"</b> or <b>"OTP"</b> refers to the six-digit code sent to the applicant’s registered work email needed for  online authentication of loan advices of the user.</li>
+                    </ul>
+                    <h4>ACCESS TO LOAN RANGER WEB</h4><br />
+                    <p>Online applications in Loan Ranger Web shall be done via the link provided by system as prompted by your employer’s HR Verifier once your name has been enrolled in the system. Upon filling out needed information for the online forms, you must provide the necessary and accurate information needed such as but not limited to your name, address, contact information, employment information, net take home pay, and valid IDs , among others, as the case may be. Your loan application shall only be submitted to the Bank after your HR’s verification of your submitted information and documentary requirements. The Bank, at its sole discretion, reserves the right to validate the information provided by you through the Loan Ranger Web. Once your information has been validated and your loan application has been assessed, you will receive a confirmation from the Bank through electronic mail (email) which will require online validation of respective loan advices related to your loan through OTP authentication.</p><br />
+                    <p><b>The successful validation and authentication of the OTP shall serve to authorize the Bank to perform the necessary banking transactions to perform your instructions made through the Facility.</b>The Bank shall have no obligation to verify the authenticity of any transaction received from you through or purporting to have been by you via the Loan Ranger Web App other than by means of verification of your email address through the OTP sent. </p><br />
+                    <p>Your loan applied for through the Facility will be effective upon your receipt of the Bank's confirmation of the disbursement of your loan through email and will remain in full force and effect until its termination.</p><br />
+                    <p>The Facility may be utilized anytime except for when we are undergoing system maintenance and if the Bank notifies you of the unavailability of our Web Services.</p><br />
+                    <h4>LOAN APPLICATIONS</h4><br />
+                    <p>All qualified personnel duly enrolled by their HR verifiers in the system may apply for a loan online through the Loan Ranger Web . You, as the Borrower, understands and agrees that all your submitted information and document/s such as but not limited to payslip that are necessary in processing your loan application must be true and accurate. Once the application is submitted, you agree that the Bank has the right to approve and/or reject your application as the Bank deems fit. </p><br />
+                    <h4>CALL CITY SAVINGS BANK </h4><br />
+                    <p>You may call the bank for inquiries or, concerns about or to report unauthorized transactions in Loan Ranger Web or CitySavings Bank’s other services/products at +63 917-8SIMPLE or +63 917-8746753 or email us at <a href="simpleisgood@citysavings.com.ph" target="_blank">simpleisgood@citysavings.com.ph</a> or visit us at any of our CitySavings branch near you</p><br />
+                    <h4>ACCURACY OF INFORMATION</h4><br />
+                    <p>The Bank will use reasonable efforts to ensure the accuracy of information accessed through the Facility but does not warrant the information will be free from error. If you notice an error in the account information supplied to you through the Facility or by the use of any of the Facility’s services, you shall advise the Bank as soon as possible. The Bank will endeavor to correct the error promptly and adjust any interest or charges arising out of the error.</p><br />
+                    <p>The Bank accepts no liability for the consequences arising out of erroneous information that may have been supplied by you through this Facility. Hence, you are solely responsible for the correctness of the information that you supply to the Bank through the use of the Facility or through any other means such as electronic mail or written communication. If you suspect that there is an error in the information supplied to the Bank, you shall advise the Bank as soon as possible. The Bank will endeavor to correct the error wherever possible on a "best efforts' basis".</p><br />
+                    <h4>GENERAL AGREEMENTS</h4><br />
+                    <p>CitySavings may, from time to time, introduce new internet banking features and services. We will inform you of these new features and services. By using these features and services when they become available, you agree to be bound by the Terms and Conditions that will be made available to you concerning these features and services.</p><br />
+                    <p>CitySavings does not guarantee the continuous availability of all internet banking services mentioned in this Agreement. CitySavings reserves the right to terminate or suspend any online banking service.</p><br />
+                    <p>The Facility will only work on compatible devices and operating systems and certain functionalities will only work if your device is connected to the internet. Some features may also only be available with certain operating systems.</p><br />
+                    <p>CitySavings shall not be liable for any loss or damage of whatever nature in connection with the implementation of online transactions in the following instances:</p><br />
+                    <ol>
+                        <li>Disruption, failure or delay relating to or in connection with the Facility and/or it’s services which are due to circumstances beyond the control of the Bank, unforeseen events, fortuitous events such as but not limited to prolonged power outages, breakdown in computers, software, operating systems and telecommunication facilities, typhoons, floods, public disturbances and calamities and other similar or related cases.</li>
+                        <li>Loss or damage arising out of any fraudulent access or utilization of the Facility due to theft, unauthorized disclosure of mobile phone numbers, emails, passwords or the unauthorized usage of biometrics and other security measures used in the Facility with or without your participation.</li>
+                        <li>Inaccurate, incomplete or delayed information is received due to disruption or failure of any information or communication facilities used in the Facility or due to faults in the telecommunication network, internet or network failure, or software or hardware error beyond the control of the Bank.</li>
+                        <li>Any indirect, incidental or consequential loss, loss of profit or damage suffered by reason of the use or failure or inability to use the Facility.</li>
+                        <li>Any and all liability, costs, damages, losses and causes of action arising from or in any way connected with the disclosure of information concerning your accounts and/or transactions with the Bank to unauthorized persons for any reason whatsoever, including but not limited to wiretapping of communication lines or erroneous connection by telecommunication switches, or errors in transmitted information due to faulty lines, and any and all forms of high technology surveillance or fraud.</li>
+                        <li>Any incidental or consequential loss, loss of profit or damage arising from the loss of your mobile phone, mobile devices and other electronic devices enrolled to Loan Ranger Web.</li>
+                    </ol>
+                    <h4>MISCELLANEOUS</h4><br />
+                    <p>The terms and conditions set forth in this Agreement and the banking practices and charges relating hereto may be changed by the Bank at any time by notice thereof to the account holder. Any such changes will be effective from the date of the notice or such later date as may be specified therein. The Bank shall endeavor to post such changes in its website at <a href="www.citysavings.com.ph" target="_blank">www.citysavings.com.ph</a></p><br />
+                    <p>Should the Bank become involved in any litigation due to your actions in relation to the use of the Facility or with this Agreement, or with any of the rights, powers and remedies hereunder, all fees and expenses incurred by the Bank in such a litigation, including a reasonable amount for the attorney's fees which amount is hereby agreed to be at the rate of 10% of the sum sought, shall be under your account.</p><br />
+                    <p>This Agreement is governed by the regulations of Bangko Sentral ng Pilipinas and applicable laws of the Philippines relating to the covered transactions herein. It shall be understood that access to and use of the service shall be subject to applicable requirements and procedures of government telecommunications or other regulatory authorities and those prescribed by law.</p><br />
+                    <p>The venue of all legal actions or proceedings arising out of or in connection with these Terms and Conditions shall be brought only in the proper courts of Pasig City to the exclusion of all other courts.</p><br />
+                    <h4>Privacy Notice</h4><br />
+                    <p>Dear Customers of CitySavings,</p><br />
+                    <p>To deliver our brand promise of Straightforward Banking, we make sure that you are properly informed of the implications, duties and obligations that arise when entering into agreements with us.</p><br />
+                    <p>In light of this commitment, this Privacy Notice outlines how we collect, protect and process the information you have entrusted with us. </p><br />
+                    <p>To avail of our products or services and over the course of our relationship, the Banks collects the following information:</p><br />
+                    <ul>
+                        <li>Personal Information such as name, date of birth, address, contact details and specimen signatures;</li>
+                        <li>Sensitive Personal Information such as age, civil status and nationality;</li>
+                        <li>Photocopies of your nominated Identification Cards, or similar documents which proves your identity;</li>
+                        <li>Voice recordings, CCTV/ATM images and video footage;</li>
+                        <li>Your employment details;</li>
+                        <li>For Institutions, your corporate information.</li>
+                        <li>Financial and credit information such as, but not limited to, financial status, credit background, and source of funds;</li>
+                        <li>Technical information such as internet protocol (IP), browser type, operating system, and average time spent in accessing the bank’s online channels.</li>
+                    </ul>
+                    <p>This information is collected through the following:</p><br />
+                    <ul>
+                        <li>Bank Forms (Customer Information Form, Signature Cards, Loan Application Forms and Survey Forms);</li>
+                        <li>Copies of Employment Documents submitted;</li>
+                        <li>Copies of Official Corporate Documents submitted;</li>
+                        <li>Data transmission of your payments and other transactions with us;</li>
+                        <li>Email, phone calls, letters, and other communications that you sent to us;</li>
+                        <li>Our website and online and mobile banking app facilities;</li>
+                        <li>Any of our branches and offices, and CitySavings accredited payment channels which you visited.</li>
+                    </ul>
+                    <p>We use your information for the following purposes,</p><br />
+                    <ul>
+                        <li>Conducting Know-Your-Customer (KYC) procedures;</li>
+                        <li>Loan evaluation, approval and credit investigation;</li>
+                        <li>Billing and collecting payments;</li>
+                        <li>Transferring of funds;</li>
+                        <li>Processing of insurance;</li>
+                        <li>Monitoring of accounts;</li>
+                        <li>Answering queries received via hotline or website;</li>
+                        <li>Addressing complaints;</li>
+                        <li>Conducting studies to improve our products and processes;</li>
+                        <li>Mailing letters and notices</li>
+                        <li>Promotional and direct marketing initiatives</li>
+                        <li>Exercising legal proceedings;</li>
+                        <li>Complying with (a) the Bank’s governing policies, processes, procedures and (b) of the Bangko Sentral ng Pilipinas, our governing body.</li>
+                    </ul>
+                    <p>We store your information for purposes it was obtained for and in compliance with the regulations set by the (a) Bangko Sentral ng Pilipinas, the (b) Anti-Money Laundering Council, the (c) Bureau of Internal Revenue and (d) other applicable laws.</p><br />
+                    <p>We shall not process nor retain your information for purposes you have not consented to.</p><br />
+                    <p>From time to time, we also share your information to third parties. However, we ensure that information given is proportional to the service rendered on behalf of CitySavings. These activities include the:</p><br />
+                    <ul>
+                        <li>Delivery of mails and notices;</li>
+                        <li>Collection of payments through UnionBank, Mlhullier, PeraHub and other collection facilities;</li>
+                        <li>Billing of payments to your company or UnionBank;</li>
+                        <li>Review by authorized auditing firms and other regulatory bodies</li>
+                    </ul>
+                    <h4>Know that we are protecting your data.</h4><br />
+                    <p>Data security is the Bank's top priority. CitySavings maintains strict security systems designed to prevent unauthorized or accidental access, processing, or erasure of data.</p><br />
+                    <h4>Loan Ranger Web Services Usage</h4><br />
+                    <p>The provisions of this section apply only to personal data collected through our Loan Ranger Web Services, a CitySavings web-based platform that enables employees of accredited institutions to submit loan applications, provide information, and submit documentary requirements. By using the said service, you agree to be governed by these provisions. We do not use cookies or any other data-gathering software that installs itself or remains on your device. There are instances, however, when you will be requested to provide personal data, such as when you file an online application for a product or service. We give all personal data that you provide through our Facility the same degree of protection that we give to personal data that we collect through other channels. Our Loan Ranger Web Facility is served from a secure server, thus any personal data that you submit through our mobile banking app service is encrypted on their way from your computer to our servers. In the unlikely event that your transmission is intercepted, your personal data will not be usable by anyone. We require that you use a unique password to access your accounts and transaction information through our mobile banking app service. You can help maintain the security of your personal data by not sharing your password with anyone, by changing your password on a regular basis, and by properly signing off after each mobile banking session.</p><br />
+                    <h4>Use of Cookies</h4><br />
+                    <p>This site uses “cookies”, which allows CitySavings to collect information such as browser type, time spent on the site, pages visited and language preferred. This information allows us to know which pages you find relevant and frequently visit. We use this information to improve how we communicate with you through the website. </p><br />
+                    <p>Most browsers offer privacy settings which can manage these “cookies”. You can refuse to accept these “cookies”; however, you may experience some inconvenience in using the site.</p><br />
+                    <h4>As a Data Subject, you have and may exercise the following rights:</h4><br />
+                    <ul>
+                        <li>Right to be <b>INFORMED</b> </li>
+                        <li>Right to <b>ACCESS</b> </li>
+                        <li>Right to <b>OBJECT</b></li>
+                        <li>Right to <b>ERASURE/BLOCKING</b></li>
+                        <li>Right to <b>DAMAGES</b></li>
+                        <li>Right to <b>FILE A COMPLAINT</b></li>
+                        <li>Right to <b>RECTIFY</b></li>
+                        <li>Right to <b>DATA PORTABILITY</b></li>
+                    </ul>
+                    <i>For more details, you may access this website: <a href="https://www.privacy.gov.ph/know-your-rights/" target="_blank">https://www.privacy.gov.ph/know-your-rights/</a></i>
+                    <pre style="font-size:10px;">
+For inquiries regarding this Privacy Notice:
+You may e-mail us at <b>simpleisgood@citysavings.com.ph</b>, or
+Mail your letter to our <b>Data Protection Officer</b> at:
+29th Floor, CitySavings Bank, UnionBank Plaza
+Meralco Avenue corner Onyx Road,
+Ortigas Center, Pasig City
+Philippines
+                        </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form>
+        <footer id="footer" style="background-color:#f1f1f1">
+            <div style="margin:20px 20px 20px 20px;padding-top:20px;padding-bottom:20px;">
+                <div class="form-group" style="text-align:center">
+                    <label><input type="checkbox" id="agree" onclick="checkboxes('agree')" name="docs" required  disabled/>  I AGREE TO THE TERMS OF SERVICE AND PRIVACY POLICY</label>
+                </div>
+                <div class="form-group">
+                    <div id="OTPverification" hidden>
+                        <div class="form-group">
+                            <label>ENTER OTP HERE:</label>
+                            <input class="form-control" type="text" id="OTP" value="" maxlength="8" />
+                            <label>The One-time Password (OTP) shall serve as your electronic signature for all loan documents and shall be considered valid and binding as contracts duly signed between the Customer and City Savings Bank.</label>
+                            <div id="timerdisplay" hidden>OTP input closes in <span id="counter">5:00</span> minutes</div>
+                            <button class="btn btn-info" id="requestOTP">REQUEST OTP</button>
+                            <button class="btn btn-info" id="submitOTP" hidden>SUBMIT OTP</button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-info" id="submit" hidden>PROCEED</button>
+                </div>
+            </div>
+        </footer>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/jspdf-autotable@3.5.13/dist/jspdf.plugin.autotable.js"></script>
+<style type="text/css">
+
+    .block label {
+        display: inline-block;
+        width: 140px;
+        text-align: right;
+    }
+
+    .content div {
+        padding-top: 10px;
+    }
+
+    .content #subcontent {
+        padding-top: 5px;
+    }
+
+    #page-content {
+        flex: 1 0 auto;
+        height: calc(100% - 100px);
+        overflow-y: auto;
+    }
+
+    #footer {
+        height: auto;
+    }
+
+    
+
+    input {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid black;
+        font-size: 14px;
+    }
+</style>
+@*@foreach (var list in Model)
+    {
+        <script>
+
+
+        $("#amort").find("tbody").append("<tr style='text-align:right;' hidden><td style='text-align:left;'>@list.term</td><td>@list.loan_amt.ToString("#.##")</td><td class='principal'>@list.principal.ToString("F")</td><td class='interest'>@list.interest.ToString("F")</td><td class='monthlyAmort'>@list.monthly_amort.ToString("F")</td><td>@list.OS_balance.ToString("F")</td></tr>");
+
+        var loan_amt = @list.loan_amt.ToString()
+        loan_amt = commaSeparateNumber(loan_amt.toFixed(2))
+        var interest = @list.interest.ToString()
+        //console.log(interest.toFixed(2))
+        interest = commaSeparateNumber(interest.toFixed(2))
+
+        var principal = @list.principal.ToString()
+        principal = commaSeparateNumber(principal.toFixed(2))
+
+        var monthly_amort = @list.monthly_amort.ToString()
+        monthly_amort = commaSeparateNumber(monthly_amort.toFixed(2))
+
+        var OS = @list.OS_balance.ToString()
+        OS = commaSeparateNumber(OS.toFixed(2))
+
+        $("#amort").find("tbody").append("<tr style='text-align:right;'><td style='text-align:left;'>@list.term</td><td>"+loan_amt+"</td><td>"+principal+"</td><td>"+interest+"</td><td>"+monthly_amort+"</td><td>"+OS+"</td></tr>");
+        $("#amort").find("tbody").append("<tr style='text-align:right;' hidden><td style='text-align:left;'>@list.term</td><td>"+loan_amt+"</td><td>"+principal+"</td><td>"+interest+"</td><td>"+monthly_amort+"</td><td>"+OS+"</td></tr>");
+
+    function commaSeparateNumber(val){
+    //console.log(val)
+            try
+            {
+            //Seperates the components of the number
+            var n= val.toString().split(".");
+            //Comma-fies the first part
+            n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            //Combines the two sections
+            //n[1] = n[1].substring(0,2)
+                return n.join(".");
+            } catch(ex) {
+                return("0.00");
+            }
+
+          }
+        </script>
+    }*@
+<script>
+
+    var model_state = new FormData();
+    
+    $(document).ready(function () {
+        reset();
+        var mytimer;
+        $(':input').attr('readonly', 'readonly');
+
+        
+        $.ajax({
+            url: FolderName + "/LRForms/Message/getInfo",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                $("#loadingmodal").modal('show');
+                const months = [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                ]
+                const monthsAbr = [
+                    'JAN.',
+                    'FEB.',
+                    'MAR.',
+                    'APR.',
+                    'MAY',
+                    'JUN.',
+                    'JUL.',
+                    'AUG.',
+                    'SEP.',
+                    'OCT.',
+                    'NOV.',
+                    'DEC.'
+                ]
+
+                var d = new Date();
+
+                //var d = new Date(data[0].DATE_GRANTED)
+                const monthIndex = d.getMonth();
+                const monthName = months[monthIndex];
+                var dateGranted = monthName + " " + d.getDate() + ", " + d.getFullYear();
+
+
+                var m = new Date(data[0].DATE_MATURED)
+                const monthIndex2 = m.getMonth();
+                const monthName2 = months[monthIndex2];
+                var dateMatured = monthName2 + " " + m.getDate() + ", " + m.getFullYear();
+
+                var s = new Date(data[0].START_PAY_DATE)
+                const monthIndex3 = m.getMonth();
+                const monthName3 = monthsAbr[monthIndex3];
+                var startPayDate = monthName3 + " " + m.getDate() + ", " + m.getFullYear();
+
+                var rnd
+                rnd = parseInt(data[0].NET_PROCEEDS);
+                var netProceeds = commaSeparateNumber(rnd.toFixed(2));
+                rnd = parseInt(data[0].LOAN_AMOUNT);
+                var loanAmount = commaSeparateNumber(rnd.toFixed(2));
+                rnd = parseInt(data[0].TOTAL_CHARGES);
+                var totalCharges = commaSeparateNumber(rnd.toFixed(2));
+                rnd = parseInt(data[0].NEW_DEDUCTION);
+                var newDeduction = commaSeparateNumber(rnd.toFixed(2));
+
+                $("input[name='amountInWords'").val(data[0].AMOUNT_IN_WORDS);
+                $("input[name='accountNumber']").val(data[0].ACCOUNT_NUMBER);
+                $("input[name='address']").val(data[0].ADDRESS_1);
+                $("input[name='borrowerName']").val(data[0].BORROWER_NAME);
+                $("input[name='computedEIR']").val(data[0].COMPUTED_EIR)
+                $("input[name='createdBy']").val("Loan Ranger Web")
+                $("input[name='creditAccount']").val(data[0].CREDIT_ACCOUNT)
+                $("#accountNumber").text(data[0].ACCOUNT_NUMBER)
+                $("#creditAccount1").text("Credit: " + data[0].CREDIT_ACCOUNT)
+                $("#creditAccount2").text("Credit: " + data[0].CREDIT_ACCOUNT)
+                $("input[name='dateGranted']").val(dateGranted)
+                $("input[name='dateGrantedDay']").val(d.getDate())
+                $("input[name='dateGrantedMonthYear']").val(monthName + " " + d.getFullYear())
+                $("input[name='dateMatured']").val(dateMatured)
+                $("input[name='firstName']").val(data[0].FIRST_NAME)
+                $("input[name='interestRate']").val(data[0].INTEREST_RATE)
+                $("input[name='lastName']").val(data[0].LAST_NAME)
+                $("input[name='loanAmount']").val(loanAmount)
+                $("input[name='middleName']").val(data[0].MIDDLE_NAME)
+                $("input[name='netProceeds']").val(netProceeds)
+                $("input[name='newDeduction']").val(newDeduction)
+                $("input[name='processingFee']").val(commaSeparateNumber(data[0].PROCESSING_FEE))
+                $("input[name='startPayDate']").val(startPayDate)
+                $("input[name='taxes']").val(commaSeparateNumber(data[0].TAXES))
+                $("input[name='term']").val(data[0].TERM)
+                $("input[name='totalCharges']").val(totalCharges)
+                $("input[name='voucherNumber']").val(data[0].VOUCHER_NUMBER)
+                $("#voucherNumber").text(data[0].VOUCHER_NUMBER);
+                setTimeout(function () {
+                    $("#loadingmodal").modal('hide');
+                }, 5000);
+
+            },
+            error: function (ex) {
+                alert("Internal Server Error");
+            }
+        });
+
+        $.ajax({
+            url: FolderName + "/LRForms/Message/getAmor",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                var json = $.parseJSON(data);
+                //$("#amorpdf").prop('src',data)
+                //console.log(data)
+                /*const blob = new Blob([data], { type: 'application/pdf' });*/
+                //var url = window.URL.createObjectURL(blob);
+                //window.open(data);
+                //setTimeout(function () {
+                //    $("#loadingmodal").modal('hide');
+                //}, 5000);
+                //var newBlob = new Blob([data], { type: "application/pdf" })
+                //console.log(json.params["term"])
+                var totPrincipal = 0;
+                var totInterest = 0;
+                var totMonthlyAmort = 0;
+                for (var key in json.amort_sched) {
+                    var term = json.amort_sched[key].C001
+
+                    var loan_amt = json.amort_sched[key].C009
+                    loan_amt = commaSeparateNumber(loan_amt)
+
+                    var interest = json.amort_sched[key].C005
+                    totInterest += parseFloat(interest)
+                    interest = commaSeparateNumber(interest)
+
+                    var principal = json.amort_sched[key].C004
+                    totPrincipal += parseFloat(principal);
+                    principal = commaSeparateNumber(principal)
+
+                    var monthly_amort = json.amort_sched[key].C006
+                    totMonthlyAmort += parseFloat(monthly_amort)
+                    monthly_amort = commaSeparateNumber(monthly_amort)
+
+                    var OS = json.amort_sched[key].C007
+                    OS = commaSeparateNumber(OS)
+
+                    $("#amort").find("tbody").append("<tr style='text-align:right;'><td style='text-align:left;'>"+term+"</td><td>"+loan_amt+"</td><td>"+principal+"</td><td>"+interest+"</td><td>"+monthly_amort+"</td><td>"+OS+"</td></tr>");
+                    
+                }
+                
+                //console.log(totInterest)
+                //console.log(totMonthlyAmort)
+                $("#amort").find("tbody").append("<tr style='text-align:right;'><td></td><td style='text-align:left;'><b>TOTAL</b></td><td class='totPrincipal'>" + commaSeparateNumber(totPrincipal.toFixed(2)) + "</td><td class='totInterest'>" + commaSeparateNumber(totInterest.toFixed(2)) + "</td><td class='totMonthlyAmort'>" + commaSeparateNumber(totMonthlyAmort.toFixed(2)) + "</td><td></td></tr>");
+
+
+            },
+            error: function (ex) {
+                alert("Internal Server Error");
+            }
+        });
+
+
+
+        $("#submit").on('click', function (e) {
+            e.preventDefault();
+
+            let OTP = $("i[name='signature']:first").text() + " " + $("i[name='otp']:first").text();
+
+            var x = confirm("Are you sure you want to verify?")
+            if (x == true) {
+
+                $("#loadingmodal").modal('show');
+                $.ajax({
+                    url: FolderName + "/LRForms/Message/submitFiles",
+                    contentType: false,
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({ OTP: OTP }),
+                    async: true,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data == "Success") {
+                            window.location.href = FolderName + "/LRForms/Message/LoanAdvices";
+                        }
+                        //location.reload();
+                    },
+                    error: function (ex) {
+                        console.log(ex)
+                        alert("Internal Server Error")
+                    }
+                });
+            }
+
+        })
+        $("#loadingmodal").modal('hide');
+    })
+    function commaSeparateNumber(val) {
+
+        //Seperates the components of the number
+        var n = val.toString().split(".");
+        //Comma-fies the first part
+        n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //Combines the two sections
+        //n[1] = n[1].substring(0,2)
+        return n.join(".");
+    }
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        mytimer = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+            if (timer == 0) {
+                alert("Please request another OTP");
+                $("#requestOTP").prop("hidden", false);
+                $("#submitOTP").prop("hidden", true);
+                clearInterval(mytimer);
+                $("#timerdisplay").prop("hidden", true);
+            }
+        }, 1000);
+    }
+    $("#requestOTP").on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: FolderName + "/LRForms/Message/requestOTP",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                alert(data.message);
+                var fiveMinutes = 60 * 5,
+                    display = document.querySelector('#counter');
+                startTimer(fiveMinutes, display)
+                $("#timerdisplay").prop("hidden", false);
+                $("#requestOTP").prop("hidden", true);
+                $("#submitOTP").prop("hidden", false);
+            },
+            error: function (ex) {
+                $.alert("Internal Server Error");
+            }
+        });
+    })
+
+    $("#submitOTP").on('click', function (e) {
+        $("#loadingmodal").modal('show');
+        e.preventDefault();
+        let otp = $("#OTP").val();
+        $.ajax({
+            url: FolderName + "/LRForms/Message/checkOTP",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ otp: otp }),
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                //if (data.message == "valid") {
+                if (data.message == "valid") {
+                    const months = [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December'
+                    ]
+                    var otp = $("#OTP").val();
+                    d = new Date();
+                    utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+                    nd = new Date(utc + (3600000 * 8));
+
+                    const monthIndex = d.getMonth();
+                    const monthName = months[monthIndex];
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const myParam = urlParams.get('myParam');
+                    var dateGranted = monthName + " " + d.getDate() + ", " + d.getFullYear();
+                    $("i[name='signature']").text("(Electronically Signed via OTP) OTP: " + otp + " OTP EMAIL :  " + data.email);
+                    $("i[name='otp']").text("OTP VERIFIED ON: " + dateGranted + " " + nd.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
+                    $("input[name='dateGrantedDay']").val(nd.getDate());
+                    $("input[name='dateGrantedMonthYear']").val(monthName + " " + nd.getFullYear());
+                    clearInterval(mytimer);
+                    alert("You have successfully signed the loan documents. Click OK to submit your OTP authenticated files.");
+                    let OTP = $("i[name='signature']:first").text() + " " + $("i[name='otp']:first").text();
+                    //alert(OTP)
+                    $.ajax({
+                        url: FolderName + "/LRForms/Message/submitFiles",
+                        contentType: false,
+                        type: "POST",
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify({ OTP: OTP }),
+                        async: true,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data == "Success") {
+                                window.location.href = FolderName + "/LRForms/Message/LoanAdvices";
+                            }
+                        },
+                        error: function (ex) {
+                            console.log(ex)
+                            alert("Internal Server Error")
+                        }
+                    });
+                    ////clearInterval(mytimer);
+                    //$("#timerdisplay").prop("hidden", true);
+                    //// create all pdf
+
+                    //setTimeout(function () {
+                    //    $("#loadingmodal").modal('hide');
+                    //}, 3000)
+
+                } else if (data.message == "invalid") {
+                    alert("OTP is invalid");
+                    $("#loadingmodal").modal('hide');
+                }
+            }
+        })
+    });
+    function checkboxes(x) {
+        if ($("#agree").prop('checked')) {
+            $("#OTPverification").prop('hidden', false);
+            $("#OTP").removeAttr('readonly');
+            $("#requestOTP").prop('disabled', false);
+        } else {
+            $("#OTPverification").prop('hidden', true);
+        }
+    }
+    console.log($("#page-content").prop("scrollHeight"))
+    $("#page-content").scroll(function () {
+        if (($("#page-content").prop("scrollHeight") - $("#page-content").scrollTop()) < 2000) {
+            $("#agree").prop('disabled', false);
+        }
+    });
+    function reset() {
+        $("#agree").prop("checked", false)
+        $("#agree").prop("disabled", true)
+        $("#page-content").scrollTop(0);
+    }
+</script>
+

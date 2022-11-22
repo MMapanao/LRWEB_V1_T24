@@ -1,0 +1,199 @@
+﻿@using LRWEB_V1_ADMIN_T24.Areas.Admin
+@model IEnumerable<LRWEB_V1_ADMIN_T24.Areas.Admin.Models._EPAY_V2_CLIENTS>
+<div class="mainboard" style="width:100%;padding:30px;height:100vh;">
+    <p style="margin:0px;padding:3px;color:#f1f1f1;min-width:100%;padding-left:10px;background-color:#4f2683;color:#fff;"><i class="fa fa-check-square"></i><b> RETURN GROUP CODE</b></p>
+    <div class="" style="width: 100%; height: calc(100vh - 150px); overflow: auto;">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="custom-control custom-checkbox" style="vertical-align:middle;">
+                            <input type="checkbox" name="cboxcheckall" class="custom-control-input" id="cboxcheckall" value="cboxcheckall" style="cursor:pointer;">
+                            <label class="custom-control-label" for="cboxcheckall" style="vertical-align:middle;cursor:pointer;">All</label>
+                        </div>
+                    </th>
+                    <th>Group Code</th>
+                    <th>Company Name</th>
+                    <th>Encoded by</th>
+                    <th>Reason</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            @{
+                var arr_cred = new string[20];
+                if (Session["ticket"] == null || Session["cred"] == null)
+                {
+
+                }
+                else
+                {
+                    string ticket = Session["ticket"].ToString(), cred = Session["cred"].ToString();
+                    arr_cred = GlobalVariableClass.Base64Decode(GlobalVariableClass.Base64Decode(cred)).Split(',');
+                }
+            }
+            <tbody>
+                @foreach (var cl in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (arr_cred[0] == cl.admin_id)
+                            {
+                                <div class="custom-control custom-checkbox" style="display:flex;text-align:center;padding-left:calc(50%);">
+                                    <input type="checkbox" name="cboxgroupCode" class="custom-control-input" id="@cl.groupCode" value="@cl.groupCode" style="cursor:pointer;">
+                                    <label class="custom-control-label" for="@cl.groupCode" style="vertical-align:middle;cursor:pointer;"></label>
+                                </div>
+                            }
+                        </td>
+                        <td>@cl.groupCode</td>
+                        <td>@cl.clientName</td>
+                        <td>@cl.encode_by</td>
+                        <td>@cl.remarks</td>
+                        <td>
+                            @if (arr_cred[0] == cl.admin_id)
+                            {
+                            <a href="~/Admin/VerifyClients/groupCodeDetails?content=ReturnEntries&groupCode=@cl.groupCode" name="btndetails" id="@cl.groupCode">&nbsp;<i class="fa fa-info-circle"></i> Details &nbsp;</a>
+                                <a href="~/Admin/EnrollClients/UpdategroupCode?content=ReturnEntries&groupCode=@cl.groupCode" name="btnedit" id="@cl.groupCode">&nbsp;<i class="fa fa-pencil"></i> Edit &nbsp;</a>
+                            }
+                            else
+                            {
+                                <a href="~/Admin/VerifyClients/groupCodeDetails?content=ReturnEntries&groupCode=@cl.groupCode" name="btndetails" id="@cl.groupCode">&nbsp;<i class="fa fa-info-circle"></i> Details &nbsp;</a>
+                                <a href="#" style="color: currentColor;cursor: not-allowed;opacity: 0.5;text-decoration: none;">&nbsp;<i class="fa fa-pencil"></i> Edit &nbsp;</a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <div style="width:100%;height:auto;padding-top:20px;">
+        <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+            <li style="width:100%;text-align:center;">
+                <button class="btn" style="background-color:#faa634;color:#fff;" id="btnsubmit"><i class="fa fa-check"></i> Submit</button>
+            </li> 
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    $(document).on('change', '#cboxcheckall', function () {
+        if ($("#cboxcheckall:checkbox:checked").length > 0) {
+            $('input[name="cboxgroupCode"]').attr('checked', true);
+        } else {
+            $('input[name="cboxgroupCode"]').attr('checked', false);
+        }
+    });
+
+    function JMODEL_Layer() {
+        var array_pendings = [];
+        $('input[name="cboxgroupCode"]').each(function () {
+            if ($(this).prop('checked') == true) {
+                array_pendings.push($(this).val());
+            }
+        });
+        return array_pendings.toString();
+    }
+
+    $(document).on('click', '#btnsubmit', function () {
+        $("#loadingmodal").show();
+        var model_state = JMODEL_Layer();
+        if (model_state == "") {
+            swal({
+                title: 'Message',
+                text: "Please select row first",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF9800',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ok'
+            })
+            setTimeout(function () {
+                $("#loadingmodal").hide();
+            }, 2000);
+            return false;
+        }
+        $.confirm({
+            title: '<i class="fa fa-info"></i> Confirmation',
+            content: "Do you really want to Submit?",
+            type: "blue",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Submit',
+                    btnClass: "btn-orange",
+                    action: function () {
+
+                        $.ajax({
+                            url: FolderName + "/Admin/ReturnEntries/SubmitClient",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify({ model_state: model_state }),
+                            async: true,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                swal({
+                                    title: 'Submit Clients',
+                                    text: "Successfully Submit clients",
+                                    type: 'success',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.value) {
+
+                                    }
+                                })
+
+                                setTimeout(function () {
+                                    window.location.href = FolderName + "/Admin/ReturnEntries/Index?content=ReturnEntries";
+                                }, 2000);
+                            },
+                            error: function (ex) {
+                                msgbox("Error", ex, "red");
+
+                            }
+                        });
+
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-gray",
+                    action: function () {
+                        setTimeout(function () {
+                            $("#loadingmodal").hide();
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    });
+
+
+
+ 
+</script>
+<style>
+    body {
+    }
+
+    .table td {
+        padding: 4px;
+        font-size: 13px;
+        text-align: center;
+        /*border-bottom:2px solid #FF8108;*/
+    }
+
+    .table th {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        color: #4e4e4e;
+    }
+</style>

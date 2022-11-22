@@ -1,0 +1,159 @@
+﻿@{
+    Layout = "~/Areas/LRForms/Views/Shared/_LayoutInfo.cshtml";
+    ViewBag.Title = "LRWEB";
+}
+<div class="col-12" style="text-align:center;">
+    <img src="~/Areas/LRForms/Resources/Images/loanrangerlogo.png" alt="" style="width:150px;margin-top:13vh;margin-bottom:25px;" />
+</div>
+<div class="col-12" style="text-align:center;">
+    <h2 class="text-violet" id="apiurl">title</h2>
+    <br />
+    <p class="text-violet" id="res">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    <button id="btn1">REQUEST 1</button>
+    <button id="btn2">REQUEST 2</button>
+    <button id="btn3">REQUEST 3</button>
+    <button id="btn4">REQUEST 4</button>
+    <button id="btn5">REQUEST 5</button>
+</div>
+<style>
+    .text-violet {
+        color: #4f2683
+    }
+</style>
+
+<script>
+    $("#btn1").click(function () {
+        var firstname = "CLAIRE ANN"
+        var middlename = "JIMENO"
+        var lastname = "AVENTURADO"
+        var birthdate = "1995-01-01"
+        $.ajax({
+            url: FolderName + "/LRForms/Fillup/getCIF",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            data: JSON.stringify({ birthdate: birthdate, lastname: lastname, firstname: firstname, middlename: middlename }),
+            cache: false,
+            success: function (data) {
+                var jsonData = JSON.stringify(data)
+                $("#res").text(jsonData);
+                $("#apiurl").text("ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;")
+                console.log(jsonData)
+            },
+            error: function (ex) {
+                console.log(ex)
+                alert("Internal Server Error");
+            }
+        });
+    })
+    $("#btn2").click(function () {
+        var firstname = "CLAIRE ANN"
+        var middlename = "JIMENO"
+        var lastname = "AVENTURADO"
+        var birthdate = "1995-01-01"
+        $.ajax({
+            url: FolderName + "/LRForms/Fillup/getCIF2",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            data: JSON.stringify({ birthdate: birthdate, lastname: lastname, firstname: firstname, middlename: middlename }),
+            cache: false,
+            success: function (data) {
+                var jsonData = JSON.stringify(data)
+                $("#res").text(jsonData);
+                $("#apiurl").text("ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;")
+                console.log(jsonData)
+
+            },
+            error: function (ex) {
+                console.log(ex)
+                alert("Internal Server Error");
+            }
+        });
+    })
+    $("#btn3").click(function () {
+        var firstname = "CLAIRE ANN"
+        var middlename = "JIMENO"
+        var lastname = "AVENTURADO"
+        var birthdate = "1995-01-01"
+        $.ajax({
+            url: FolderName + "/LRForms/Fillup/getCIF3",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            data: JSON.stringify({ birthdate: birthdate, lastname: lastname, firstname: firstname, middlename: middlename }),
+            cache: false,
+            success: function (data) {
+                var jsonData = JSON.stringify(data)
+                $("#res").text(jsonData);
+                $("#apiurl").text("ServicePointManager.Expect100Continue = true;ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;")
+                console.log(jsonData)
+
+            },
+            error: function (ex) {
+                console.log(ex)
+                alert("Internal Server Error");
+            }
+        });
+    })
+    $("#btn4").click(function () {
+        var firstname = "CLAIRE ANN"
+        var middlename = "JIMENO"
+        var lastname = "AVENTURADO"
+        var birthdate = "1995-01-01"
+        $.ajax({
+            url: FolderName + "/LRForms/Fillup/getCIF4",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            data: JSON.stringify({ birthdate: birthdate, lastname: lastname, firstname: firstname, middlename: middlename }),
+            cache: false,
+            success: function (data) {
+                var jsonData = JSON.stringify(data)
+                $("#res").text(jsonData);
+                $("#apiurl").text("ServicePointManager.Expect100Continue = true;ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;")
+                console.log(jsonData)
+
+            },
+            error: function (ex) {
+                console.log(ex)
+                alert("Internal Server Error");
+            }
+        });
+    })
+    $("#btn5").click(function () {
+        var firstname = "CLAIRE ANN"
+        var middlename = "JIMENO"
+        var lastname = "AVENTURADO"
+        var birthdate = "1995-01-01"
+        $.ajax({
+            url: FolderName + "/LRForms/Fillup/getCIF4",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            data: JSON.stringify({ birthdate: birthdate, lastname: lastname, firstname: firstname, middlename: middlename }),
+            cache: false,
+            success: function (data) {
+                var jsonData = JSON.stringify(data)
+                $("#res").text(jsonData);
+                $("#apiurl").text("No Declaration")
+                console.log(jsonData)
+
+            },
+            error: function (ex) {
+                console.log(ex)
+                alert("Internal Server Error");
+            }
+        });
+    })
+</script>

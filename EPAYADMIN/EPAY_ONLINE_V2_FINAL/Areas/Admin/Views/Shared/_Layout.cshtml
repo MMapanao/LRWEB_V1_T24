@@ -1,0 +1,308 @@
+﻿@using LRWEB_V1_ADMIN_T24.Areas.Admin
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - LOAN RANGER WEB</title>
+    <script src="~/Areas/Admin/Resources/Bootstrap/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
+    @*<link rel="stylesheet" href="~/Areas/Admin/Resources/css/sweetalert2.css" />*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Areas/Admin/Resources/js/jsapi.js"></script>
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/Bootstrap/css/bootstrap.css" />
+    <script src="~/Areas/Admin/Resources/Bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/css/sidebar.css" />
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/css/font-awesome-4.7.0/css/font-awesome.css" />
+    <script src="~/Areas/Admin/Resources/js/_Sidebar.js"></script>
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/css/jquery-confirm.min.css" />
+    <script src="~/Areas/Admin/Resources/js/jquery-confirm.min.js"></script>
+
+</head>
+<body onload="openNav()" style="background-color:#e5e3e3;">
+
+    @{
+        var arr_cred = new string[20];
+        if (Session["ticket"] == null || Session["cred"] == null)
+        {
+
+        }
+        else
+        {
+            string ticket = Session["ticket"].ToString(), cred = Session["cred"].ToString();
+            arr_cred = GlobalVariableClass.Base64Decode(GlobalVariableClass.Base64Decode(cred)).Split(',');
+        }
+    }
+    @try
+    {
+
+
+        <div class="container-fluid body-content" style="">
+            <div id="mySidenav" class="sidenav" style="padding-top:0px; ">
+                @*<img src="~/Areas/Admin/Resources/Images/sidebarbg.png" alt="" style="height:100vh;width:100%;position:absolute;z-index:-5;" />*@
+                <!-- sidebar top content-->
+                <div class="sidebar-top" style="">
+                    <div style="width:100%;">
+                        <ul style="list-style-type:none;width:100%;padding:0px;margin:0px;">
+                            <li>
+                                <div style="background-color:#4f2683;width:100%;height:50px;padding:15px;padding-left:45px;padding-right:45px;">
+                                    <img src="~/Areas/Admin/Resources/Images/ublogoviolet.jpg" alt="" style="width:100%;" />
+                                </div>
+                            </li>
+                            <li style="padding-left:20px;padding-right:15px;padding-top:20px;">
+                                <div class="branding" style="display:flex;">
+                                    <label class="circle-picture">@(arr_cred[2].Substring(0, 1) + arr_cred[1].Substring(0, 1))</label>
+                                    <div class="brand2" style="padding-left:5px;">
+                                        <label style="font-size:13px;color:#f1f1f1;"><b>@(arr_cred[2] + " " + arr_cred[1])</b></label><br />
+                                        <p style="color:#e1e1e1;font-size:10px;">@arr_cred[6]</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul style="list-style-type:none;padding:15px 15px 10px 20px;margin:0px;">
+                        <li>
+                            <a href="~/Admin/EnrollClients/Index?content=EnrollClient" id="EnrollClient" name="btnside" class="btnsidebar" style="color:#4f2683;padding-top:17px;font-size:15px;"> <img src="~/Areas/Admin/Resources/Images/enrollclient.png" style="height:25px;margin-right:5px;margin-top:-5px;" />  <b>CLIENT LIST</b></a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/VerifyClients/Index?content=PendingClients" id="PendingClients" name="btnside" class="btnsidebar" style="color:#4f2683;padding-top:17px;font-size:15px;"> <img src="~/Areas/Admin/Resources/Images/verifyclient.png" style="height:25px;margin-right:5px;margin-top:-5px;" /> <b>PENDING CLIENTS</b></a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/ReturnEntries/Index?content=ReturnEntries" id="ReturnEntries" name="btnside" class="btnsidebar" style="color:#4f2683;padding-top:17px;font-size:15px;"> <img src="~/Areas/Admin/Resources/Images/returnentries.png" style="height:25px;margin-right:5px;margin-top:-5px;" /> <b>RETURNED ENTRIES</b></a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/ClientAccess/Index?content=ClientAccess" id="ClientAccess" name="btnside" class="btnsidebar" style="color:#4f2683;padding-top:17px;font-size:15px;"> <img src="~/Areas/Admin/Resources/Images/createclientid.png" style="height:25px;margin-right:5px;margin-top:-5px;" /> <b>CLIENT ACCESS</b></a>
+                        </li>
+                        <li>
+                            <a href="#" id="btnchange" data-toggle="modal" data-target="#exampleModal" name="btnsidebar" class="btnsidebar" style="color:#4f2683;padding-top:17px;font-size:15px;"> <img src="~/Areas/Admin/Resources/Images/verifyclient.png" style="height:25px;margin-right:5px;margin-top:-5px;" /> <b>CHANGE PASSWORD</b></a>
+                        </li>
+                        <li>
+                            <a href="#" name="btnside" class="btnsidebar" id="btnlogout" style="color:#4f2683;padding-top:17px;font-size:15px;"> <img src="~/Areas/Admin/Resources/Images/logout.png" style="height:25px;margin-right:5px;margin-top:-5px;" /> <b>LOG OUT</b> </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- main content -->
+            <div class="" id="main">
+                @RenderBody()
+            </div>
+        </div>
+
+    }
+    catch
+    {
+
+    }
+    <div id="loadingmodal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" style="">
+        <div class="modal-lg" style="width:100%;height:100%;background:none">
+            <div class="modal-content" style="vertical-align:middle;color:#faa634;text-align:center;width:100vw;height:100vh;background-color:#0000006e;border:none;">
+                <div style="margin: auto;">
+                    <span class="fa fa-spinner fa-spin fa-3x" style="color:#faa634;"></span><br><b>Loading...</b>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#4f2683">Change Password</h5>
+                </div>
+                <form id="changePasswordForm" class="formName">
+                    <div class="modal-body">
+
+                        <div class="container">
+                            <div class="form-group">
+                                <label>Old Password: </label>
+                                <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[&#64;#?!$%^&*-]).{12,}$" title="Minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character" placeholder="Old password" id="txtoldpassword" class="name form-control" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label>New Password: </label>
+                                <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[&#64;#?!$%^&*-]).{12,}$" placeholder="New password" title="Minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character" id="txtnewpassword" class="name form-control" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password: </label>
+                                <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[&#64;#?!$%^&*-]).{12,}$" title="Minimum 12 characters, at least one uppercase letter, one lowercase letter, one number and one special character" placeholder="Confirm password" id="txtconfirm" class="name form-control" autocomplete="off" required />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-orange" data-dismiss="modal">CLOSE</button>
+                        <button type="submit" class="btn btn-orange" id="btnsavepassword">CHANGE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+        label {
+            font-size: 14px;
+            color: #4F2683;
+            font-weight: bold;
+        }
+
+        .btn-orange {
+            background-color: #faa634;
+            color: #fff;
+        }
+    </style>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        var foldername = "";
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "265px";
+            document.getElementById("main").style.marginLeft = "265px";
+        }
+
+        $("#changePasswordForm").submit(function (e) {
+            $("#loadingmodal").show();
+            e.preventDefault();
+            var oldpass = $("#txtoldpassword").val();
+            var newpass = $("#txtnewpassword").val();
+            var confirmpass = $("#txtconfirm").val();
+
+            if (confirmpass != newpass) {
+                $.alert("New password and confirm password is not match")
+            } else {
+                if (confirm("Are you sure you want to change your password?") == true) {
+                    var oldpass = $("#txtoldpassword").val();
+                    var newpass = $("#txtnewpassword").val();
+                    var confirmpass = $("#txtconfirm").val();
+
+                    $.ajax({
+                        url: FolderName + "/Admin/SuperAdmin/UPDATE_PASSWORD",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify({ newpass: newpass, oldpass: oldpass }),
+                        async: true,
+                        cache: false,
+                        success: function (data) {
+
+                            if (data == "Old password is incorrect") {
+                                $.alert(data);
+                            } else if (data == "Invalid Password") {
+                                $.alert("A new password should not be the same from the last 5 passwords changed");
+                            } else {
+                                $.alert("Password changed successfully.");
+                                $('#exampleModal').modal('toggle');
+                                $("#txtoldpassword").val("");
+                                $("#txtnewpassword").val("");
+                                $("#txtconfirm").val("");
+                            }
+                            setTimeout(function () {
+                                $("#loadingmodal").hide();
+                            }, 1000);
+
+                        },
+                        error: function (ex) {
+                            console.log(ex)
+
+                        }
+                    });
+                }
+            }
+        });
+        var idleTime = 0;
+        var idleInterval = 0;
+        $(document).ready(function () {
+            checkAuth();
+            //idleInterval = setInterval(timerIncrement, 1000); // 1 sec
+            idleInterval = setInterval(timerIncrement, 60000) //1min
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+        });
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            console.log(idleTime + " min")
+            if (idleTime > 15) {
+                idleTime = 0;
+                $.confirm({
+                    title: 'Logout?',
+                    content: 'Due to nactivity, you will be automatically logged out in 60 seconds.',
+                    autoClose: 'logoutUser|60000',
+                    buttons: {
+                        logoutUser: {
+                            text: 'logout myself',
+                            action: function () {
+                                clearInterval(idleInterval);
+                                $.ajax({
+                                    url: FolderName + "/Admin/SuperAdmin/LOGOUT",
+                                    dataType: "json",
+                                    type: "POST",
+                                    contentType: 'application/json; charset=utf-8',
+                                    async: true,
+                                    cache: false,
+                                    success: function (data) {
+                                        $.alert({
+                                            content: 'Due to inactivity, you are now logged out',
+                                            onClose: function () {
+                                                window.location = FolderName + "/Admin/Login";
+                                            },
+                                        })
+                                    },
+                                    error: function (ex) {
+                                        console.log(ex)
+
+                                    }
+                                });
+                            }
+                        },
+                        cancel: function () {
+                            $.alert('Canceled');
+                        }
+                    }
+                });
+            }
+        }
+        function checkAuth() {
+            $.ajax({
+                url: FolderName + "/Admin/SuperAdmin/checkAuth",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                cache: false,
+                success: function (data) {
+                    if (data == "TRUE") {
+                        $.alert({
+                            title: 'Session Invalid',
+                            content: 'You have Login in another device or logout due to inactivity',
+                            onClose: function () {
+                                window.location = FolderName + "/Admin/Login";
+                            },
+                        })
+                    } else {
+
+                    }
+                },
+                error: function (ex) {
+                    console.log(ex)
+
+                }
+            });
+        }
+    </script>
+
+    <script>
+        var FolderName = '@GlobalVariableClass.FolderName';
+        function FolderNameString() {
+            return FolderName;
+        }
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,3 @@
+[{"UserCode":"1000007","GroupCode":"CMNCC","email":"sample@yahoo.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-07-28 00:41","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500000","1500001"]}}
+,
+{"UserCode":"1000007","GroupCode":"CMNCC","email":"sample@yahoo.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-07-28 00:57","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500002"]}}

@@ -1,0 +1,36 @@
+﻿@using LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LRWEB - Human Resource</title> 
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="~/ubicon.ico">
+    <script src="~/Areas/HumanResource/Resources/Bootstrap/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
+    @*<link rel="stylesheet" href="~/Areas/Admin/Resources/css/sweetalert2.css" />*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Areas/HumanResource/Resources/js/jsapi.js"></script>
+    <link rel="stylesheet" href="~/Areas/HumanResource/Resources/Bootstrap/css/bootstrap.css" />
+    <script src="~/Areas/HumanResource/Resources/Bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Areas/HumanResource/Resources/css/sidebar.css" />
+    @*<link rel="stylesheet" href="~/Areas/HumanResource/Resources/css/font-awesome-4.7.0/css/font-awesome.css" />*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="~/Areas/HumanResource/Resources/js/_Sidebar.js"></script>
+    <link rel="stylesheet" href="~/Areas/HumanResource/Resources/css/jquery-confirm.min.css" />
+    <script src="~/Areas/HumanResource/Resources/js/jquery-confirm.min.js"></script>
+
+</head>
+<body style="background-image:url(@GlobalVariableClass.FolderName/Areas/HumanResource/Resources/Images/loginbg.jpg);">
+ 
+    @RenderBody()
+ 
+    <script>
+        var FolderName = '@GlobalVariableClass.FolderName';
+    </script>
+
+ 
+    @RenderSection("scripts", required: false)
+</body>
+</html>

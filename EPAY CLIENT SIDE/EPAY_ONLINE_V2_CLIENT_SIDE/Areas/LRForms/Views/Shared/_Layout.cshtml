@@ -1,0 +1,39 @@
+﻿@using LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LRWEB - Online Application Form</title>
+    <link rel="icon" href="~/ubicon.ico">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="~/Areas/LRForms/Resources/Bootstrap/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
+    @*<link rel="stylesheet" href="~/Areas/Admin/Resources/css/sweetalert2.css" />*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Areas/LRForms/Resources/js/jsapi.js"></script>
+    <link rel="stylesheet" href="~/Areas/LRForms/Resources/Bootstrap/css/bootstrap.css" />
+    <script src="~/Areas/LRForms/Resources/Bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Areas/LRForms/Resources/css/sidebar.css" />
+    @*<link rel="stylesheet" href="~/Areas/LRForms/Resources/css/font-awesome-4.7.0/css/font-awesome.css" />*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="~/Areas/LRForms/Resources/js/_Sidebar.js"></script>
+    <link rel="stylesheet" href="~/Areas/LRForms/Resources/css/jquery-confirm.min.css" />
+    <script src="~/Areas/LRForms/Resources/js/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js" integrity="sha512-lMkd3Y03vWd6SXDKGLaPgbco+3VNI4xtwiuADZvr29hzHhxIdonDcZQF0k/eAf6/1vI4b2eNqkkIm42Hjxiz6A==" crossorigin="anonymous"></script>
+
+</head>
+<body >
+ 
+        @RenderBody()
+
+    <script>
+        FolderName = '@GlobalVariableClass.FolderName';
+    </script> 
+ 
+    @RenderSection("scripts", required: false)
+</body>
+</html>

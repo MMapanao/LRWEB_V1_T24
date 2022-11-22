@@ -1,0 +1,4 @@
+[{"UserCode":"1000001","GroupCode":"YTP01","email":"c.wew22@gmail.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-11-23 13:20","Before":"","After":"","DeclineReason":null,"EnrolledID":["1501001"]}}
+,
+{"UserCode":"1000002","GroupCode":"HH195","email":"fortunochristian22@gmail.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-11-23 17:12","Before":"","After":"","DeclineReason":null,"EnrolledID":["1501002"]}},
+{"UserCode":"1000001","GroupCode":"YTP01","email":"c.wew22@gmail.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-11-23 17:23","Before":"","After":"","DeclineReason":null,"EnrolledID":["1501003"]}}

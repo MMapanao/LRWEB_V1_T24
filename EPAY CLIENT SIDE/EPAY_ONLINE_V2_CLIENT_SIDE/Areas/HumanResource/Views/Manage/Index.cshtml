@@ -1,0 +1,537 @@
+﻿@model LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource.Controllers.ManageController.VM_INDEX_MANAGE
+
+
+<div class="mainboard" style="width:100%;height:100vh;padding:25px;">
+    <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+        <li style="width:280px;">
+            <h4 style="color:#4f2683;"><i class="fa fa-users"></i> ENROLL EMPLOYEE</h4>
+        </li>
+        <li style="width:calc(100% - 280px);">
+            <button type="submit" form="clientForm" class="btn btn-violet" id="btnsubmit" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;"><i class="fa fa-save"></i> Send</button> &nbsp;
+            <a href="~/HumanResource/Manage/Index?content=EnrollEmployee" class="btn btn-violet" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;"><i class="fa fa-unlink"></i> Cancel</a> &nbsp;
+            <a href="~/Areas/HumanResource/Batch-Upload_LR.xlsm" class="btn btn-violet" id="btndownload" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;" download=""><i class="fa fa-download"></i> Download Template</a>
+
+            <label class="btn btn-violet btn-file" id="btnbatchupload" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;">
+                <i class="fa fa-upload"></i> Batch Upload (.csv)
+                <input type="file" id="txtFileUpload" accept=".csv" style="display: none;">
+            </label>
+            <button class="btn btn-violet" id="btnnewrow" style="float:right;padding-left:15px;padding-right:15px;margin-right:5px;"><i class="fa fa-plus"></i> New Row</button>
+        </li>
+    </ul>
+
+    <label class="bg-violet" style="width:100%;padding:3px 10px 3px 15px;color:#f1f1f1;margin-top:20px;"><i class="fa fa-table"></i> New Employee</label>
+    <div style="width:100%;height:calc(100vh - 120px);overflow:auto;">
+        <form id="clientForm">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                         <th class="bg-violet" style="min-width:50px;">
+                            <div class="custom-control custom-checkbox" style="vertical-align:middle;">
+                                <input type="checkbox" name="cboxcheckall" class="custom-control-input" id="cboxcheckall" value="cboxcheckall" style="cursor:pointer;">
+                                <label class="custom-control-label" for="cboxcheckall" style="vertical-align:middle;cursor:pointer;position:absolute;"></label>
+                            </div>
+                        </th> 
+                        <th style="min-width:200px">Account Type</th>
+                        <th style="min-width:200px;">Branch</th>
+                        <th style="min-width:200px;">Last Name</th>
+                        <th style="min-width:200px;">First Name</th>
+                        <th style="min-width:150px;">Middle Name</th>
+                        <th style="min-width:150px;">Mobile #</th>
+                        <th style="min-width:220px">Email Address</th>
+                        <th style="min-width:50px;"><i class="fa fa-pencil"></i></th>
+                    </tr>
+                </thead>
+                <tbody id="tblnewemployee">
+                    <tr id="row0">
+                         <td class="bg-violet">
+                            <div class="custom-control custom-checkbox" style="vertical-align:middle;">
+                                <input type="checkbox" name="cboxchoice" class="custom-control-input" id="0" value="cbox1" style="cursor:pointer;">
+                                <label class="custom-control-label" for="0" style="vertical-align:middle;cursor:pointer;position:absolute;"></label>
+                            </div>
+                        </td> 
+                        <td>
+                            @*<select class="form-control" name="dropdownscheme" id="scheme_code0">
+                                    @foreach (var sc in Model.vm_GCODE_SCHEME)
+                                    {
+                                        <option value="@sc.Schemecode">@sc.DefinitionScheme</option>
+                                    }
+                                </select>*@
+                            @foreach (var sc in Model.vm_GCODE_SCHEME)
+                            {
+                                <input type="text" id="scheme_code0" class="form-control" placeholder="SCHEME CODE" name="" value="@sc.schemeCode" disabled />
+                            }
+                            <small class="text-danger" id="scheme_code0_msg" style="display:none;"></small>
+                        </td>
+                        <td>
+                            @*<select class="form-control" name="dropdownbranch" id="branchdel0">
+                                    @foreach (var sc in Model.vm_FIN_PROFIT_CTR)
+                                    {
+                                        <option value="@sc.BR_CODE">@sc.BR_DESC</option>
+                                    }
+                                </select>*@
+                            @foreach (var sc in Model.vm_GCODE_SCHEME)
+                            {
+                                <input type="text" id="branchdel0" class="form-control" placeholder="BRANCH" name="" value="@sc.csbBranch" disabled />
+                            }
+                            <small class="text-danger" id="branchdel0_msg" style="display:none;"></small>
+                        </td>
+                        <td>
+                            <input type="text" id="lastname0" class="form-control" placeholder="Last name" name="" required />
+                            <small class="text-danger" id="lastname0_msg" style="display:none;"></small>
+                        </td>
+                        <td>
+                            <input type="text" id="firstname0" class="form-control" placeholder="First name" name="txtnewemployee" required />
+                            <small class="text-danger" id="firstname0_msg" style="display:none;"></small>
+                        </td>
+                        <td>
+                            <input type="text" id="middlename0" class="form-control" placeholder="Middle name" name="" / required>
+                            <small class="text-danger" id="middlename0_msg" style="display:none;"></small>
+                        </td>
+                        <td>
+                            <input type="text" id="contactnumber0" class="form-control" pattern=".{12,12}" title="639*********" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(09|639)/gm, '639').substr(0, 12)" placeholder="639xxxxxxxxx" name="" required />
+                            <small class="text-danger" id="contactnumber0_msg" style="display:none;"></small>
+                        </td>
+                        <td>
+                            @foreach (var sc in Model.vm_GCODE_SCHEME)
+                            {
+                                //<input type="email" id="email_address0" class="form-control" title="Email domain must be @sc.emailFormat" placeholder="Email Address" pattern="(\w\.?)+@@ @sc.emailFormat+(\w\.?)" name="" required />
+                                //var emaildomain = '@' + @sc.emailFormat;
+                                string email = sc.emailFormat;
+                                string emaildomain = email.Substring(0, email.IndexOf("."));
+                                <input type="email" id="email_address0" class="form-control" title="domain: @emaildomain" placeholder="Email Address" pattern="^[a-zA-Z0-9_.+-]+@emaildomain\.+[a-zA-Z0-9-.]+$" name="" required />
+                            }
+                            <small class="text-danger" id="email_address0_msg" style="display:none;"></small>
+                        </td>
+                        <td><button class="btn btn-danger" id="0" name="btndeleterow"><i class="fa fa-trash"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    @*<div style="width:100%;text-align:center;margin-top:15px;display:flex;">
+            <select class="form-control" name="dropdown_ALL_BRANCH" id="SelectAllBranch" style="border-radius:0px;width:220px;">
+                @foreach (var sc in Model.vm_FIN_PROFIT_CTR)
+                {
+                    <option value="@sc.BR_CODE">@sc.BR_DESC</option>
+                }
+            </select>
+
+            @foreach (var sc in Model.vm_GCODE_SCHEME)
+            {
+                <button class="btn btn-yellow" name="btnscheme"  value="@sc.Schemecode" style="margin-left:5px;"><i class="fa fa-check"></i> @sc.DefinitionScheme</button>
+            }
+
+        </div>*@
+</div>
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    .table td {
+        padding: 4px;
+        font-size: 13px;
+        vertical-align: middle;
+        text-align: center;
+        /*border-bottom:2px solid #FF8108;*/
+    }
+
+    .table th {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        color: #4e4e4e;
+    }
+
+    small {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .btn-violet {
+        background-color: #4f2683;
+        color: #fff;
+    }
+
+    .btn-yellow {
+        background-color: #faa634;
+        color: #fff;
+    }
+
+    .bg-violet {
+        background-color: #4f2683;
+        color: #fff;
+    }
+</style>
+<script>
+    var schemetags = "";
+    var branchtags = "";
+    var emailtags = "";
+</script>
+@foreach (var sc in Model.vm_GCODE_SCHEME)
+{
+    string email = sc.emailFormat;
+    string emaildomain = email.Substring(0, email.IndexOf("."));
+    <script>
+    schemetags = '@sc.schemeCode';
+    branchtags = '@sc.csbBranch';
+    emailtags = '@emaildomain';
+    </script>
+}
+
+@*@foreach (var sc in Model.vm_GCODE_SCHEME)
+    {
+        <script>
+            schemetags = schemetags + '<option value="@sc.Schemecode"> @sc.DefinitionScheme</option>';
+        </script>
+    }*@
+@*@foreach (var sc in Model.vm_FIN_PROFIT_CTR)
+    {
+        <script>
+            branchtags = branchtags + '<option value="@sc.BR_CODE"> @sc.BR_DESC</option>';
+        </script>
+    }*@
+<script>
+    //$(document).on('change', '#SelectAllBranch', function () {
+    //    var thisid = $(this).val();
+    //    jQuery("input[name='cboxchoice']").each(function () {
+    //        if ($(this).is(':checked')) {
+    //            $("#branchdel" + this.id).val(thisid);
+    //        }
+    //    });
+    //});
+
+    //$(document).on('click', 'button[name="btnscheme"]', function () {
+    //    var thisid = $(this).val();
+    //    jQuery("input[name='cboxchoice']").each(function () {
+    //        if ($(this).is(':checked')) {
+    //            $("#scheme_code" + this.id).val(thisid);
+    //        }
+    //    });
+    //});
+
+    $(document).on('change', '#cboxcheckall', function () {
+        if ($(this).prop("checked") == false) {
+            $("input[name='cboxchoice']").prop('checked', false);
+        } else {
+            $("input[name='cboxchoice']").prop('checked', true);
+        }
+    });
+    var introw = 1;
+    $(document).on('click', '#btnnewrow', function () {
+        //console.log("schemetage = " + schemetags)
+        //console.log("branchtag = " + branchtags)
+        var htmltags = '<tr id="row' + introw + '">' +
+             '<td class="bg-violet">'+
+                 '<div class="custom-control custom-checkbox" style="vertical-align:middle;">'+
+                     '<input type="checkbox" name="cboxchoice" class="custom-control-input" id="' + introw + '" value="cbox1" style="cursor:pointer;">' +
+                     '<label class="custom-control-label" for="' + introw + '" style="vertical-align:middle;cursor:pointer;position:absolute;"></label>' +
+                 '</div>'+
+             '</td>'+
+            '<td>' +
+            //'<select class="form-control" id="scheme_code' + introw + '">' +
+            //    schemetags +
+            //'</select>' +
+            '<input type="text" id="scheme_code' + introw + '" class="form-control" placeholder="SCHEME CODE" name="" value="' + schemetags + '" disabled />' +
+            '<small class="text-danger" id="scheme_code' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' +
+            //'<select class="form-control" id="branchdel' + introw + '">' +
+            //    branchtags +
+            //'</select>' +
+            '<input type="text" id="branchdel' + introw + '" class="form-control" placeholder="BRANCH" name="" value="' + branchtags + '" disabled/>' +
+            '<small class="text-danger" id="branchdel' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" id="lastname' + introw + '" class="form-control" placeholder="Last name" name="" required/>' +
+            '<small class="text-danger" id="lastname' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" id="firstname' + introw + '" class="form-control" placeholder="First name" name="txtnewemployee" required/>' +
+            '<small class="text-danger" id="firstname' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" id="middlename' + introw + '" class="form-control" placeholder="Middle name" name="" required />' +
+            '<small class="text-danger" id="middlename' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' +
+            '<input type="number" id="contactnumber' + introw + '" class="form-control" title="639*********" oninput="this.value = this.value.replace(/[^0-9]/g, \'\').replace(/^(09|639)/gm, \'639\').substr(0, 12)" placeholder="639xxxxxxxxx" name="" required/>' +
+            '<small class="text-danger" id="contactnumber' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' +
+            //title="domain: emaildomain2" placeholder="Email Address" pattern="^[a-zA-Z0-9_.+-]+emaildomain2+\.[a-zA-Z0-9-.]+$"
+            //'<input type="email" id="email_address' + introw + '" class="form-control" title="Email Format is ' + emailtags + '" placeholder="Email Address" name="" pattern="[a-z0-9._%+-]+' + emailtags + '$" required/>' +
+            '<input type="email" id="email_address' + introw + '" class="form-control" title="domain: ' + emailtags + '" placeholder="Email Address" name="" pattern="^[a-zA-Z0-9_.+-]+' + emailtags + '\\.+[a-zA-Z0-9-.]+$" required/>' +
+            '<small class="text-danger" id="email_address' + introw + '_msg" style="display:none;"></small>' +
+            '</td>' +
+            '<td>' + '<button class="btn btn-danger" id="' + introw + '" name="btndeleterow"><i class="fa fa-trash"></i></button>' + '</td>' +
+            '</tr>';
+        $("#tblnewemployee").append(htmltags);
+        introw = introw + 1;
+    });
+
+
+
+    $(document).on('click', 'button[name="btndeleterow"]', function () {
+        var thisid = this.id;
+        $("#row" + thisid).remove();
+    });
+    $(document).on('focusout', 'input[type="text"]', function () {
+        var thisid = this.id;
+        if (thisid != "Email_Address") {
+            //$(this).val($(this).val().toUpperCase());
+            const element = $(this);
+            element.val($(this).val().toUpperCase());
+            const textToReplace = element.val();
+            const newText = textToReplace.replace("Ñ", "N");
+            element.val(newText);
+        }
+    });
+
+
+
+    //$(document).on('click', '#btnsubmit', function () {
+    $("#clientForm").submit(function (e) {
+        e.preventDefault();
+        var count = $("input[name=cboxchoice]:checked").length
+        if (count != 0) {
+            $.confirm({
+                title: '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Send new application',
+                content: "Are you sure?",
+                type: "green",
+                typeAnimated: true,
+                buttons: {
+                    tryAgmnain: {
+                        text: 'Yes',
+                        btnClass: "btn-orange",
+                        action: function () {
+                            var model_state = JModel();
+                            $("#loadingmodal").show();
+                            $.ajax({
+                                url: FolderName + "/HumanResource/Manage/SubmitNewEmployeee",
+                                dataType: "json",
+                                type: "POST",
+                                contentType: 'application/json; charset=utf-8',
+                                data: JSON.stringify(model_state),
+                                async: true,
+                                cache: false,
+                                success: function (data) {
+
+                                    //console.log(data);
+
+                                    if (data != null) {
+                                        $("input").css('border-color', '');
+                                        $("select").css('border-color', '');
+                                        $('small').css('display', 'none');
+
+                                        var arrnum = [];
+                                        jQuery("input[name='txtnewemployee']").each(function () {
+                                            var idd = this.id;
+                                            idd = idd.toString().replace('firstname', '');
+                                            arrnum.push(idd);
+                                        });
+                                        // console.log(arrnum);
+                                        var cntr = 0;
+                                        var indxxx = 1;
+                                        $(data).each(function (index, item) {
+                                            if (item.message != null) {
+                                                $("#" + item.component_id + arrnum[cntr]).css('border-color', '#D32F2F');
+                                                $("#" + item.component_id + arrnum[cntr] + "_msg").css('display', 'block');
+                                                $("#" + item.component_id + arrnum[cntr] + "_msg").text(item.message);
+                                                // console.log(item.component_id + arrnum[cntr]);
+
+                                            }
+                                            if (indxxx >= 7) {
+                                                if (indxxx % 7 === 0) {
+                                                    cntr = cntr + 1;
+                                                    //console.log(cntr);
+                                                }
+                                            }
+                                            indxxx = indxxx + 1;
+                                        });
+                                    }
+
+                                    if (data == "") {
+                                        swal({
+                                            title: 'EMPLOYEE ENROLLMENT SUCCESSFUL',
+                                            text: "Email notification with online application link sent via email.",
+                                            type: 'success',
+                                            confirmButtonColor: '#faa634',
+                                            confirmButtonText: 'Okay'
+                                        }).then((result) => {
+                                            if (result.value) {
+
+                                            }
+                                        })
+                                        setTimeout(function () {
+                                            window.location.reload();
+                                        }, 6000);
+                                    } else {
+                                        swal({
+                                            title: 'Employee application/s',
+                                            text: "Error Found",
+                                            type: 'warning',
+                                            confirmButtonColor: '#faa634',
+                                            confirmButtonText: 'Okay'
+                                        }).then((result) => {
+                                            if (result.value) {
+
+                                            }
+                                        })
+                                        setTimeout(function () {
+                                            $("#loadingmodal").hide();
+                                        }, 1000)
+                                    }
+                                },
+                                error: function (ex) {
+                                    alert("Error while uploading");
+                                    setTimeout(function () {
+                                        $("#loadingmodal").hide();
+                                    }, 1000)
+                                }
+                            });
+
+                        }
+                    },
+                    No: {
+                        text: 'No',
+                        btnClass: "btn-orange",
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
+        } else {
+            $.alert("Please select on the list by clicking the checkbox.")
+            setTimeout(function () {
+                $("#loadingmodal").hide();
+            }, 1000)
+        }
+
+    });
+
+    function JModel() {
+        var arrayLayer = [];
+        var model_state = {};
+        var count = 0;
+        jQuery("input[name='cboxchoice']").each(function () {
+            if ($(this).prop('checked') == true) {
+                var idd = this.id;
+                idd = idd.toString().replace('firstname', '');
+                model_state = {
+                    scheme_code: $("#scheme_code" + idd).val(),
+                    firstname: $("#firstname" + idd).val(),
+                    lastname: $("#lastname" + idd).val(),
+                    middlename: $("#middlename" + idd).val(),
+                    contactnumber: $("#contactnumber" + idd).val(),
+                    email_address: $("#email_address" + idd).val(),
+                    branch_delivery: $("#branchdel" + idd).val()
+                };
+                count = count + 1;
+                arrayLayer.push(model_state);
+            }
+        });
+        console.log(arrayLayer);
+        return arrayLayer;
+    }
+    //function JModel() {
+    //    var arrayLayer = [];
+    //    var model_state = {};
+    //    var count = 0;
+    //    jQuery("input[name='txtnewemployee']").each(function () {
+    //        var idd = this.id;
+    //        idd = idd.toString().replace('firstname', '');
+    //        model_state = {
+    //            scheme_code: $("#scheme_code" + idd).val(),
+    //            firstname: $("#firstname" + idd).val(),
+    //            lastname: $("#lastname" + idd).val(),
+    //            middlename: $("#middlename" + idd).val(),
+    //            contactnumber: $("#contactnumber" + idd).val(),
+    //            email_address: $("#email_address" + idd).val(),
+    //            branch_delivery: $("#branchdel" + idd).val()
+    //        };
+    //        count = count + 1;
+    //        arrayLayer.push(model_state);
+    //    });
+    //    console.log(arrayLayer);
+    //    return arrayLayer;
+    //}
+
+    $(document).on('change', '#txtFileUpload', function () {
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+        if (regex.test($("#txtFileUpload").val().toLowerCase())) {
+            if (typeof (FileReader) != "undefined") {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var rows = e.target.result.split("\n");
+                    //console.log(rows)
+                    var valval = "";
+                    introw = 0;
+                    for (var i = 1; i < rows.length; i++) {
+
+                        var row = "";
+                        var cells = rows[i].split(",");
+                        //console.log(cells)
+                        if (cells[0] != "") {
+                            valval = valval + '<tr id="row' + introw + '">' +
+                                 '<td class="bg-secondary">' +
+                                     '<div class="custom-control custom-checkbox" style="vertical-align:middle;">' +
+                                         '<input type="checkbox" name="cboxchoice" class="custom-control-input" id="' + introw + '" value="cbox1" style="cursor:pointer;">' +
+                                         '<label class="custom-control-label" for="' + introw + '" style="vertical-align:middle;cursor:pointer;position:absolute;"></label>' +
+                                     '</div>' +
+                                 '</td>' +
+                                '<td>' +
+                                //'<select class="form-control" id="scheme_code' + introw + '">' +
+                                //    schemetags +
+                                //'</select>' +
+                                '<input type="text" id="scheme_code' + introw + '" class="form-control" placeholder="SCHEME CODE" name="" value="' + schemetags + '" disabled />' +
+                                '<small class="text-danger" id="scheme_code' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+                                '<td>' +
+                                //'<select class="form-control" id="branchdel' + introw + '">' +
+                                //    branchtags +
+                                //'</select>' +
+                                '<input type="text" id="branchdel' + introw + '" class="form-control" placeholder="BRANCH" name="" value="' + branchtags + '" disabled/>' +
+                                '<small class="text-danger" id="branchdel' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+                                '<td>' +
+                                '<input type="text" id="lastname' + introw + '" value="' + cells[0].toUpperCase() + '" class="form-control" placeholder="Last name" name="" required/>' +
+                                '<small class="text-danger" id="lastname' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+                                '<td>' +
+                                '<input type="text" value="' + cells[1].toUpperCase() + '" id="firstname' + introw + '" class="form-control" placeholder="First name" name="txtnewemployee" required/>' +
+                                '<small class="text-danger" id="firstname' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+
+                                '<td>' +
+                                '<input type="text" id="middlename' + introw + '" value="' + cells[2].toUpperCase() + '" class="form-control" placeholder="Middle name" name="" required/>' +
+                                '<small class="text-danger" id="middlename' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+                                '<td>' +
+                                '<input type="number" id="contactnumber' + introw + '" value="' + cells[3] + '" class="form-control" placeholder="639xxxxxxxxx" pattern=".{12,12}" title="639*********" oninput="this.value = this.value.replace(/[^0-9]/g, \'\').replace(/^(09|639)/gm, \'639\').substr(0, 12)" name="" required/>' +
+                                '<small class="text-danger" id="contactnumber' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+                                '<td>' +
+                                '<input type="email" id="email_address' + introw + '" value="' + cells[4] + '" class="form-control" title="Email Format is ' + emailtags + '" placeholder="Email Address" name="" pattern="[a-z0-9._%+-]+' + emailtags + '$" required />' +
+                                '<small class="text-danger" id="email_address' + introw + '_msg" style="display:none;"></small>' +
+                                '</td>' +
+                                '<td>' + '<button class="btn btn-danger" id="' + introw + '" name="btndeleterow"><i class="fa fa-trash"></i></button>' + '</td>' +
+                                '</tr>';
+                        }
+                        introw = introw + 1;
+                    }
+
+                    $("#tblnewemployee").html('');
+                    $("#tblnewemployee").html(valval);
+                    $("#txtFileUpload").val('');
+                }
+                reader.readAsText($("#txtFileUpload")[0].files[0]);
+            } else {
+                alert("This browser does not support HTML5.");
+            }
+        } else {
+            alert("Please upload a valid CSV file.");
+        }
+    });
+</script>

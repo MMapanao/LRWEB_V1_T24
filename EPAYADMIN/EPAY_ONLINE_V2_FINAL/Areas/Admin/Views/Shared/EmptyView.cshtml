@@ -1,0 +1,45 @@
+﻿@using LRWEB_V1_ADMIN_T24.Areas.Admin
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOAN RANGER WEB</title>
+
+    <script src="~/Areas/Admin/Resources/Bootstrap/js/popper.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>*@
+    @*<link rel="stylesheet" href="~/Areas/Admin/Resources/css/sweetalert2.css" />*@
+    @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+    <script src="~/Areas/Admin/Resources/js/jsapi.js"></script>
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/Bootstrap/css/bootstrap.css" />
+    <script src="~/Areas/Admin/Resources/Bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/css/sidebar.css" />
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/css/font-awesome-4.7.0/css/font-awesome.css" />
+    <script src="~/Areas/Admin/Resources/js/_Sidebar.js"></script>
+    <link rel="stylesheet" href="~/Areas/Admin/Resources/css/jquery-confirm.min.css" />
+    <script src="~/Areas/Admin/Resources/js/jquery-confirm.min.js"></script>
+
+
+</head>
+<body>
+    <div id="loadingmodal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" style="">
+        <div class="modal-lg" style="width:100%;height:100%;background:none">
+            <div class="modal-content" style="vertical-align:middle;color:#faa634;text-align:center;width:100vw;height:100vh;background-color:#0000006e;border:none;">
+                <div style="margin: auto;">
+                    <span class="fa fa-spinner fa-spin fa-3x" style="color:#faa634;"></span><br><b>Loading...</b>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <script>
+        var FolderName = '@GlobalVariableClass.FolderName';
+    </script>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

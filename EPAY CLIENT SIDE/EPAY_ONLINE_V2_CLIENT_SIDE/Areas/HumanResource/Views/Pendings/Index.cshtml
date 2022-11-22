@@ -1,0 +1,591 @@
+﻿@model IEnumerable<LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource.Models._NEW_EMPLOYEE>
+@using LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource
+
+<div class="mainboard" style="width:100%;height:100vh;padding:30px;">
+    <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+        <li style="width:calc(100% - 480px);">
+            <h4 style="color:#4f2683;"><i class="fa fa-users"></i> EMPLOYEES LIST</h4>
+        </li>
+        <li style="width:210px;padding-right:10px;">
+            @*<select class="form-control" style="">
+                    <option value="PENDING">PENDING</option>
+                    <option value="">ALL</option>
+                    <option value="SUBMITTED">SUBMITTED</option>
+                    <option value="DECLINED">DECLINED</option>
+                    <option value="APPROVED">APPROVED</option>
+                </select>*@
+        </li>
+        @*<li style="width:280px;">
+                <div class="row no-gutters">
+                    <div class="col">
+                        <input id="txtsearch" class="form-control border-secondary border-right-0 rounded-0" type="search" value="" placeholder="Search" id="example-search-input4">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>*@
+    </ul>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content  text-violet">
+                <div class="modal-header">
+                    <h4 class="modal-title">EDIT INFO</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <input type="text" id="employee_reference" value="" hidden />
+                    <input type="text" id="appID" value="" hidden />
+                </div>
+                <div class="modal-body" style="color:#4F2683;">
+                    <form id="editInfo" class="formName">
+                        <div class="modal-body">
+
+                            <div class="container">
+                                <div class="form-group" hidden>
+                                    <label>Int Record: </label>
+                                    <input type="text" id="intrecord" class="form-control" placeholder="Int Record" name="" required disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name: </label>
+                                    <input type="text" id="lastname" class="form-control" placeholder="Last name" name="" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>First Name: </label>
+                                    <input type="text" id="firstname" class="form-control" placeholder="First name" name="" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Middle Name: </label>
+                                    <input type="text" id="middlename" class="form-control" placeholder="Middle name" name="" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile Number: </label>
+                                    <input type="text" id="contactnumber" class="form-control" pattern=".{12,12}" title="639*********" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(09|639)/gm, '639').substr(0, 12)" placeholder="639xxxxxxxxx" name="" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address: </label>
+                                    <input type="email" id="email_address" class="form-control" placeholder="Email Address" pattern="" name="" required />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-violet" data-dismiss="modal">CLOSE</button>
+                            <button type="submit" class="btn btn-violet" id="btnchange">CHANGE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="" style="width:100%;height:calc(100vh - 100px);overflow:auto;margin-top:15px;border:0px solid #111;">
+        <table id="example" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    @*<th>
+                            <div class="custom-control custom-checkbox" style="vertical-align:middle;">
+                                <input type="checkbox" name="cboxcheckall" class="custom-control-input" id="cboxcheckall" value="cboxcheckall" style="cursor:pointer;">
+                                <label class="custom-control-label" for="cboxcheckall" style="vertical-align:middle;cursor:pointer;">All</label>
+                            </div>
+                        </th>*@
+                    <th>FULL NAME</th>
+                    <th>CONTACT NUMBER</th>
+                    <th>EMAIL</th>
+                    <th>SENT STATUS</th>
+                    @*<th>Submitted Application?</th>*@
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="tblemployee">
+                @foreach (var list in Model)
+                {
+                    string email = list.email;
+                    int firstStringPosition = email.IndexOf("@");
+
+                    string username = list.email.Substring(0, email.IndexOf("@"));
+                    string emaildomain = list.email.Substring(firstStringPosition,email.Length - firstStringPosition);
+                    string domainname = emaildomain.Substring(0, emaildomain.IndexOf("."));
+                    string editInfo = "editInfo('" + list.first_name + "','" + list.middle_name + "','" + list.last_name + "','" + list.contactnum + "','" + username + "','" + emaildomain + "','" + domainname + "','" + list.IntRecord + "')";
+                    <tr>
+                        <td>@(list.first_name + " " + list.middle_name + " " + list.last_name)</td>
+                        <td>@list.contactnum</td>
+                        
+                        <td>@list.email</td>
+                        
+                        @if (list.Status == "1 " || list.Status == "1")
+                        {
+                            <td>SENT</td>
+                        }
+                        else
+                        {
+                            <td>NOT SENT</td>
+                        }
+                        
+                        <td><a href="#" id="@list.IntRecord" name="btnresend"><i class="fa fa-envelope"></i> Resend</a> | <a href="#" onclick="@editInfo" name="btnedit"><i class="fa fa-edit"></i> Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table td {
+        padding: 4px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .table th {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        color: #fff;
+        background-color: #4f2683;
+    }
+
+    label {
+        color: #4f2683;
+    }
+
+    .bg-violet {
+        background-color: #4f2683;
+        color: #fff;
+    }
+
+    .btn-unselected-violet {
+        color: #4f2683;
+        background-color: #fff;
+    }
+
+    .btn-violet {
+        background-color: #4f2683;
+        color: #fff;
+    }
+
+    .btn-yellow {
+        background-color: #ffa634;
+        color: #fff;
+    }
+
+    .text-violet {
+        color: #4f2683;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#example').DataTable();
+    });
+    $(document).on('click', '#btnpdfform', function () {
+        $(this).removeClass('btn-unselected-violet').addClass('btn-violet');
+        $("#btnids").addClass('btn-unselected-violet').removeClass('btn-violet');
+    });
+
+    $(document).on('click', '#btnids', function () {
+        $(this).removeClass('btn-unselected-violet').addClass('btn-violet');
+        $("#btnpdfform").addClass('btn-unselected-violet').removeClass('btn-violet');
+    });
+
+    $(document).on('click', 'a[name="btnreview"]', function () {
+        var thisid = this.id;
+        $.ajax({
+            url: FolderName + "/HumanResource/Pendings/GetReviewDATA",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ thisid: thisid }),
+            async: true,
+            cache: false,
+            processData: false,
+            success: function (data) {
+
+                $("#content_review").html('<iframe id="iframe" src="' + PDFHost + JModelReview(data) + '" style="width:100%;height:calc(100vh - 180px);margin-top:15px;">' + '</iframe>');
+
+
+                $('#myModal').modal('show');
+                $('button[name="btndecline"]').attr("id", data.employee_reference);
+                $('button[name="btnapprove"]').attr("id", data.employee_reference);
+                $('#imgA1').attr('src', FolderName + "/Areas/ID_STORAGE/" + data.INTRECORD + "-A1.jpg");
+                $('#imgA2').attr('src', FolderName + "/Areas/ID_STORAGE/" + data.INTRECORD + "-A2.jpg");
+                $('#imgB1').attr('src', FolderName + "/Areas/ID_STORAGE/" + data.INTRECORD + "-B1.jpg");
+                $('#imgB2').attr('src', FolderName + "/Areas/ID_STORAGE/" + data.INTRECORD + "-B2.jpg");
+                $('#imgC1').attr('src', FolderName + "/Areas/ID_STORAGE/" + data.INTRECORD + "-C1.jpg");
+                $('#imgC2').attr('src', FolderName + "/Areas/ID_STORAGE/" + data.INTRECORD + "-C2.jpg");
+            },
+            error: function (ex) {
+                alert(ex);
+            }
+        });
+    });
+
+    $(document).on('click', 'button[name="btndecline"]', function () {
+        var thisid = this.id;
+        $.confirm({
+            title: '<span class="glyphicon glyphicon-question-sign text-violet" aria-hidden="true">Decline application?</span> ',
+            content: '' +
+                '<form action="" class="formName">' +
+                '<div class="form-group">' +
+                '<label>Reason for declining</label>' +
+                '<textarea type="text" id="txtreason" placeholder="e.g. wrong details" class="name form-control" required rows="5"></textarea>' +
+                '</div>' +
+                '</form>',
+            buttons: {
+                formSubmit: {
+                    text: 'Submit',
+                    btnClass: 'btn-orange',
+                    action: function () {
+
+                        if ($("#txtreason").val() == "") {
+                            alert("Reason is required");
+
+                            return false;
+                        } else if ($("#txtreason").val().toString().length > 250) {
+                            alert("250 characters allowed");
+
+                            return false;
+                        } else {
+                            $.ajax({
+                                url: FolderName + "/HumanResource/Pendings/DeclineUser",
+                                dataType: "json",
+                                type: "POST",
+                                contentType: 'application/json; charset=utf-8',
+                                data: JSON.stringify({ thisid: thisid, txtreason: $("#txtreason").val().toString().toUpperCase() }),
+                                async: true,
+                                cache: false,
+                                processData: false,
+                                success: function (data) {
+                                    swal({
+                                        title: 'Decline',
+                                        text: "Successfully declined employee",
+                                        type: 'Success',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Close'
+                                    }).then((result) => {
+                                        if (result.value) {
+
+
+                                        }
+                                    })
+                                    $('#myModal').modal('hide');
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+
+                                },
+                                error: function (ex) {
+                                    alert(ex);
+                                }
+                            });
+                        }
+
+                    }
+                },
+                cancel: {
+                    btnClass: 'btn-orange',
+                    function() {
+                        //close
+                    }
+                },
+            }
+        });
+
+
+
+    });
+
+    $(document).on('click', 'button[name="btnapprove"]', function () {
+        var thisid = this.id;
+        $.confirm({
+            title: '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Approval Confirmation',
+            content: "Are you sure?",
+            type: "red",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Yes',
+                    btnClass: "btn-orange",
+                    action: function () {
+
+                        $.ajax({
+                            url: FolderName + "/HumanResource/Pendings/ApproveEmployee",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify({ thisid: thisid }),
+                            async: true,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+                                swal({
+                                    title: 'APPROVAL',
+                                    text: "Successfully Approve Client",
+                                    type: 'Success',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Close'
+                                }).then((result) => {
+                                    if (result.value) {
+
+
+                                    }
+                                })
+                                $('#myModal').modal('hide');
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1200);
+
+                            },
+                            error: function (ex) {
+                                alert(ex);
+                            }
+                        });
+
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-orange",
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+
+    });
+    $(document).on('click', 'a[name="btnresend"]', function () {
+        var thisid = this.id;
+        var r = confirm("Are you sure you want to resend online application link to employee?");
+        if (r == true) {
+            $.ajax({
+                url: FolderName + "/HumanResource/Pendings/ResendEmployee",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({ thisid: thisid }),
+                async: true,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    swal({
+                        title: 'Successfully resent employee application',
+                        text: "Successfully resend Client",
+                        type: 'Success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#4f2683',
+                        confirmButtonText: 'Close'
+                    }).then((result) => {
+                        if (result.value) {
+
+
+                        }
+                    })
+                    $('#myModal').modal('hide');
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 5000);
+
+                },
+                error: function (ex) {
+                    alert(ex);
+                }
+            });
+        } else {
+
+        }
+        
+
+    });
+    function JModelReview(obj) {
+        var model_state = '';
+        // $.each(dds, function (idx, obj) {
+        model_state = '' +
+            'Salutation=' + obj.Salutation + '&' +
+            'lastname=' + obj.lastname + '&' +
+            'firstname=' + obj.firstname + '&' +
+            'middlename=' + obj.middlename + '&' +
+            'Present_Address=' + obj.Present_Address + '&' +
+            'Present_City=' + obj.Present_City + '&' +
+            'Present_State=' + obj.Present_State + '&' +
+            'Present_ZipCode=' + obj.Present_ZipCode + '&' +
+            'Present_Country=' + obj.Present_Country + '&' +
+            'Permanent_Address=' + obj.Permanent_Address + '&' +
+            'Permanent_City=' + obj.Permanent_City + '&' +
+            'Permanent_State=' + obj.Permanent_State + '&' +
+            'Permanent_ZipCode=' + obj.Permanent_ZipCode + '&' +
+            'Permanent_Country=' + obj.Permanent_Country + '&' +
+
+            'Email_Address=' + obj.Email_Address + '&' +
+            'ContactNumber=' + obj.ContactNumber + '&' +
+            'BirthDate=' + obj.BirthDate + '&' +
+            'BirthPlace=' + obj.BirthPlace + '&' +
+            'Nationality=' + obj.Nationality + '&' +
+            'Gender=' + obj.Gender + '&' +
+            'Civil_Status=' + obj.Civil_Status + '&' +
+            'SpouseName=' + obj.SpouseName + '&' +
+            'Mother_MaidenName=' + obj.Mother_MaidenName + '&' +
+
+            'SSS=' + obj.SSS + '&' +
+            'GSIS=' + obj.GSIS + '&' +
+            'Beneficial_Owners=' + obj.Beneficial_Owners + '&' +
+            'Monthly_Transaction=' + obj.Monthly_Transaction + '&' +
+            'Source_Funds=' + obj.Source_Funds + '&' +
+            'NatureWorkBusiness=' + obj.NatureWorkBusiness + '&' +
+            'EmployerBusiness=' + obj.EmployerBusiness + '&' +
+            'Designation=' + obj.Designation + '&' +
+            'BusinessPhoneNo=' + obj.BusinessPhoneNo + '&' +
+            'FaxNo=' + obj.FaxNo + '&' +
+            'Business_Address=' + obj.Business_Address + '&' +
+            'Business_Country=' + obj.Business_Country + '&' +
+            'Business_City=' + obj.Business_City + '&' +
+            'Business_State=' + obj.Business_State + '&' +
+            'Business_ZipCode=' + obj.Business_ZipCode + '&' +
+            'OverSeas_Address=' + obj.OverSeas_Address + '&' +
+            'OverSeas_City=' + obj.OverSeas_City + '&' +
+            'OverSeas_State=' + obj.OverSeas_State + '&' +
+            'OverSeas_Country=' + obj.OverSeas_Country + '&' +
+            'OverSeas_PostalCode=' + obj.OverSeas_PostalCode + '&' +
+            'OverSeas_Tax_ID_No=' + obj.OverSeas_Tax_ID_No + '&' +
+            'PasspportNo=' + obj.PasspportNo + '&' +
+            'ExpiryDate=' + obj.ExpiryDate + '&' +
+            'PlaceIssue=' + obj.PlaceIssue + '&' +
+            'OthersID=' + obj.OthersID + '&' +
+            'OverSeas_CountryCode=' + obj.Overseas_CountryCode + '&' +
+            'OverSeas_Area=' + obj.Overseas_AreaCode + '&' +
+            'OverSeas_PhoneNo=' + obj.Overseas_PhoneNo + '&' +
+            'GroupCode=' + "" + '&' +
+            'TIN=' + $("#TIN").val() + "&" +
+            'schemecode=' + obj.scheme_code;
+
+        //console.log(model_state);
+        //});
+        return model_state;
+    }
+
+    $(document).on('input', '#txtsearch', function () {
+        $.ajax({
+            url: FolderName + "/HumanResource/Pendings/SearchData",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ txtsearch: $("#txtsearch").val() }),
+            async: true,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                var sbj_list = '';
+
+
+                if (data.length == 0) {
+                    $("#tblemployee").html(sbj_list);
+                } else {
+                    $.each(data, function (idx, obj) {
+                        var status = '';
+                        if (obj.Status == 'True') {
+                            status = 'SENT';
+                        } else {
+                            status = 'NOT SENT';
+                        }
+                        var submitstat = '';
+                        if (obj.SubmitStatus == '0') {
+                            submitstat = '<td>ON GOING</td>' +
+                                '<td><a href="#" id="' + obj.IntRecord + '" name="btnresend"><i class="fa fa-send"></i> Resend</a></td>';
+                        } else if (obj.SubmitStatus == "00") {
+                            submitstat = ' <td>DECLINED</td>' +
+                                '<td><a href="#" id="' + obj.IntRecord + '" name="btnresend"><i class="fa fa-send"></i> Resend</a></td>';
+                        }
+                        else if (obj.SubmitStatus == "11") {
+                            submitstat = ' <td>APPROVED</td>' +
+                                '<td><a href="#" id="' + obj.Tokens + '" name="btnresend"><i class="fa fa-send"></i> Details</a></td>';
+                        }
+                        else {
+                            submitstat = ' <td>PENDING</td>' +
+                                ' <td>' +
+                                '<a href="#" name="btnreview" id="' + obj.Tokens + '"><i class="fa fa-hand-paper-o"></i> Review</a>' +
+                                '</td>';
+                        }
+                        sbj_list = sbj_list +
+                            '<tr>' +
+                            '<td>' + obj.first_name + ' ' + obj.last_name + '</td>' +
+                            '<td>' + obj.contactnum + '</td>' +
+                            '<td>' + obj.email + '</td>' +
+                            '<td>' + status + '</td>' +
+                            submitstat +
+                            '</tr>';
+                    });
+                    $("#tblemployee").html(sbj_list);
+                }
+
+
+            },
+            error: function (ex) {
+
+            }
+        });
+    });
+
+    $("#editInfo").submit(function (e) {
+        e.preventDefault();
+        if (confirm("Do you really want to change info?") == true) {
+            $("#loadingmodal").modal('show');
+            var firstname = $("#firstname").val()
+            var middlename = $("#middlename").val();
+            var lastname = $("#lastname").val();
+            var contact = $("#contactnumber").val();
+            var email = $("#email_address").val();
+            var intrecord = $("#intrecord").val();
+            $.ajax({
+                url: FolderName + "/HumanResource/Pendings/editInfo",
+                dataType: "json",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({ firstname: firstname, middlename: middlename, lastname: lastname, contact: contact, email: email, intrecord: intrecord }),
+                async: true,
+                cache: false,
+                success: function (data) {
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000)
+                },
+                error: function (ex) {
+                    console.log(ex)
+                }
+            });
+        }
+    });
+    function editInfo(firstname,middlename,lastname,contact,username,emaildomain,domainname,intrecord) {
+        var domain = '^[a-zA-Z0-9_.+-]+' + domainname +'\.+[a-zA-Z0-9-.]+$'
+        $("#firstname").val(firstname);
+        $("#middlename").val(middlename);
+        $("#lastname").val(lastname);
+        $("#contactnumber").val(contact);
+        $("#email_address").val(username + emaildomain);
+        $("#email_address").attr({
+            'pattern': domain,
+            'title' : 'Domain : ' + domainname
+        });
+        $('#intrecord').val(intrecord);
+        $("#myModal").modal('show');
+    }
+    $(document).on("focusout", 'input', function () {
+        var thisid = this.id;
+        if (thisid != "email_address") {
+            //$(this).val($(this).val().toUpperCase());
+            const element = $(this);
+            element.val($(this).val().toUpperCase());
+            const textToReplace = element.val();
+            const newText = textToReplace.replace("Ñ", "N");
+            element.val(newText);
+        }
+    });
+
+</script>

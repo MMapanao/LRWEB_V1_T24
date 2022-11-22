@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.3.6.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.3.6.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D6ED59E-0E16-4FCE-85E9-F3EA40830C24}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LRWEB_V1_ADMIN_T24</RootNamespace>
+    <AssemblyName>LRWEB_V1_ADMIN_T24</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId>/subscriptions/d1e186a6-b843-43fc-a4dd-f69dd2cb358e/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/EPAY_ONLINE_V2_FINAL</ApplicationInsightsResourceId>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.7.2\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.ApplicationInsights.2.7.2\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.3\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlConnector, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MySqlConnector.1.0.1\lib\net45\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.4.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Memory.4.5.0\lib\netstandard1.1\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\Controllers\BranchesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientAccessController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EnrollClientsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReturnEntriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SuperAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VerifyClientsController.cs" />
+    <Compile Include="Areas\Admin\EpayAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\GlobalVariableClass.cs" />
+    <Compile Include="Areas\Admin\Models\AccountViewModels.cs" />
+    <Compile Include="Areas\Admin\Models\CLIENT_ACCESS.cs" />
+    <Compile Include="Areas\Admin\Models\EncryptionClass.cs" />
+    <Compile Include="Areas\Admin\Models\IdentityModels.cs" />
+    <Compile Include="Areas\Admin\Models\ValidationMessage.cs" />
+    <Compile Include="Areas\Admin\Models\_AUDIT_TRAIL.cs" />
+    <Compile Include="Areas\Admin\Models\_BRANCHES.cs" />
+    <Compile Include="Areas\Admin\Models\_BRANCHES_LIST.cs" />
+    <Compile Include="Areas\Admin\Models\_CHECKPASSWORD.cs" />
+    <Compile Include="Areas\Admin\Models\_CITY.cs" />
+    <Compile Include="Areas\Admin\Models\_CITY_PROVINCES_LIST.cs" />
+    <Compile Include="Areas\Admin\Models\_CLIENT_LISTGC.cs" />
+    <Compile Include="Areas\Admin\Models\_EPAY_V2_CLIENTS.cs" />
+    <Compile Include="Areas\Admin\Models\_EPAY_V2_CLIENTS_BRANCH.cs" />
+    <Compile Include="Areas\Admin\Models\_EPAY_V2_CLIENTS_CARDDELIVERYSOL.cs" />
+    <Compile Include="Areas\Admin\Models\_EPAY_V2_CLIENT_ACCESS_ID.cs" />
+    <Compile Include="Areas\Admin\Models\_EPAY_V2_CLIENT_EMPLOYEE.cs" />
+    <Compile Include="Areas\Admin\Models\_EPAY_V2_CUSTOMERS.cs" />
+    <Compile Include="Areas\Admin\Models\_ERROR_MESSAGE.cs" />
+    <Compile Include="Areas\Admin\Models\_FIN_CUST_GRP_CODE_CMS.cs" />
+    <Compile Include="Areas\Admin\Models\_FIN_PROFIT_CTR.cs" />
+    <Compile Include="Areas\Admin\Models\_GET_LOCATIONS.cs" />
+    <Compile Include="Areas\Admin\Models\_INFO_TABLE.cs" />
+    <Compile Include="Areas\Admin\Models\_Login.cs" />
+    <Compile Include="Areas\Admin\Models\_NEWGROUPCODE.cs" />
+    <Compile Include="Areas\Admin\Models\_SCHEME_CODE.cs" />
+    <Compile Include="Areas\Admin\Models\_SUPER_ADMIN.cs" />
+    <Compile Include="Areas\Admin\Queries\QueryModel_EnrollClients.cs" />
+    <Compile Include="Areas\Admin\Queries\QueryModel_SuperAdmin.cs" />
+    <Compile Include="Areas\Admin\ViewModel\ViewModel_NewGroupCode.cs" />
+    <Compile Include="Areas\Admin\ViewModel\VM_epay.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Resources\3rdParty\css\style.css" />
+    <Content Include="Areas\Admin\Resources\3rdParty\js\app.js" />
+    <Content Include="Areas\Admin\Resources\3rdParty\js\lib\stats.js" />
+    <Content Include="Areas\Admin\Resources\3rdParty\js\particles.js" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap.css" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.js" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\popper.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\accordion.css" />
+    <Content Include="Areas\Admin\Resources\css\components\accordion.js" />
+    <Content Include="Areas\Admin\Resources\css\components\accordion.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\accordion.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\ad.css" />
+    <Content Include="Areas\Admin\Resources\css\components\ad.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\api.js" />
+    <Content Include="Areas\Admin\Resources\css\components\api.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\breadcrumb.css" />
+    <Content Include="Areas\Admin\Resources\css\components\breadcrumb.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\button.css" />
+    <Content Include="Areas\Admin\Resources\css\components\button.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\card.css" />
+    <Content Include="Areas\Admin\Resources\css\components\card.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\checkbox.css" />
+    <Content Include="Areas\Admin\Resources\css\components\checkbox.js" />
+    <Content Include="Areas\Admin\Resources\css\components\checkbox.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\checkbox.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\colorize.js" />
+    <Content Include="Areas\Admin\Resources\css\components\colorize.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\comment.css" />
+    <Content Include="Areas\Admin\Resources\css\components\comment.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\container.css" />
+    <Content Include="Areas\Admin\Resources\css\components\container.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\dimmer.css" />
+    <Content Include="Areas\Admin\Resources\css\components\dimmer.js" />
+    <Content Include="Areas\Admin\Resources\css\components\dimmer.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\dimmer.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\divider.css" />
+    <Content Include="Areas\Admin\Resources\css\components\divider.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\dropdown.css" />
+    <Content Include="Areas\Admin\Resources\css\components\dropdown.js" />
+    <Content Include="Areas\Admin\Resources\css\components\dropdown.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\dropdown.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\embed.css" />
+    <Content Include="Areas\Admin\Resources\css\components\embed.js" />
+    <Content Include="Areas\Admin\Resources\css\components\embed.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\embed.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\feed.css" />
+    <Content Include="Areas\Admin\Resources\css\components\feed.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\flag.css" />
+    <Content Include="Areas\Admin\Resources\css\components\flag.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\form.css" />
+    <Content Include="Areas\Admin\Resources\css\components\form.js" />
+    <Content Include="Areas\Admin\Resources\css\components\form.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\form.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\grid.css" />
+    <Content Include="Areas\Admin\Resources\css\components\grid.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\header.css" />
+    <Content Include="Areas\Admin\Resources\css\components\header.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\icon.css" />
+    <Content Include="Areas\Admin\Resources\css\components\icon.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\image.css" />
+    <Content Include="Areas\Admin\Resources\css\components\image.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\input.css" />
+    <Content Include="Areas\Admin\Resources\css\components\input.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\item.css" />
+    <Content Include="Areas\Admin\Resources\css\components\item.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\label.css" />
+    <Content Include="Areas\Admin\Resources\css\components\label.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\list.css" />
+    <Content Include="Areas\Admin\Resources\css\components\list.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\loader.css" />
+    <Content Include="Areas\Admin\Resources\css\components\loader.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\menu.css" />
+    <Content Include="Areas\Admin\Resources\css\components\menu.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\message.css" />
+    <Content Include="Areas\Admin\Resources\css\components\message.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\modal.css" />
+    <Content Include="Areas\Admin\Resources\css\components\modal.js" />
+    <Content Include="Areas\Admin\Resources\css\components\modal.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\modal.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\nag.css" />
+    <Content Include="Areas\Admin\Resources\css\components\nag.js" />
+    <Content Include="Areas\Admin\Resources\css\components\nag.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\nag.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\popup.css" />
+    <Content Include="Areas\Admin\Resources\css\components\popup.js" />
+    <Content Include="Areas\Admin\Resources\css\components\popup.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\popup.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\progress.css" />
+    <Content Include="Areas\Admin\Resources\css\components\progress.js" />
+    <Content Include="Areas\Admin\Resources\css\components\progress.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\progress.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\rail.css" />
+    <Content Include="Areas\Admin\Resources\css\components\rail.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\rating.css" />
+    <Content Include="Areas\Admin\Resources\css\components\rating.js" />
+    <Content Include="Areas\Admin\Resources\css\components\rating.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\rating.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\reset.css" />
+    <Content Include="Areas\Admin\Resources\css\components\reset.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\reveal.css" />
+    <Content Include="Areas\Admin\Resources\css\components\reveal.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\search.css" />
+    <Content Include="Areas\Admin\Resources\css\components\search.js" />
+    <Content Include="Areas\Admin\Resources\css\components\search.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\search.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\segment.css" />
+    <Content Include="Areas\Admin\Resources\css\components\segment.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\shape.css" />
+    <Content Include="Areas\Admin\Resources\css\components\shape.js" />
+    <Content Include="Areas\Admin\Resources\css\components\shape.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\shape.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\sidebar.css" />
+    <Content Include="Areas\Admin\Resources\css\components\sidebar.js" />
+    <Content Include="Areas\Admin\Resources\css\components\sidebar.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\sidebar.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\site.css" />
+    <Content Include="Areas\Admin\Resources\css\components\site.js" />
+    <Content Include="Areas\Admin\Resources\css\components\site.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\site.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\state.js" />
+    <Content Include="Areas\Admin\Resources\css\components\state.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\statistic.css" />
+    <Content Include="Areas\Admin\Resources\css\components\statistic.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\step.css" />
+    <Content Include="Areas\Admin\Resources\css\components\step.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\sticky.css" />
+    <Content Include="Areas\Admin\Resources\css\components\sticky.js" />
+    <Content Include="Areas\Admin\Resources\css\components\sticky.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\sticky.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\tab.css" />
+    <Content Include="Areas\Admin\Resources\css\components\tab.js" />
+    <Content Include="Areas\Admin\Resources\css\components\tab.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\tab.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\table.css" />
+    <Content Include="Areas\Admin\Resources\css\components\table.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\transition.css" />
+    <Content Include="Areas\Admin\Resources\css\components\transition.js" />
+    <Content Include="Areas\Admin\Resources\css\components\transition.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\transition.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\video.css" />
+    <Content Include="Areas\Admin\Resources\css\components\video.js" />
+    <Content Include="Areas\Admin\Resources\css\components\video.min.css" />
+    <Content Include="Areas\Admin\Resources\css\components\video.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\visibility.js" />
+    <Content Include="Areas\Admin\Resources\css\components\visibility.min.js" />
+    <Content Include="Areas\Admin\Resources\css\components\visit.js" />
+    <Content Include="Areas\Admin\Resources\css\components\visit.min.js" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Areas\Admin\Resources\css\jquery-confirm.min.css" />
+    <Content Include="Areas\Admin\Resources\css\jquery.dataTables.min.css" />
+    <Content Include="Areas\Admin\Resources\css\sidebar.css" />
+    <Content Include="Areas\Admin\Resources\css\sweetalert2.css" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\brand-icons.svg" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\icons.svg" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\outline-icons.svg" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\images\flags.png" />
+    <Content Include="Areas\Admin\Resources\css\_Admin_EnrollClients.css" />
+    <Content Include="Areas\Admin\Resources\Images\contensidebarbg.png" />
+    <Content Include="Areas\Admin\Resources\Images\createclientid.png" />
+    <Content Include="Areas\Admin\Resources\Images\download.png" />
+    <Content Include="Areas\Admin\Resources\Images\enrollclient.png" />
+    <Content Include="Areas\Admin\Resources\Images\form_bg.png" />
+    <Content Include="Areas\Admin\Resources\Images\loanrangerlogo.png" />
+    <Content Include="Areas\Admin\Resources\Images\loginbg.jpg" />
+    <Content Include="Areas\Admin\Resources\Images\logout.png" />
+    <Content Include="Areas\Admin\Resources\Images\returnentries.png" />
+    <Content Include="Areas\Admin\Resources\Images\sendclientid.png" />
+    <Content Include="Areas\Admin\Resources\Images\sidebarbg.png" />
+    <Content Include="Areas\Admin\Resources\Images\sort_asc.png" />
+    <Content Include="Areas\Admin\Resources\Images\sort_asc_disabled.png" />
+    <Content Include="Areas\Admin\Resources\Images\sort_both.png" />
+    <Content Include="Areas\Admin\Resources\Images\sort_desc.png" />
+    <Content Include="Areas\Admin\Resources\Images\sort_desc_disabled.png" />
+    <Content Include="Areas\Admin\Resources\Images\ubbuilding.png" />
+    <Content Include="Areas\Admin\Resources\Images\ublogo.png" />
+    <Content Include="Areas\Admin\Resources\Images\ublogoorange.png" />
+    <Content Include="Areas\Admin\Resources\Images\ublogoviolet.jpg" />
+    <Content Include="Areas\Admin\Resources\Images\ublogowhite.jpg" />
+    <Content Include="Areas\Admin\Resources\Images\ubplogo.png" />
+    <Content Include="Areas\Admin\Resources\Images\verifyclient.png" />
+    <Content Include="Areas\Admin\Resources\js\jquery-confirm.min.js" />
+    <Content Include="Areas\Admin\Resources\js\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\Resources\js\jquery.min.js" />
+    <Content Include="Areas\Admin\Resources\js\jsapi.js" />
+    <Content Include="Areas\Admin\Resources\js\NewGroupCode.js" />
+    <Content Include="Areas\Admin\Resources\js\sweetalert2.js" />
+    <Content Include="Areas\Admin\Resources\js\_Admin_EnrollClients.js" />
+    <Content Include="Areas\Admin\Resources\js\_Sidebar.js" />
+    <Content Include="Areas\Admin\Views\SuperAdmin\AuditTrail.cshtml" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\EnrollClients\Index.cshtml" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\.DS_Store" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.js.map" />
+    <Content Include="Areas\Admin\Resources\Bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Areas\Admin\Resources\css\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\brand-icons.eot" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\brand-icons.ttf" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\brand-icons.woff" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\brand-icons.woff2" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\icons.eot" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\icons.otf" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\icons.woff" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\icons.woff2" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\outline-icons.eot" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\outline-icons.ttf" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\outline-icons.woff" />
+    <Content Include="Areas\Admin\Resources\css\themes\default\assets\fonts\outline-icons.woff2" />
+    <Content Include="Areas\Admin\Views\EnrollClients\NewGroupCode.cshtml" />
+    <Content Include="Areas\Admin\Views\EnrollClients\UpdateGroupcode.cshtml" />
+    <Content Include="Areas\Admin\Views\SuperAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\SuperAdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\SuperAdmin\NewAdmin.cshtml" />
+    <Content Include="Areas\Admin\Resources\css\NewGroupCode.scss" />
+    <Content Include="Areas\Admin\Views\Branches\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Branches\NewBranch.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyClients\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ReturnEntries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyClients\GroupCodeDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\ClientAccess\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyClients\NewClientAccess.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Resources\3rdParty\js\particles.json" />
+    <Content Include="Areas\Admin\Views\Shared\EmptyView.cshtml" />
+    <Content Include="Areas\Admin\Views\SuperAdmin\EditDetails.cshtml" />
+    <None Include="Properties\PublishProfiles\EpayV2Final.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BankAlertsBL\BankAlertsBL.csproj">
+      <Project>{accb1952-050a-4bf4-a759-5ecc2772460b}</Project>
+      <Name>BankAlertsBL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BusinessObjectEntities\BusinessObjectEntities.csproj">
+      <Project>{f68dccdc-20ae-44ce-8072-fab8c70f27ae}</Project>
+      <Name>BusinessObjectEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59760</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59761/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.3.6.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.3.6.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+  <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets')" />
+  <Import Project="..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

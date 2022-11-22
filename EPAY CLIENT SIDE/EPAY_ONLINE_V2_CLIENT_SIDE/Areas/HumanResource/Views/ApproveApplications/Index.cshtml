@@ -1,0 +1,978 @@
+﻿
+@model IEnumerable<LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource.Models._LRWEB_V1_CUSTOMER_APPLICATION>
+@using LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource
+
+<div class="mainboard" style="width:100%;height:100vh;padding:30px;">
+    <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+        <li style="width:calc(100% - 480px);">
+            <h4 style="color:#4f2683"><i class="fa fa-users"></i> APPLICATION LIST</h4>
+        </li>
+        <li style="width:210px;padding-right:10px;">
+
+        </li>
+
+    </ul>
+    <div id="loadingmodal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" style="">
+        <div class="modal-lg" style="width:100%;height:100%;background:none">
+            <div class="modal-content" style="vertical-align:middle;color:#faa634;text-align:center;width:100vw;height:100vh;background-color:#0000006e;border:none;">
+                <div style="margin: auto;">
+                    <span class="fa fa-spinner fa-spin fa-3x" style="color:#faa634;"></span><br><b>Loading...</b>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" style="max-width:90vw;height:100vh;">
+
+            <!-- Modal content-->
+            <div class="modal-content  text-violet">
+                <div class="modal-header">
+                    <h4 class="modal-title">LOAN APPLICATION SUMMARY</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <input type="text" id="employee_reference" value="" hidden />
+                    <input type="text" id="appID" value="" hidden />
+                </div>
+                <div class="modal-body" id="page-content">
+                    <div id="toPrint">
+                        <div class="form-group">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTableheader" width="100%" cellspacing="0" style="border-color:#808080">
+                                    <tr>
+                                        <th colspan="6" class="text-center">LOAN INFORMATION</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LOAN AMOUNT :</th>
+                                        <td colspan="2"><span id="dLoanAmount"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LOAN TERMS: </th>
+                                        <td colspan="2"><span id="dLoanTerm"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LOAN PURPOSE: </th>
+                                        <td colspan="2"><span id="dLoanPurpose"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NET PAY:</th>
+                                        <td colspan="2"><span id="dNetPay"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">OTHER LOAN: </th>
+                                        <td colspan="2"><span id="dOtherLoans"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NTHP :</th>
+                                        <td colspan="2"><span id="dNetIncome"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LOAN PURPOSE OTHERS: </th>
+                                        <td colspan="5"><span id="dLoanPurposeOthers"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">PERSONAL INFORMATION</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NAME: </th>
+                                        <td colspan="2"><span id="dName"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">PLACE OF BIRTH: </th>
+                                        <td colspan="2"><span id="dBirthPlace"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">DATE OF BIRTH: </th>
+                                        <td colspan="2"><span id="dBirthDate"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">AGE: </th>
+                                        <td colspan="2"><span id="dAge"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">GENDER: </th>
+                                        <td colspan="2"><span id="dGender"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">RELIGION: </th>
+                                        <td colspan="2"><span id="dReligion"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">CITIZENSHIP: </th>
+                                        <td colspan="2"><span id="dCitizenship"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">CIVIL STATUS: </th>
+                                        <td colspan="2"><span id="dCivilStatus"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">TIN: </th>
+                                        <td colspan="5"><span id="dTIN"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">MOTHER'S MAIDEN NAME: </th>
+                                        <td colspan="5"><span id="dMothersMaidenName"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">GSIS: </th>
+                                        <td colspan="5"><span id="dGSIS"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">SSS: </th>
+                                        <td colspan="5"><span id="dSSS"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">SPOUSE INFORMATION</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NAME: </th>
+                                        <td colspan="2"><span id="dsName"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">GENDER: </th>
+                                        <td colspan="2"><span id="dsGender"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">DATE OF BIRTH: </th>
+                                        <td colspan="2"><span id="dsBirthDate"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">AGE: </th>
+                                        <td colspan="2"><span id="dsAge"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">EMPLOYER NAME: </th>
+                                        <td colspan="2"><span id="dsEmployer"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NO. OF DEPENDENTS: </th>
+                                        <td colspan="2"><span id="dsDependents"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">MONTHLY INCOME: </th>
+                                        <td colspan="2"><span id="dsMonthlyIncome"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">CONTACT NUMBER: </th>
+                                        <td colspan="2"><span id="dsNumber"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">OCCUPATION: </th>
+                                        <td colspan="5"><span id="dsOccupation"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">PRESENT ADDRESS</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">PRESENT ADDRESS: </th>
+                                        <td colspan="5"><span id="dPresentAddress"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">OWNWERSHIP: </th>
+                                        <td colspan="5"><span id="dPresentOwnership"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LENGTH OF STAY: </th>
+                                        <td colspan="2"><span id="dPresentLengthOfStay"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">TELEPHONE NUMBER: </th>
+                                        <td colspan="2"><span id="dPresentTelephone"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">PERMANENT ADDRESS</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">PERMANENT ADDRESS: </th>
+                                        <td colspan="5"><span id="dPermanentAddress"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">OWNWERSHIP: </th>
+                                        <td colspan="5"><span id="dPermanentOwnership"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LENGTH OF STAY: </th>
+                                        <td colspan="2"><span id="dPermanentLengthOfStay"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">TELEPHONE NUMBER: </th>
+                                        <td colspan="2"><span id="dPermanentTelephone"></span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="6" class="text-center">EMPLOYMENT INFORMATION</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">DATE HIRED: </th>
+                                        <td colspan="2"><span id="dDateHired"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">TENURE: </th>
+                                        <td colspan="2"><span id="dTenure"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">EMPLOYEE NUMBER: </th>
+                                        <td colspan="2"><span id="dEmployeeNumber"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">TELEPHONE NUMBER: </th>
+                                        <td colspan="2"><span id="deTelephone"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">RANK: </th>
+                                        <td colspan="2"><span id="dRank"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">DEPARTMENT: </th>
+                                        <td colspan="2"><span id="dDepartment"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">MONTHLY ALLOWANCE: </th>
+                                        <td colspan="2"><span id="dMonthlyAllowance"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">OCCUPATION: </th>
+                                        <td colspan="2"><span id="dOccupation"></span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <th style="width:120px;text-align:left;font-size:12px;">NATURE OF WORK: </th>
+                                        <td colspan="5"><span id="dNatureOfWork"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">EMPLOYERS ADDRESS: </th>
+                                        <td colspan="5"><span id="dEmployerAddress"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">OTHER SOURCE OF INCOME: </th>
+                                        <td colspan="2"><span id="dSourceOFIncomeOthers"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">MONTHLY INCOME: </th>
+                                        <td colspan="2"><span id="dMonthlyIncomeOthers"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">BANK INFORMATION</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">CREDIT PROCEEDS TO: </th>
+                                        <td colspan="5"><span id="dCreditOption"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NAME TO DISPLAY: </th>
+                                        <td colspan="5"><span id="dNameToDisplay"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">ACCOUNT NUMBER: </th>
+                                        <td colspan="5"><span id="dAccountNumber"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">BANK NAME: </th>
+                                        <td colspan="5"><span id="dBankName"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">YOUR PHOTO</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><img id="attach1" alt="" height=300 width=300></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">PAYSLIP</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><img id="attach2" alt="" height=300 width=300></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">CERTIFICATE OF EMPLOYMENT / COMPANY ID</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><img id="attach3" alt="" height=300 width=300></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">SIGNATURE</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><img id="attach4" alt="" height=300 width=300></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">ID FRONT</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><img id="attach5" alt="" height=300 width=300></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">ID BACK</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><img id="attach6" alt="" height=300 width=300></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" hidden><img id="attach7" alt="" height=300 width=300></td>
+                                        <td colspan="6"><a id="cif" href="#" target="_blank">CIF FORM</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" hidden><img id="attach8" alt="" height=300 width=300></td>
+                                        <td colspan="6"><a id="atm" href="#" target="_blank">ATM FORM</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" hidden><img id="attach9" alt="" height=300 width=300></td>
+                                        <td colspan="6"><a id="app" href="#" target="_blank">APPLICATION FORM</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6" class="text-center">ATTACHMENT INFORMATION</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">LEGAL ID: </th>
+                                        <td colspan="2"><span id="dLegalID"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">NAME ON ID: </th>
+                                        <td colspan="2"><span id="dNameOnID"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">DOCUMENT NAME: </th>
+                                        <td colspan="2"><span id="dDocumentName"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">ISSUE AUTHORITY: </th>
+                                        <td colspan="2"><span id="dIssueAuth"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:120px;text-align:left;font-size:12px;">ISSUE DATE: </th>
+                                        <td colspan="2"><span id="dIssueDate"></span></td>
+                                        <th style="width:120px;text-align:left;font-size:12px;">EXPIRATION DATE:  </th>
+                                        <td colspan="2"><span id="dExpirationDate"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="footer">
+                    <button type="button" class="btn btn-violet" id="btnsubmit"></button>
+                    <button type="button" class="btn btn-violet" id="btnresend">RESEND ATTACHMENT</button>
+                    <button type="button" class="btn btn-violet" id="btndecline">DECLINE</button>
+                    @*<button type="button" id="save" class="btn btn-violet" onclick="printPartOfPage('toPrint')">Print</button>*@
+                    <button type="button" class="btn btn-violet" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="" style="width:100%;height:calc(100vh - 100px);overflow:auto;margin-top:15px;border:0px solid #111;">
+        <table id="example" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>APPLICATION NUMBER</th>
+                    <th>REFERENCE ID</th>
+                    <th>NAME</th>
+                    <th>STATUS</th>
+                    <th>DATE CREATED</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var list in Model)
+                {
+                <tr>
+                    <td>@list.application_number</td>
+                    <td>@list.referenceNumber</td>
+                    <td>@list.name</td>
+                    <td>@list.status</td>
+                    <td>@list.dateCreated</td>
+                    @if (list.status == "PENDING")
+                    {
+                        <td><a onclick="loadpreview(@list.ID,'VERIFY')" href="#" name="btnreview"><i class="fa fa-eye"></i> VIEW</a></td>
+                    }
+                    else if (list.status == "REVERIFY")
+                    {
+                        //<td><a onclick="loadpreview(@list.ID,'VERIFY')" href="#" name="btnreview"><i class="fa fa-eye"></i> VIEW</a></td>
+                        <td><a onclick="loadpreview(@list.ID,'REVERIFY')" href="#" name="btnreview"><i class="fa fa-eye"></i> VIEW</a></td>
+                    }
+                    else
+                    {
+                        <td><a onclick="loadpreview(@list.ID,'VIEW')" href="#" name="btnreview"><i class="fa fa-eye"></i> VIEW</a></td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+        @*<img style="object-fit:cover;" src="~/Areas/HumanResource/Resources/Images/UnderConstruction.png" alt="Underconstruction" />*@
+    </div>
+</div>
+
+<style>
+    .table td {
+        padding: 4px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .table th {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        color: #fff;
+        background-color: #4f2683;
+    }
+    #page-content {
+        height: 80vh;
+        overflow-y: auto;
+    }
+
+    #footer {
+        height: auto;
+    }
+</style>
+
+
+<script type="text/javascript">
+    //$("#loadingmodal").modal('show');
+    $(document).ready(function () {
+        var model_state;
+
+        var table = $('#example').DataTable({
+            "aaSorting": []
+        });
+        table.columns('#status').every(function () {
+            var that = this;
+
+            // Create the select list and search operation
+            var select = $('<select />')
+                .appendTo(
+                    '#searchbox'
+                )
+                .on('change', function () {
+                    that
+                        .search($(this).val())
+                        .draw();
+                });
+
+            // Get the search data for the first column and add to the select list
+            this
+                .cache('search')
+                .sort()
+                .unique()
+                .each(function (d) {
+                    select.append($('<option value="' + d + '">' + d + '</option>'));
+                });
+        });
+    });
+
+    function loadpreview(ID, ACT) {
+        $.ajax({
+            url: FolderName + "/HumanResource/ApproveApplications/getInfo",
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            data: JSON.stringify({ ID: ID }),
+            cache: false,
+            success: function (data) {
+                model_state = new FormData();
+                model_state.append("CIFno", data[0].CIFno)
+                model_state.append("appID", data[0].appID);
+                model_state.append("name", data[0].name);
+                model_state.append("application_number", data[0].application_number);
+                model_state.append("referenceNumber", data[0].referenceNumber);
+                model_state.append("netIncome", data[0].netIncome);
+                model_state.append("loanAmount", data[0].loanAmount);
+                model_state.append("loanTerms", data[0].loanTerms);
+                model_state.append("loanPurpose", data[0].loanPurpose);
+                model_state.append("loanPurposeID", data[0].loanPurposeID);
+                model_state.append("loanPurposeOthers", data[0].loanPurposeOthers);
+                model_state.append("creditOption", data[0].creditOption);
+                model_state.append("creditOptionID", data[0].creditOptionID);
+                model_state.append("nameToDisplay", data[0].nameToDisplay);
+                model_state.append("accountNumber", data[0].accountNumber);
+                model_state.append("bankName", data[0].bankName);
+
+                model_state.append("attachment1", data[0].attachment1);
+                model_state.append("attachment2", data[0].attachment2);
+                model_state.append("attachment3", data[0].attachment3);
+                model_state.append("attachment4", data[0].attachment4);
+                model_state.append("attachment5", data[0].attachment5);
+                model_state.append("attachment6", data[0].attachment6);
+                model_state.append("attachment7", data[0].attachment7);
+                model_state.append("attachment8", data[0].attachment8);
+                model_state.append("attachment9", data[0].attachment9);
+                model_state.append("attachment10", data[0].attachment10);
+
+                model_state.append("legalID", data[0].legalID);
+                model_state.append("nameOnID", data[0].nameOnID);
+                model_state.append("documentName", data[0].documentName);
+                model_state.append("documentNameID", data[0].documentNameID);
+                model_state.append("issueAuth", data[0].issueAuth);
+                model_state.append("issueAuthID", data[0].issueAuthID);
+                model_state.append("issueDate", data[0].issueDate);
+                model_state.append("expirationDate", data[0].expirationDate);
+                model_state.append("salutation", data[0].salutation);
+                model_state.append("firstName", data[0].firstName);
+                model_state.append("middleName", data[0].middleName);
+                model_state.append("lastName", data[0].lastName);
+                model_state.append("suffix", data[0].suffix);
+                model_state.append("birthPlace", data[0].birthPlace);
+                model_state.append("birthDate", data[0].birthDate);
+                model_state.append("age", data[0].age);
+                model_state.append("gender", data[0].gender);
+                model_state.append("religion", data[0].religion);
+                model_state.append("citizenship", data[0].citizenship);
+                model_state.append("civilStatus", data[0].civilStatus);
+                model_state.append("civilStatusID", data[0].civilStatusID);
+                model_state.append("TIN", data[0].TIN);
+                model_state.append("mothersMaidenName", data[0].mothersMaidenName);
+                model_state.append("SSS", data[0].SSS);
+                model_state.append("GSIS", data[0].GSIS);
+                model_state.append("spouseSalutation", data[0].spouseSalutation);
+                model_state.append("spouseFirstname", data[0].spouseFirstname);
+                model_state.append("spouseMiddlename", data[0].spouseMiddlename);
+                model_state.append("spouseLastname", data[0].spouseLastname);
+                model_state.append("spouseSuffix", data[0].spouseSuffix);
+                model_state.append("spouseGender", data[0].spouseGender);
+                model_state.append("spouseBirthDate", data[0].spouseBirthDate);
+                model_state.append("spouseAge", data[0].spouseAge);
+                model_state.append("dependents", data[0].dependents);
+                model_state.append("spouseEmployer", data[0].spouseEmployer);
+                model_state.append("spouseOccupation", data[0].spouseOccupation);
+                model_state.append("spouseMonthlyIncome", data[0].spouseMonthlyIncome);
+                model_state.append("spouseNumber", data[0].spouseNumber);
+                model_state.append("Present_Address", data[0].Present_Address);
+                model_state.append("Present_Province", data[0].Present_Province);
+                model_state.append("Present_ProvinceID", data[0].Present_ProvinceID);
+                model_state.append("Present_City", data[0].Present_City);
+                model_state.append("Present_CityID", data[0].Present_CityID);
+                model_state.append("Present_Barangay", data[0].Present_Barangay);
+                model_state.append("Present_BarangayID", data[0].Present_BarangayID);
+                model_state.append("Present_Country", data[0].Present_Country);
+                model_state.append("Present_Zipcode", data[0].Present_Zipcode);
+                model_state.append("Present_Ownership", data[0].Present_Ownership);
+                model_state.append("Present_OwnershipID", data[0].Present_OwnershipID);
+                model_state.append("Present_Years", data[0].Present_Years);
+                model_state.append("Present_Months", data[0].Present_Months);
+                model_state.append("Present_LengthOfStay", data[0].Present_LengthOfStay);
+                model_state.append("Present_Telephone", data[0].Present_Telephone);
+                model_state.append("Permanent_Address", data[0].Permanent_Address);
+                model_state.append("Permanent_Province", data[0].Permanent_Province);
+                model_state.append("Permanent_ProvinceID", data[0].Permanent_ProvinceID);
+                model_state.append("Permanent_City", data[0].Permanent_City);
+                model_state.append("Permanent_CityID", data[0].Permanent_CityID);
+                model_state.append("Permanent_Barangay", data[0].Permanent_Barangay);
+                model_state.append("Permanent_BarangayID", data[0].Permanent_BarangayID);
+                model_state.append("Permanent_Country", data[0].Permanent_Country);
+                model_state.append("Permanent_Zipcode", data[0].Permanent_Zipcode);
+                model_state.append("Permanent_Ownership", data[0].Permanent_Ownership);
+                model_state.append("Permanent_OwnershipID", data[0].Permanent_OwnershipID);
+                model_state.append("Permanent_Years", data[0].Permanent_Years);
+                model_state.append("Permanent_Months", data[0].Permanent_Months);
+                model_state.append("Permanent_LengthOfStay", data[0].Permanent_LengthOfStay);
+                model_state.append("Permanent_Telephone", data[0].Permanent_Telephone);
+                model_state.append("dateHired", data[0].dateHired);
+                model_state.append("tenure", data[0].tenure);
+                model_state.append("employeeNumber", data[0].employeeNumber);
+                model_state.append("rank", data[0].rank);
+                model_state.append("department", data[0].department);
+                model_state.append("monthlyAllowance", data[0].monthlyAllowance);
+                model_state.append("occupation", data[0].occupation);
+                model_state.append("natureOfWork", data[0].natureOfWork);
+                model_state.append("natureOfWorkID", data[0].natureOfWorkID);
+                model_state.append("sourceOfIncomeOthers", data[0].sourceOfIncomeOthers);
+                model_state.append("monthlyIncomeOthers", data[0].monthlyIncomeOthers);
+                model_state.append("Employer_Address", data[0].Employer_Address);
+                model_state.append("Employer_Province", data[0].Employer_Province);
+                model_state.append("Employer_ProvinceID", data[0].Employer_ProvinceID);
+                model_state.append("Employer_City", data[0].Employer_City);
+                model_state.append("Employer_CityID", data[0].Employer_CityID);
+                model_state.append("Employer_Barangay", data[0].Employer_Barangay);
+                model_state.append("Employer_BarangayID", data[0].Employer_BarangayID);
+                model_state.append("Employer_Country", data[0].Employer_Country);
+                model_state.append("Employer_Zipcode", data[0].Employer_Zipcode);
+                model_state.append("Employer_Telephone", data[0].Employer_Telephone)
+
+
+
+                var loanamount = data[0].loanAmount;
+                var netincome = data[0].netIncome;
+                var otherloans = data[0].otherLoans;
+                var netpay = data[0].netPay;
+                var loanterm = data[0].loanTerms;
+                var loanpurpose = data[0].loanPurpose || 'N / A';
+                var loanothers = data[0].loanPurposeOthers || 'N / A';
+                var fullclientname = data[0].salutation + " " + data[0].firstName + " " + data[0].middleName + " " + data[0].lastName + " " + data[0].suffix + " ";
+                var birthplace = data[0].birthPlace;
+                var birthdate = data[0].birthDate;
+                var age = data[0].age;
+                var gender = data[0].gender;
+                var religion = data[0].religion;
+                var citizenship = data[0].citizenship;
+                var civilstatus = data[0].civilStatus;
+                var tin = data[0].TIN;
+                var mothersMaidenName = data[0].mothersMaidenName;
+                var sss = data[0].SSS || 'N / A';
+                var gsis = data[0].GSIS || 'N / A';
+
+                $("#dLoanAmount").html(loanamount);
+                $("#dNetIncome").html(netincome);
+                $("#dOtherLoans").html(otherloans);
+                $("#dNetPay").html(netpay);
+                $("#dLoanTerm").html(loanterm);
+                $("#dLoanPurpose").html(loanpurpose);
+                $("#dLoanPurposeOthers").html(loanothers);
+                $("#dName").html(fullclientname);
+                $("#dBirthPlace").html(birthplace);
+                $("#dBirthDate").html(birthdate);
+                $("#dAge").html(age);
+                $("#dGender").html(gender);
+                $("#dReligion").html(religion);
+                $("#dCitizenship").html(citizenship);
+                $("#dCivilStatus").html(civilstatus);
+                $("#dTIN").html(tin);
+                $("#dMothersMaidenName").html(mothersMaidenName);
+                
+                $("#dSSS").html(sss);
+                $("#dGSIS").html(gsis);
+
+                var sfullname = data[0].spouseSalutation + " "
+                    + data[0].spouseFirstname + " "
+                    + data[0].spouseMiddlename + " "
+                    + data[0].spouseLastname + " "
+                    + data[0].spouseSuffix || 'N / A';
+                var sgender = data[0].spouseGender || 'N / A';
+                var sage = data[0].spouseAge || 'N / A';
+                var sbirthdate = data[0].spouseBirthDate || 'N / A';
+                var dependents = data[0].dependents || 'N / A';
+                var employer = data[0].spouseEmployer || 'N / A';
+                var sMonthlyIncome = data[0].spouseMonthlyIncome || 'N / A';
+                var sNumber = data[0].spouseNumber || 'N / A';
+                var sOccupation = data[0].spouseOccupation || 'N / A';
+
+
+                $("#dsName").html(sfullname);
+                $("#dsGender").html(sgender);
+                $("#dsAge").html(sage);
+                $("#dsBirthDate").html(sbirthdate);
+                $("#dsDependents").html(dependents);
+                $("#dsEmployer").html(employer);
+                $("#dsMonthlyIncome").html(sMonthlyIncome);
+                $("#dsNumber").html(sNumber);
+                $("#dsOccupation").html(sOccupation);
+
+                var presentaddress = $("#Present_Address").val() + " "
+                    + $("#Present_Barangay option:selected").text() + " "
+                    + $("#Present_City option:selected").text() + ", "
+                    + $("#Present_Province option:selected").text() + " "
+                    + $("#Present_Country").val() + " "
+                    + $("#Present_Zipcode").val();
+                var presentaddress = data[0].Present_Address + " "
+                    + data[0].Present_Barangay + " "
+                    + data[0].Present_City + ", "
+                    + data[0].Present_Province + " "
+                    + data[0].Present_Country + " "
+                    + data[0].Present_Zipcode;
+                var presentownership = data[0].Present_Ownership;
+                var presentlos = data[0].Present_Years + " YEARS " + data[0].Present_Months + " MONTHS.";
+                var presenttel = data[0].Present_Telephone;
+
+                $("#dPresentAddress").html(presentaddress);
+                $("#dPresentOwnership").html(presentownership);
+                $("#dPresentLengthOfStay").html(presentlos);
+                $("#dPresentTelephone").html(presenttel);
+
+                var permanentaddress = data[0].Permanent_Address + " "
+                    + data[0].Permanent_Barangay + " "
+                    + data[0].Permanent_City + ", "
+                    + data[0].Permanent_Province + " "
+                    + data[0].Permanent_Country + " "
+                    + data[0].Permanent_Zipcode;
+                var permanentownership = data[0].Permanent_Ownership;
+                var permanentlos = data[0].Permanent_Years + " YEARS " + data[0].Permanent_Months + " MONTHS.";
+                var permanenttel = data[0].Permanent_Telephone;
+
+                $("#dPermanentAddress").html(permanentaddress);
+                $("#dPermanentOwnership").html(permanentownership);
+                $("#dPermanentLengthOfStay").html(permanentlos);
+                $("#dPermanentTelephone").html(permanenttel);
+
+                var datehired = data[0].dateHired;
+                var tenure = data[0].tenure;
+                var employeenumber = data[0].employeeNumber;
+                //var position = $("#position").val();
+                var rank = data[0].rank;
+                var department = data[0].department;
+                var natureofwork = data[0].natureOfWork;
+                var employeraddress = data[0].Employer_Address + " "
+                    + data[0].Employer_Barangay + " "
+                    + data[0].Employer_City + ", "
+                    + data[0].Employer_Province + " "
+                    + data[0].Employer_Country + " "
+                    + data[0].Employer_Zipcode;
+                var employertelephone = data[0].Employer_Telephone;
+                var occupation = data[0].occupation;
+                var monthlyallowance = data[0].monthlyAllowance;
+                var dSourceOFIncomeOthers = data[0].sourceOfIncomeOthers || 'N / A';
+                var dMonthlyIncomeOthers = data[0].monthlyIncomeOthers || 'N / A';
+
+                $("#dDateHired").html(datehired);
+                $("#dTenure").html(tenure);
+                $("#dEmployeeNumber").html(employeenumber);
+                //$("#dPosition").html(position);
+                $("#dRank").html(rank);
+                $("#dDepartment").html(department);
+                $("#dNatureOfWork").html(natureofwork);
+                $("#dEmployerAddress").html(employeraddress);
+                $("#deTelephone").html(employertelephone);
+                $("#dMonthlyAllowance").html(monthlyallowance);
+                $("#dOccupation").html(occupation);
+                $("#dSourceOFIncomeOthers").html(dSourceOFIncomeOthers);
+                $("#dMonthlyIncomeOthers").html(dMonthlyIncomeOthers);
+
+                var credOption = data[0].creditOption || 'N / A';
+                var bankName = data[0].bankName || 'N / A';
+                var nameToDisplay = data[0].nameToDisplay || 'N / A';
+                var accountNumber = data[0].accountNumber || 'N / A';
+
+                $("#dCreditOption").html(credOption);
+                $("#dBankName").html(bankName);
+                $("#dNameToDisplay").html(nameToDisplay);
+                $("#dAccountNumber").html(accountNumber);
+
+                var attach1 = data[0].attachment1
+                var attach2 = data[0].attachment2
+                var attach3 = data[0].attachment3
+                var attach4 = data[0].attachment4
+                var attach5 = data[0].attachment5
+                var attach6 = data[0].attachment6
+                var attach7 = data[0].attachment7
+                var attach8 = data[0].attachment8
+                var attach9 = data[0].attachment9
+
+                $('#attach1').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach1);
+                $('#attach2').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach2);
+                $('#attach3').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach3);
+                $('#attach4').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach4);
+                $('#attach5').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach5);
+                $('#attach6').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach6);
+                $('#attach7').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach7);
+                $('#attach8').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach8);
+                $('#attach9').attr('src', FolderName + "/Areas/ID_STORAGE/" + attach9);
+                $("#cif").attr("href", FolderName + "/Areas/ID_STORAGE/" + attach7);
+                $("#atm").attr("href", FolderName + "/Areas/ID_STORAGE/" + attach8);
+                $("#app").attr("href", FolderName + "/Areas/ID_STORAGE/" + attach9);
+                //testing
+                //var zip = new JSZip();
+                //var a = "http://localhost:51133/Areas/ID_STORAGE/" + attach1;
+                //var b = "http://localhost:51133/Areas/ID_STORAGE/" + attach2;
+                //var c = "http://localhost:51133/Areas/ID_STORAGE/" + attach3;
+                //var d = "http://localhost:51133/Areas/ID_STORAGE/" + attach4;
+                //var e = "http://localhost:51133/Areas/ID_STORAGE/" + attach5;
+                //console.log(a);
+                //console.log(b);
+                //console.log(c);
+                //console.log(d);
+                //console.log(e);
+                //zip.file("Photo.jpg", urlToPromise(a), { binary: true });
+                //zip.file("Payslip.jpg", urlToPromise(b), { binary: true });
+                //zip.file("COE.jpg", urlToPromise(c), { binary: true });
+                //zip.file("frontID.jpg", urlToPromise(d), { binary: true });
+                //zip.file("backID.jpg", urlToPromise(e), { binary: true });
+                //zip.generateAsync({ type: "blob" }).then(function (content) {
+                //    model_state.append("Attachment1", content);
+                //    //saveAs(content, "qwesad.zip");
+                //});
+                // end test
+                var legalid = data[0].legalID;
+                var nameonid = data[0].nameOnID;
+                var documentname = data[0].documentName;
+                var issueauth = data[0].issueAuth;
+                var issuedate = data[0].issueDate;
+                var expirationdate = data[0].expirationDate || 'N / A';
+
+                $("#dLegalID").html(legalid);
+                $("#dNameOnID").html(nameonid);
+                $("#dDocumentName").html(documentname);
+                $("#dIssueAuth").html(issueauth);
+                $("#dIssueDate").html(issuedate);
+                $("#dExpirationDate").html(expirationdate);
+
+                if (ACT == "VIEW") {
+                    $("#btnsubmit").prop('hidden', true);
+                    $("#btndecline").prop('hidden', true);
+                    
+                } else {
+                    $("#btnsubmit").prop('hidden', false);
+                    
+                    $("#btndecline").prop('hidden', false);
+                    $("#btnsubmit").html(ACT);
+                    $("#appID").val(ID);
+                    $("#employee_reference").val(data[0].employee_reference);
+                }
+
+                var docstat = data[0].status;
+                
+                if (docstat != "ONPROCESS") {
+                    $("#btnresend").prop('hidden', true);
+                } else {
+                    $("#btnresend").prop('hidden', false);
+                }
+                $("#myModal").modal('show');
+
+
+            },
+            error: function (ex) {
+                alert("Internal Server Error");
+            }
+        });
+    }
+
+    $("#btnsubmit").on('click', function () {
+
+        var activity = $(this).html();
+        if (activity == "VERIFY") {
+            //alert("verify")
+            verifyClient();
+        } else if (activity == "REVERIFY") {
+            //alert("reverify")
+            reverifyClient();
+        }
+    })
+
+    $("#btndecline").on('click', function () {
+        $.confirm({
+            title: '<i class="fa fa-info"></i> Confirmation',
+            content: "Do you really want to decline application?" +
+                '<div class="form-group" style="text-align:left;margin-top:5px;">' +
+                '<label for="usr" style="margin-bottom:1px;">Reason:</label>' +
+                '<Textarea type="text" class="form-control" id="txtreason" name="txtinput" placeholder="Reason" id="txtemail" />' +
+                '</div>',
+            type: "orange",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Yes',
+                    btnClass: "btn-orange",
+                    action: function () {
+                        if ($("#txtreason").val() == "") {
+                            $("#txtreason").css("border-color", "#F44336");
+                            return false;
+                        }
+                        var reason = $("#txtreason").val()
+                        var appID = $("#appID").val()
+                        var employee_reference = $("#employee_reference").val()
+                       // console.log(reason);
+                        //console.log(appID);
+                        //console.log(employee_reference)
+                        //model_state.append("reason", $("#txtreason").val())
+                        $.ajax({
+                            url: FolderName + "/HumanResource/ApproveApplications/Decline",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify({ appID: appID, reason: reason, employee_reference: employee_reference }),
+                            //data: model_state,
+                            async: true,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                swal({
+                                    title: 'Decline Application',
+                                    text: "An email was sent to employee with another link",
+                                    type: 'success',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#faa634',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.value) {
+
+                                    }
+                                })
+
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 10000);
+                            },
+                            error: function (ex) {
+                                msgbox("Error", ex, "red");
+
+                            }
+                        });
+
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-gray",
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+    })
+
+    $("#btnresend").on('click', function () {
+        $.confirm({
+            title: '<i class="fa fa-info"></i> Confirmation',
+            content: "Resend attached documentary requirements?",
+            type: "blue",
+            typeAnimated: true,
+            buttons: {
+                tryAgmnain: {
+                    text: 'Yes',
+                    btnClass: "btn-orange",
+                    action: function () {
+                        resendAttachment()
+
+                    }
+                },
+                No: {
+                    text: 'No',
+                    btnClass: "btn-gray",
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+    })
+    function verifyClient() {
+        var x = confirm("Are you sure you want to verify?")
+        if (x == true) {
+            $("#myModal").modal('toggle');
+            $("#loadingmodal").modal('show');
+            $.ajax({
+                url: FolderName + "/HumanResource/ApproveApplications/verifyClient",
+                contentType: false,
+                type: "POST",
+                data: model_state,
+                async: true,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    alert(data)
+                    location.reload();
+                },
+                error: function (ex) {
+                    alert("Internal Server Error")
+                }
+            });
+        }
+    }
+
+    function reverifyClient() {
+        var x = confirm("Are you sure you want to verify?")
+        if (x == true) {
+            $("#myModal").modal('toggle');
+            $("#loadingmodal").modal('show');
+            $.ajax({
+                url: FolderName + "/HumanResource/ApproveApplications/reverifyClient",
+                contentType: false,
+                type: "POST",
+                data: model_state,
+                async: true,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    alert(data)
+                    location.reload();
+                },
+                error: function (ex) {
+                    alert("Internal Server Error")
+                }
+            });
+        }
+    }
+
+    function resendAttachment() {
+        $("#myModal").modal('toggle');
+        $("#loadingmodal").modal('show');
+        $.ajax({
+            url: FolderName + "/HumanResource/ApproveApplications/resendAttachment",
+            contentType: false,
+            type: "POST",
+            data: model_state,
+            async: true,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                var msg = JSON.parse(data)
+                alert(msg.msg)
+                location.reload();
+            },
+            error: function (ex) {
+                alert("Internal Server Error")
+            }
+        });
+    }
+    function urlToPromise(url) {
+        return new Promise(function (resolve, reject) {
+            JSZipUtils.getBinaryContent(url, function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+    }
+</script>

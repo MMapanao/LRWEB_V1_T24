@@ -1,0 +1,137 @@
+﻿ 
+ 
+.td-active{
+    background-color:#ffd79c; 
+ }
+
+body {
+    font-family: Calibri;
+    background-color: #2e2e2e;
+}
+ .body-content{
+          padding-left: 0px; 
+     padding-right: 0px; 
+ }
+.logout{
+    background-color:#FF8108;
+    color:#fff;
+    font-size:17px;
+    float:right;
+    margin-right:10px;
+    height:100%;
+    
+}
+
+.sidenave_active_a{
+       background-color:#3e3e3e;
+}
+.logout:hover {
+    background-color: #FAA634;
+    color: #fff;
+    font-style: normal;
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 265px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #4F2683;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 0px;
+}
+span{
+    margin-right:5px;
+}
+.sidenav a {
+    padding: 13px 8px 13px 8px;
+    text-decoration: none;
+    background-color:#fff;
+    margin-top:5px;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    text-align: start;
+    padding-left:20px;
+    border-radius: 2px;
+}
+.sdbar_topactive {
+    background-color: #2e2e2e;
+}
+
+.sidenav a:hover {
+    color: #ccc;
+    background-color: #FAA634;
+}
+
+
+#main {
+    margin-left:265px;
+    /*transition: margin-left .5s;*/
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.branding {
+    text-align: start;
+    background-color: #4F2683;
+    color: #f1f1f1;
+    height: auto;
+    padding-top: 5px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.circle-picture {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    border: 2px solid #FAA634;
+    text-align: center;
+    background-color: #FAA634;
+    padding-top: 9px;
+}
+.pos{
+    font-size:12px;
+}
+ 
+.brand2{
+    top:-10px;
+    left:75px;
+    color:#fff;
+    padding-bottom:10px;
+}
+
+p,label{
+    margin:0px;
+}
+hr{
+    padding:0px;
+    margin:0px;
+}
+
+h1,h2,h3,h4,h5,h6{
+    padding:0px;
+    margin:0px;
+}
+.btn{
+    border-radius:1px;
+}
+
+.mainboard{
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(204,12,NaN,1);
+    -moz-box-shadow: 0px 0px 1px 0px rgba(204,12,NaN,1);
+    box-shadow: 0px 0px 1px 0px rgba(204,12,NaN,1);
+    padding:10px;
+    background-color:#fff;
+}

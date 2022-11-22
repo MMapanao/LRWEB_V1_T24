@@ -1,0 +1,23 @@
+﻿ 
+
+
+
+.table td {
+    padding:4px;
+    font-size:13px;
+    text-align:center;
+    /*border-bottom:2px solid #FF8108;*/
+}
+.table th{
+    padding:5px;
+    text-align:center;
+    font-size:13px;
+    color:#4e4e4e;
+ 
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   /*background-color: #ffd79c;*/
+}
+
+

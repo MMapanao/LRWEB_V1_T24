@@ -1,0 +1,3 @@
+[{"UserCode":"1000001","GroupCode":"AAAAA","email":"fortunochristian@yahoo.com","Action":{"Event":"APPROVED","Module":"PENDING EMPLOYEES","ID":"1500001","time":"2020-05-14 18:12","Before":"","After":"","DeclineReason":"","EnrolledID":[]}}
+,
+{"UserCode":"1000001","GroupCode":"AAAAA","email":"fortunochristian@yahoo.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2020-05-14 18:14","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500003"]}}

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<LRWEB_V1_ADMIN_T24.Areas.Admin.Models._AUDIT_TRAIL>
+@using LRWEB_V1_ADMIN_T24.Areas.Admin    
+@{
+    Layout = "~/Areas/Admin/Views/Shared/SuperAdminLayout.cshtml";
+    ViewBag.Title = "AuditTrail";
+}
+
+    <div class="mainboard" style="padding:30px;height:100vh;">
+        <div class="" style="width:100%;display:inline-flex;">
+
+            <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;width:100%;">
+                <li style="width:40%;">
+                    <h3 style="margin:0px;padding:0px;color:#4F2683;"><i class="fa fa-history"></i> Audit Trail</h3>
+                </li>
+                <li style="width: 60%;
+        padding-left: calc(60% - 250px);">
+                    <div class="row no-gutters" style="width:250px;">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <hr style="margin-top:7px;margin-bottom:7px;" /> 
+    <div class="table-responsive">
+        
+        <table id="myTable" style="width:100%" class="table table-bordered">
+            @*<thead style="background-color:#4F2683;">
+                <tr style="width:100%;color:#fff;background-color:#4F2683;">
+                    <th colspan="3" style="color:#fff;"><i class="fa fa-table"></i> History List</th>
+                </tr>
+            </thead>*@
+            <thead style="background-color:#4F2683;">
+                <tr>
+                    <th style="color:#fff;">ID</th>
+                    <th style="color:#fff;">Username</th>
+                    <th style="color:#fff;">Action</th>
+                    <th style="color:#fff;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                <tr>
+                    <td>@(obj.ID)</td>
+                    <td>@(obj.userName)</td>
+                    <td>@obj.action</td>
+                    <td>@obj.dateCreated</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "order": [[0, "desc"]]
+        });
+    });
+</script>
+<style>
+a[name="txtactions"]{
+    text-align:center;
+    background-color:#fff;
+    color:#4e4e4e;
+    padding:4px 8px 4px 8px;
+    border:none;
+    width:100%;
+}
+    .table td {
+    padding:4px;
+    font-size:13px;
+    vertical-align:middle;
+    text-align:center;
+    /*border-bottom:2px solid #FF8108;*/
+}
+    .table th {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        color: #4e4e4e;
+    }
+.btn{
+    border-radius:1px;
+}
+</style>

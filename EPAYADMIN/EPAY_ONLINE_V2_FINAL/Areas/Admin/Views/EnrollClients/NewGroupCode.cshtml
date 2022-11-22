@@ -1,0 +1,524 @@
+﻿@model LRWEB_V1_ADMIN_T24.Areas.Admin.ViewModel.ViewModel_NewGroupCode
+@{
+    ViewBag.Title = "NewGroupCode";
+}
+@using LRWEB_V1_ADMIN_T24.Areas.Admin
+<style>
+    .form-group {
+        margin: 0px;
+    }
+
+    .form-control {
+        border-radius: 1px;
+    }
+
+    small[name="txtmessage"] {
+        visibility: hidden;
+    }
+</style>
+
+
+<div style="padding:10px;">
+    <div class="mainboard" style="overflow-x:hidden;padding:25px;">
+        <h4 style="color:#4f2683;margin-bottom:5px;"><i class="fa fa-plus"></i> NEW GROUP CODE</h4>
+        <hr /><br />
+        <form id="regForm">
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <label for="ddgroupcode">Group Code <b style="color:#eb0101; ">*</b></label>
+                    <div class="" style="display:flex;">
+                        @*<input class="form-control" placeholder="Enter group code" id="groupCode" name="newclient" maxlength="5" style="max-width:100%;" required />*@
+                        <select class="form-control" id="groupCode" style="min-width:90%;color:#4f2683;" required>
+                            <option value="" disabled selected>Select Group Code</option>
+                            @foreach (var ddm in Model.vm_groupcode)
+                            {
+                                <option value="@ddm.agency_code">@ddm.group_code</option>
+                            }
+                        </select>
+                        <button class="btn" style="min-width:10%;background-color:#faa634;color:#fff" id="btncheckgroupcode"><i class="fa fa-check"></i></button>
+                    </div>
+                    <small id="GroupCode_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <label for="schemeCode">Scheme Code</label>
+                    <input type="text" class="form-control" id="schemeCode" name="newclient" placeholder="Assign Scheme Code" style="min-width:100%;" disabled>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <label for="txtcompany">Client Name</label>
+                    <input type="text" class="form-control" id="clientName" name="newclient" placeholder="Assign Client Name " style="min-width:100%;" disabled>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                    <label for="creditRatio">Credit Ratio (%)</label>
+                    <input type="text" class="form-control" id="creditRatio" value="30" name="newclient" placeholder="Assign Scheme Code" style="min-width:100%;">
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="csbBranch">CSB Branch <b style="color:#eb0101; ">*</b></label>
+                    <select class="form-control" id="csbBranch" style="min-width:100%;color:#4f2683;">
+                        @*@foreach (var ddm in Model.vm_fpc)
+                            {
+                                <option value="@ddm.BR_DESC">@ddm.BR_DESC</option>
+                            }*@
+                    </select>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="AED">Agreement Effectivity Date <b style="color:#eb0101; ">*</b></label>
+                    <input type="date" class="form-control" id="AED" style="min-width:100%;" required>
+                </div>
+
+
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="mobileNumber">Mobile Number <b style="color:#eb0101; ">*</b></label>
+                    <input type="text" class="form-control" id="mobileNumber" name="newclient" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(09|639)/gm, '639').substr(0, 12)" placeholder="Assign Mobile Number" style="min-width:100%;" required>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="officeNumber">Office Number <b style="color:#eb0101; ">*</b></label>
+                    <input type="text" class="form-control" id="officeNumber" name="newclient" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(09|639)/gm, '639').substr(0, 12)" placeholder="Assign Office Number" style="min-width:100%;" required>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="emailAddress">Email Address <b style="color:#eb0101; ">*</b></label>
+                    <input type="email" class="form-control" id="emailAddress" name="newclient" placeholder="Assign Company Email" style="min-width:100%;" required>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="emailFormat">Email Domain <b style="color:#eb0101; ">*</b></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="emailFormat" placeholder="Assign Email Domain" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">ex(@@domain.com.ph)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="classification">Institution Classification <b style="color:#eb0101; ">*</b></label>
+                    <select class="form-control" id="classification" style="color:#4f2683;">
+                        <option value="Private Schools, Universities and Colleges">Private Schools, Universities and Colleges</option>
+                        <option value="Private Companies">Private Companies</option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="structure">Business Type <b style="color:#eb0101; ">*</b></label>
+                    <select class="form-control" id="structure" style="color:#4f2683;">
+                        <option value="Sole proprietorship">Sole proprietorship</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="Corporation">Corporation</option>
+                        <option value="One-person Corporation">One-person Corporation</option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="accountNumber">Account Number:</label>
+                    <input type="text" class="form-control" id="accountNumber" name="newclient" placeholder="" style="min-width:100%;">
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12" style="padding-top:10px;">
+                    <label for="customerID">Customer ID:</label>
+                    <input type="text" class="form-control" id="customerID" name="newclient" placeholder="" style="min-width:100%;">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h5 style="margin-top:10px;margin-bottom:5px;"><label>BUSINESS ADDRESS</label></h5>
+                    <p style="width:100%;height:1px;background-color:#aeaeae;margin-bottom:15px;"></p>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label for="usr4" class="toplabel">Address Line (Unit Number / House/Building/Street Number,Street Name)<b style="color:#eb0101; ">*</b></label>
+                        <input class="form-control" placeholder="Home Number/ Street/ Subdivision" maxlength="32" id="addressLine" name="newclient" required />
+                        <small class="text-danger" id="Present_Address_msg" style="display:none;"></small>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label for="usr5" class="toplabel">Province <b style="color:#eb0101; ">*</b></label>
+                        <select class="form-control" id="province" style="color:#4f2683;" required>
+                            <option disabled selected value="">--Please select--</option>
+                            @*@foreach (var st in Model.vm_getlocations[0].city_list)
+                                {
+                                    <option value="@st.name">@st.name</option>
+                                }*@
+
+                        </select>
+                        <small class="text-danger" id="Present_City_msg" style="display:none;"></small>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label for="usr6" class="toplabel">City <b style="color:#eb0101; ">*</b></label>
+                        <select class="form-control" id="city" style="color:#4f2683;" required>
+                            <option disabled selected value="">--Please select--</option>
+                            @*<option value="">CSB DATA</option>
+                                @foreach (var ct in Model.vm_getlocations)
+                                {
+                                    <option value="@ct.name">@ct.name</option>
+                                }*@
+                        </select>
+                        <small class="text-danger" id="Present_State_msg" style="display:none;"></small>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <label for="usr4" class="toplabel">Barangay<b style="color:#eb0101; ">*</b></label>
+                        <select class="form-control" id="barangay" style="color:#4f2683;" required>
+                            <option disabled selected value="">--Please select--</option>
+                            @*<option value="">CSB DATA</option>
+                                <option value="BRGY. SAMPLE1">BRGY. SAMPLE1</option>
+                                <option value="BRGY. SAMPLE2">BRGY. SAMPLE2</option>*@
+                        </select>
+                        <small class="text-danger" id="Present_Address_msg" style="display:none;"></small>
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            <div style="width:100%;text-align:right;width:100%;padding-top:20px;">
+                <a href="@GlobalVariableClass.FolderName/Admin/EnrollClients/Index?content=EnrollClient" class="btn" style="background-color:#faa634;color:#fff">Cancel</a>  &nbsp;
+                <button type="submit" class="btn" style="background-color:#faa634;color:#fff" id="btnsubmit">Submit</button>
+            </div>
+        </form>
+        @*<div class="row">
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtcompany">Company Name:</label>
+                <input type="text" class="form-control" id="CompanyName" name="newclient" placeholder="Assign Company" style="min-width:100%;">
+                <small id="CompanyName_message" name="txtmessage" class="text-danger">Company Name is Required</small>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtcompanyemail">Company Email:</label>
+                <input type="text" class="form-control" id="CompanyEmail" name="newclient" placeholder="Company Email Address" style="min-width:100%;">
+                <small id="CompanyEmail_message" name="txtmessage" class="text-danger">Company Email is Required</small>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12" hidden>
+                <label for="txtemployerid">Employer ID:</label>
+                <input type="text" class="form-control" id="EmployerID" name="newclient" placeholder="Assign Employer ID" style="min-width:100%;">
+                <small id="EmployerID_message" name="txtmessage" class="text-danger">Assign Employer ID is Required</small>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtcustomerid">Customer ID:</label>
+                <input type="text" class="form-control" id="CustomerID" name="newclient" placeholder="Assign Customer ID" style="min-width:100%;">
+                <small id="CustomerID_message" name="txtmessage" class="text-danger">Customer ID</small>
+
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtaccountnum">Account No.:</label>
+                <input type="number" maxlength="12" class="form-control" id="AccountNo" name="newclient" placeholder="Assign Account no." style="min-width:100%;">
+                <small id="AccountNo_message" name="txtmessage" class="text-danger">Account Number</small>
+            </div>*@
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="ddmbranch">Maintaining Branch:</label>
+                <select class="form-control" id="MaintainingBranch" style="min-width:100%;">
+                    @foreach (var ddm in Model.vm_fpc)
+                    {
+                        <option value="@ddm.BR_CODE">@ddm.BR_DESC</option>
+                    }
+                </select>
+                <small id="MaintainingBranch_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="CardDesignType">Business Type:</label>
+                <select class="form-control" id="CardDesignType">
+                    <option value="Sole proprietorship">Sole proprietorship</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Corporation">Corporation</option>
+                    <option value="One-person Corporation">One-person Corporation</option>
+                </select>
+                <small id="CARD_TYPE_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 col-sm-12" hidden>
+                <label for="CARD_TYPE">Business Type:</label>
+                <select class="form-control" id="CARD_TYPE">
+                    <option value="EP1">Sole proprietorship</option>
+                    <option value="EP2">Partnership</option>
+                    <option value="EP3">Corporation</option>
+                    <option value="EP4">One-person Corporation</option>
+                </select>
+                <small id="CARD_TYPE_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+
+        @*<div class="form-group col-lg-12 col-md-12 col-sm-12" id="AccountType">
+                <label style="width:100%;padding:3px 10px 3px 15px;background-color:#4f2683;color:#fff;">Scheme Code</label>
+                <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;">
+                    <li style="width:50%;">
+                        <ul style="list-style-type:none;padding:0px;margin:0px;">
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox" style="display:flex;">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="AE101" value="AE101">
+                                    <label class="custom-control-label" for="AE101">AE101 - Private Companies - 18% int 4% bc, due: 5th of the month</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="AE102" value="AE102">
+                                    <label class="custom-control-label" for="AE102">AE102 - Private Companies -18% int 4% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="AB511" value="AB511">
+                                    <label class="custom-control-label" for="AB511">AB511 - AEV Affiliates -  12% int 6% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU01" value="PSU01">
+                                    <label class="custom-control-label" for="PSU01">PSU01 - Private School - 12% int 6% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU02" value="PSU02">
+                                    <label class="custom-control-label" for="PSU02">PSU02 - Private School - 12% int 7% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU03" value="PSU03">
+                                    <label class="custom-control-label" for="PSU03">PSU03 - Private School - 12% int 8% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+
+                        </ul>
+                    </li>
+                    <li style="width:50%;">
+                        <ul style="list-style-type:none;padding:0px;margin:0px;">
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU04" value="PSU04">
+                                    <label class="custom-control-label" for="PSU04">PSU04 - Private School - 12% int 9% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU05" value="PSU05">
+                                    <label class="custom-control-label" for="PSU05">PSU05 - Private School - 12% int 10% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU06" value="PSU06">
+                                    <label class="custom-control-label" for="PSU06">PSU06 - Private School - 12% int 11% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU07" value="PSU07">
+                                    <label class="custom-control-label" for="PSU07">PSU07 - Private School - 12% int 12% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                            <li style="padding:3px 10px 3px 15px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="PSU08" value="PSU08">
+                                    <label class="custom-control-label" for="PSU08">PSU08 - Private School - 12% int 5% bc, due: month-end</label>
+                                </div>
+                            </li>
+                            <li><hr /></li>
+                        </ul>
+                        <ul style="list-style-type:none;padding:0px;margin:0px;">
+                  <li style="padding:3px 10px 3px 15px;">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="CA064" value="CA064">
+                          <label class="custom-control-label" for="CA064">Payroll CA Account 4 (CA064)</label>
+                      </div>
+                  </li>
+                  <li><hr /></li>
+                  <li style="padding:3px 10px 3px 15px;">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="CA061" value="CA061">
+                          <label class="custom-control-label" for="CA061">Payroll CA Account 1 (CA061)</label>
+                      </div>
+
+                  </li>
+                  <li><hr /></li>
+                  <li style="padding:3px 10px 3px 15px;">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="CA160" value="CA160">
+                          <label class="custom-control-label" for="CA160">Executive Payroll Account(CA160)</label>
+                      </div>
+
+                  </li>
+                  <li><hr /></li>
+                  <li style="padding:3px 10px 3px 15px;">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" name="cboxschemecode" class="custom-control-input" id="CA052" value="CA052">
+                          <label class="custom-control-label" for="CA052">Corporate ePaycard (CA052)</label>
+                      </div>
+                  </li>
+                  <li><hr /></li>
+              </ul>
+                    </li>
+                </ul>
+                <small id="AccountType_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12" hidden>
+                <label for="txtsourcefunds">Source of Funds:</label>
+                <select class="form-control" id="SourceFunds" style="min-width:100%;">
+                    <option value="A1000">Income from Business</option>
+                    <option value="B1000">Employment / Salary</option>
+                    <option value="C1000">Savings / Investments</option>
+                    <option value="D1000">Allowance</option>
+                    <option value="E1000">Remittance</option>
+                    <option value="F1000">Pension</option>
+                    <option value="G1000">Inheritance</option>
+                    <option value="H1000">Others</option>
+                </select>
+                <small id="SourceFunds_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="ddrmcode">RM Code:</label>
+                <select class="form-control" id="RMCode" style="min-width:100%;"></select>
+                <small id="RMCode_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12" style="display:none;">
+                <label for="ddcardtype">Card Type:</label>
+                <select class="form-control" id="CardType" style="min-width:100%;">
+                    @foreach (var ddct in Model.vm_CardType)
+                    {
+                        if (ddct.NewCardType != null)
+                        {
+                            <option value="@ddct.NewCardType">@ddct.NewCardType</option>
+                        }
+                    }
+                </select>
+                <small id="CardType_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12" hidden>
+                <label for="ddsolid">Servicing Branch:</label>
+                <select class="form-control" id="ServicingBranch" style="min-width:100%;">
+                    @foreach (var ddm in Model.vm_fpc)
+                    {
+                        <option value="@ddm.BR_CODE">@ddm.BR_DESC</option>
+                    }
+                </select>
+                <small id="ServicingBranch_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12" hidden>
+                <label for="ddcarddes">Card Design Type:</label>
+                <select class="form-control" id="CardDesignType" style="min-width:100%;">
+                    <option value="G">G - GENERIC</option>
+                    <option value="F">F - FULLY CUSTOMIZED</option>
+                    <option value="C">C - CUSTOMIZED</option>
+                </select>
+                <small id="CardDesignType_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+
+        @*<div class="col-12">
+                <label style="width:100%;padding:3px 10px 3px 15px;background-color:#4f2683;color:#fff">Servicing Branch/LPO</label>
+                <table class="table table-striped table-bordered" style="margin-bottom:0px;">
+                    <thead>
+                        <tr id="CardDeliverySol">
+                            <th>BRANCH CODE</th>
+                            <th>BRANCH DESC</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblcarddeliverysol">
+                    </tbody>
+                </table>
+                <small class="text-danger" id="CardDeliverySol_message"></small>
+                <div class="" style="width:100%;margin-top:0px;display:flex;">
+                    <div class="form-group" style="width:50%;margin-bottom:20px;">
+                        <label class="text-secondary" style="font-size:10px;" for="txtcarddeliverysol"><b>Servicing Branch/LPO</b></label>
+                        <select class="form-control" id="txtcarddeliverysol">
+                            @foreach (var row in Model.vm_fpc)
+                            {
+                                <option value="@row.BR_CODE">@row.BR_DESC</option>
+                            }
+                        </select>
+                    </div>
+                    <div style="width:50%;">
+                        <button class="btn" id="btnadddeliverysol" style="margin-top:25px;background-color:#faa634;color:#fff">ADD BRANCH</button>
+                    </div>
+                </div>
+            </div>*@
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtphonenum">Phone Number:</label>
+                <input type="number" class="form-control" id="phonenumber" name="newclient" placeholder="9xxxxxxxx" style="min-width:100%;">
+                <small id="phonenumber_message" class="text-danger" name="txtmessage">Phone Number is Required</small>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-12" hidden>
+                <label for="txtsite">Site Name:</label>
+                <input type="text" class="form-control" id="SiteName" name="newclient" placeholder="Company Site Name" style="min-width:100%;">
+                <small id="SiteName_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtzipcode">Zip Code:</label>
+                <select class="form-control" id="ZipCode" style="min-width:100%;">
+                    @foreach (var row in Model.vm_getlocations)
+                    {
+                        foreach (var ls in row.city_list)
+                        {
+                            <option id="@("zipcode" + ls.code.Trim())" name="@(row.name.Trim() + "," + ls.name.Trim())" value="@ls.code.Trim()">@ls.code </option>
+                        }
+                    }
+                </select>
+                <small id="ZipCode_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtnostreet">No./Street:</label>
+                <input type="text" class="form-control" id="NoStreet" name="newclient" placeholder="no./Street" style="min-width:100%;">
+                <small id="NoStreet_message" class="text-danger" name="txtmessage">No./Street is Required</small>
+            </div>*@
+
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtcity">City/Town/Province:</label>
+                <input type="text" class="form-control" id="CityProvince" value="@Model.vm_getlocations[0].name" name="newclient" placeholder="Input District/Barangay" style="min-width:100%;" disabled>
+                <small id="CityProvince_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>*@
+
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="txtbaranggay">District/Barangay:</label>
+                <input type="text" class="form-control" id="DistrictBarangay" value="@Model.vm_getlocations[0].city_list[0].name" name="newclient" placeholder="District/Barangay" style="min-width:100%;" disabled>
+                <small id="DistrictBarangay_message" class="text-danger" name="txtmessage">District/Barangay is Required</small>
+            </div>*@
+
+        @*<div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <label for="txtbaranggay">Business Address:</label>
+                <input type="text" class="form-control" id="BusinessAddress" name="newclient" placeholder="Enter Business address" style="min-width:100%;">
+                <small id="BusinessAddress_message" class="text-danger" name="txtmessage">Business address is required</small>
+            </div>*@
+
+
+        @*<div class="form-group col-lg-6 col-md-6 col-sm-12" style="visibility:hidden;">
+                <label for="ddpicturesize">Picture Size:</label>
+                <select class="form-control" id="PictureSize" style="min-width:100%;">
+                    <option value="1x1">1x1</option>
+                    <option value="2x2">2x2</option>
+                </select>
+                <small id="PictureSize_message" class="text-danger" name="txtmessage">Site Name is Required</small>
+            </div>
+                </div>*@
+
+
+        @*<hr />
+            <div style="width:100%;text-align:right;width:100%;padding-top:10px;">
+                <a href="@GlobalVariableClass.FolderName/Admin/EnrollClients/Index?content=EnrollClient" class="btn" style="background-color:#faa634;color:#fff">Cancel</a>  &nbsp;
+                <button class="btn" style="background-color:#faa634;color:#fff" id="btnsubmit">Submit</button>
+
+            </div>*@
+    </div>
+</div>
+
+<script src="~/Areas/Admin/Resources/js/NewGroupCode.js"></script>
+<link rel="stylesheet" href="~/Areas/Admin/Resources/css/_Admin_EnrollClients.css" />
+
+<script>
+    //$("#loadingmodal").show();
+</script>

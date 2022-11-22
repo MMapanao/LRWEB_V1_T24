@@ -1,0 +1,107 @@
+﻿@model LRWEB_V1_ADMIN_T24.Areas.Admin.ViewModel.VM_Epay
+@{
+    ViewBag.Title = "Index";
+    int countrow = 0;
+}
+
+<div style="padding:0px;">
+ 
+    <div class="mainboard" style="height:calc(100vh - 0px);width:100%;padding:35px;">
+        <ul style="list-style-type:none;padding:0px;margin:0px;display:flex;margin-bottom:10px;width:100%;">
+            <li style="width:calc(100% - 250px);">
+                <div class="row no-gutters">
+                    <div class="col-2">
+                        <input class="form-control border-secondary border-right-0 rounded-0" id="txtsearch" type="search" value="" placeholder="Search" id="example-search-input4">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>  
+            </li>
+            <li style="width:250px;">
+                <div class="row pull-right" style="text-align:right;margin:auto;">
+                    @Html.ActionLink("+ New Group Code", "NewGroupCode", "EnrollClients", new { Area = "Admin" }, new { @class = "btn", @style = "background-color:#4f2683;color:#fff;" })
+                </div>
+            </li>
+        </ul>
+ 
+        <p style="margin:0px;padding:3px;color:#f1f1f1;min-width:100%;padding-left:10px;background-color:#4f2683;"><i class="fa fa-table"></i><b> CUSTOMER GROUP CODE</b></p>
+        <div class="" style="overflow:auto;height:calc(100vh - 170px);">
+            <table class="table table-bordered table-striped" style="min-width:100%;max-width:auto;">
+                <thead>
+                    <tr>
+                        <th style="width:auto;">Group code</th>
+                        <th style="width:auto;">Company Name</th>
+                        <th style="width:auto" hidden>Branches</th>
+                        <th style="width: auto;">Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-cover" id="tblclientid">
+                    @{
+                        countrow = 0;
+                        string m = "";
+                        string classvalue = "";
+                        foreach (var item in Model._EPAY_V2_CLIENTS)
+                        {
+                            countrow++;
+                            <tr name="rowclients" id="@item.ID">
+
+                                <td>@item.groupCode</td>
+                                <td id='@m'>@item.clientName</td>
+                                @*<td hidden>@item.branches</td>*@
+
+                                @if (item.status == "VERIFIED")
+                                {
+                                    <td><b style="color:#0094ff">@item.status</b></td>
+                                }
+                                else if (item.status == "PENDING")
+                                {
+                                    <td><b style="color:#ff6a00">@item.status</b></td>
+                                }
+                                else if (item.status == "RETURNED")
+                                {
+                                    <td><b style="color:#607D8B">@item.status</b></td>
+                                }
+                            <td style="text-align:center;">
+
+
+                                @if (item.status == "VERIFIED")
+                                {
+                                    <a href="~/Admin/VerifyClients/GroupCodeDetails?content=EnrollClient&GroupCode=@item.groupCode"><i class="fa fa-info-circle"></i> Details</a>
+                                    @*<a href="~/Admin/Branches/Index?content=EnrollClient&GroupCode=@item.GroupCode"><i class="fa fa-table"></i> Branches</a>*@
+
+                                    <a href="~/Admin/EnrollClients/UpdateGroupcode?GroupCode=@item.groupCode&content=EnrollClient"> &nbsp;<i class="fa fa-pencil"></i> Edit &nbsp;</a>
+                                    @*<a href="#" style="color: currentColor;cursor: not-allowed;opacity: 0.5;text-decoration: none;">&nbsp;<i class="fa fa-pencil"></i> Edit &nbsp;</a>*@
+                                }
+                                else
+                                {
+                                    <a href="~/Admin/VerifyClients/GroupCodeDetails?content=EnrollClient&GroupCode=@item.groupCode"><i class="fa fa-info-circle"></i> Details</a>
+                                    @*<a href="#" style="color: currentColor;cursor: not-allowed;opacity: 0.5;text-decoration: none;"><i class="fa fa-table"></i> Branches</a>*@
+
+                                    <a href="#" style="color: currentColor;cursor: not-allowed;opacity: 0.5;text-decoration: none;">&nbsp;<i class="fa fa-pencil"></i> Edit &nbsp;</a>
+
+                                }
+
+                                @*<a href="#" id="@item.IntRecord" name="btndelete"><i class="fa fa-trash"></i> Delete</a>*@
+                            </td>
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+        <hr />
+        <p style="width:100%;text-align:right;color:#5e5e5e;font-size:15px;"> @countrow Records </p>
+    </div>
+    
+</div>
+
+<link rel="stylesheet" href="~/Areas/Admin/Resources/css/_Admin_EnrollClients.css" />
+<script src="~/Areas/Admin/Resources/js/_Admin_EnrollClients.js"></script>
+

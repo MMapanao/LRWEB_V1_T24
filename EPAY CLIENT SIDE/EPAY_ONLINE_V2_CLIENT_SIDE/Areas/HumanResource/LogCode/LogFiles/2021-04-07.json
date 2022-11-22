@@ -1,0 +1,7 @@
+[{"UserCode":"1000002","GroupCode":"TUT01","email":"fortunochristian22@gmail.com","Action":{"Event":"ENROLL","Module":"EMPLOYEES","ID":"","time":"2021-04-07 07:04","Before":"","After":"","DeclineReason":null,"EnrolledID":["1500010"]}}
+,
+{"UserCode":"1000002","GroupCode":"TUT01","email":"fortunochristian22@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500004","time":"2021-04-07 07:44","Before":"","After":"20210414074448","DeclineReason":null,"EnrolledID":[]}},
+{"UserCode":"1000002","GroupCode":"TUT01","email":"fortunochristian22@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500009","time":"2021-04-07 07:57","Before":"","After":"20210414075706","DeclineReason":null,"EnrolledID":[]}},
+{"UserCode":"1000002","GroupCode":"TUT01","email":"fortunochristian22@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500006","time":"2021-04-07 07:57","Before":"20210325034946","After":"20210414075710","DeclineReason":null,"EnrolledID":[]}},
+{"UserCode":"1000002","GroupCode":"TUT01","email":"fortunochristian22@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500005","time":"2021-04-07 07:57","Before":"20210325014633","After":"20210414075717","DeclineReason":null,"EnrolledID":[]}},
+{"UserCode":"1000002","GroupCode":"TUT01","email":"fortunochristian22@gmail.com","Action":{"Event":"RESEND","Module":"PENDING EMPLOYEES","ID":"1500008","time":"2021-04-07 07:57","Before":"","After":"20210414075722","DeclineReason":null,"EnrolledID":[]}}

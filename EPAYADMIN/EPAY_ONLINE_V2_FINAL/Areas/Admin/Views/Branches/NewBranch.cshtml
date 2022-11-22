@@ -1,0 +1,227 @@
+﻿@model IEnumerable<LRWEB_V1_ADMIN_T24.Areas.Admin.Models._CITY_PROVINCES_LIST>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+ 
+<div class="mainboard" style="width:calc(100%);height:100vh;padding:35px;">
+
+    <ul style="list-style-type:none;width:100%;padding:0px;margin:0px;display:flex;">
+        <li style="min-width:calc(100% - 450px);">
+            <h3 style="color:#4f2683"><i class="fa fa-th-list"></i> Client Branches</h3>
+        </li> 
+        <li style="width:450px;display:flex;text-align:right;">
+            <button id="btnnewrow" class="btn" style="background:#4f2683;color:#fff"><i class="fa fa-plus"></i> New Branch</button> 
+            &nbsp;
+            &nbsp;
+            <a href="#" id="btncancel" class="btn" style="background:#4f2683;color:#fff"><i class="fa fa-unlink"></i> Cancel</a>
+            &nbsp;
+            <button  id="btnsubmit" class="btn" style="background:#4f2683;color:#fff"><i class="fa fa-save"></i> Submit</button>
+             
+        </li>
+    </ul>
+    <hr style="margin-top:7px;margin-bottom:7px;color:#4f2683;" />
+    <label style="width:100%;padding:3px 10px 3px 15px;color:#fff;background-color:#4f2683"><i class="fa fa-table"></i> Branches List</label>
+    <div style="width: 100%; height: calc(100vh - 145px); overflow: auto;">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+ 
+                    <th style="min-width:200px;">Site Name</th>
+                    <th style="min-width:150px;">Street</th>
+                    <th style="min-width:250px;">Zip Code</th> 
+                    <th style="min-width:70px;">Status</th> 
+                    <th style="min-width:90px">Group Code</th>
+                    <th style="min-width:50px;"><i class="fa fa-pencil"></i></th>
+                </tr>
+            </thead>
+            <tbody id="tblclientbranch">
+                    <tr id="row0">
+                        <td><input id="txtsitename0" class="form-control" placeholder="Enter Site Name" name="txtbranch"/></td>
+                        <td><input id="txtstreet0" class="form-control" placeholder="Enter Street" name="txtbranch" /></td>
+                        <td>
+                            <select class="form-control" id="txtzipcode0" name="txtbranch">
+                                @foreach (var tm in Model)
+                                {
+                                    if (tm.city_list != null)
+                                    {
+                                        foreach (var rr in tm.city_list)
+                                        {
+                                            <option value="@rr.code">@(rr.code + " - " + tm.name + ", " + rr.name + "")</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </td>
+                        <td><input class="form-control" value="Active" disabled /></td> 
+                        <td><input class="form-control" id="txtgroupcode" value="" disabled /></td> 
+                        <td><button class="btn btn-danger" id="btnremove0" name="btndeleterow"><i class="fa fa-trash"></i></button></td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+ 
+
+<script>
+
+    var zipcodes = '' +
+        '@foreach(var tm in Model){ if (tm.city_list != null) { foreach (var rr in tm.city_list) { <option value="@rr.code">@(rr.code + " - " + tm.name + ", "+rr.name +"")</option> } } } ';
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+    $("#txtgroupcode").val(getUrlParameter('GroupCode'));
+    $("btncancel").attr('href', '/Admin/Branches/NewBranch?content=EnrollClient&GroupCode=' + getUrlParameter("GroupCode"));
+    function JModel_branch() {
+        var json_obj = [];
+        var json_col = {};
+        var childrow = 0;
+
+        $('select[name="txtbranch"]').each(function () {
+
+            json_obj.push({
+                IntRecord: "",
+                CompanyID: "",
+                SiteName: $("#txtsitename" + childrow).val(),
+                Street: $("#txtstreet" + childrow).val(),
+                District: "",
+                City: "",
+                ZipCode: $("#txtzipcode" + childrow).val(),
+                GroupCode: $("#txtgroupcode").val(),
+                ServicingCode: "",
+                Type: "",
+                Status: ""
+            });
+
+            childrow = childrow + 1;
+
+        });
+        return json_obj;
+    }
+    $(document).ready(function () {
+        $("#btncancel").attr('href', FolderName + '/Admin/Branches/Index?content=EnrollClient&GroupCode=' + getUrlParameter("GroupCode"));
+    });
+    $(document).on('focusout', '[name="txtbranch"]', function () {
+        $(this).val($(this).val().toUpperCase());
+    });
+    $(document).on('click', '#btnsubmit', function () {
+        $.confirm({
+            title: 'Confirmation',
+            type: 'blue',
+            content: 'Do you really want to Submit?',
+            buttons: {
+                formSubmit: {
+                    text: 'Submit',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        var model_state = JModel_branch();
+                        $.ajax({
+                            url: FolderName + "/Admin/Branches/SubmitNewBranches",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify(model_state),
+                            //async: true,
+                            //processData: false,
+                            cache: false,
+                            success: function (data) {
+                                if (data != null) {
+                                    $("[name='txtbranch']").css('border-color', '');
+                                    $(data).each(function (index, item) {
+                                        $("#" + item.content_id).css('border-color', '#D32F2F');
+                                    });
+                                }
+
+                                if (data == "") {
+                                    swal({
+                                        title: 'Save New Branch',
+                                        text: "Successfully Submit Record.",
+                                        type: 'success',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'Okay'
+                                    }).then((result) => {
+                                        if (result.value) {
+
+                                        }
+                                    })
+                                    setTimeout(function () {
+                                        window.location.href = FolderName + "/Admin/Branches/Index?content=EnrollClient&GroupCode=" + getUrlParameter('GroupCode');
+                                    }, 3000);
+                                }
+                            },
+                            error: function (err) {
+
+                                swalWithBootstrapButtons(
+                                 'Error!',
+                                 err,
+                                 'error'
+                               )
+                            }
+                        });
+                    }
+                },
+                cancel: function () {
+                    //close
+                },
+            },
+            onContentReady: function () {
+                // bind to events
+                var jc = this;
+                this.$content.find('form').on('submit', function (e) {
+                    // if the user submits the form by pressing enter in the field.
+                    e.preventDefault();
+                    jc.$$formSubmit.trigger('click'); // reference the button and click it
+                });
+            }
+        });
+    });
+
+    var rownum = 0;
+    $(document).on('click', '#btnnewrow', function () {
+        rownum = rownum + 1;
+        var htmltags = '<tr id="row' + rownum + '">' +
+                            '<td><input id="txtsitename' + rownum + '" class="form-control" placeholder="Enter Site Name" name="txtbranch"/></td>' +
+                            '<td><input id="txtstreet' + rownum + '" class="form-control" placeholder="Enter Street" name="txtbranch" /></td>' +
+                            '<td>' +
+                                '<select class="form-control" id="txtzipcode' + rownum + '" name="txtbranch">' +
+                                    zipcodes +
+                                '</select>' +
+                            '</td>' +
+                            '<td><input class="form-control" value="Active" disabled /></td> ' +
+                            '<td><input class="form-control" id="txtgroupcode" value="' + getUrlParameter('GroupCode') + '" disabled /></td> ' +
+                            '<td><button class="btn btn-danger" id="btnremove' + rownum + '" name="btndeleterow"><i class="fa fa-trash"></i></button></td>' +
+                        '</tr>';
+        $("#tblclientbranch").append(htmltags);
+    });
+
+    $(document).on('click', 'button[name="btndeleterow"]', function () {
+        var thisid = this.id;
+        $("#row" + thisid.replace("btnremove", "")).remove();
+    });
+</script>
+
+ 
+<style>
+    .table td {
+        padding: 4px;
+        font-size: 13px;
+        text-align: center;
+        /*border-bottom:2px solid #FF8108;*/
+    }
+
+    .table th {
+        padding: 5px;
+        text-align: center;
+        font-size: 13px;
+        color: #4e4e4e;
+    }
+
+    #main {
+        padding: 0px;
+    }
+</style>
