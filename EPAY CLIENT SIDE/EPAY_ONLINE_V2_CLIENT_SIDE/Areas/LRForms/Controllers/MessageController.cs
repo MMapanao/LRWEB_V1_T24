@@ -481,6 +481,7 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
 
             try
             {
+                //String Query
                 var strquery = "INSERT INTO LRWEB_V1_OTP (OTP,email,application_number,Date) values ('" + otpcode + "','" + email + "','" + appno + "','" + dt2 + "')";
                 conn.Execute(strquery);
             }
