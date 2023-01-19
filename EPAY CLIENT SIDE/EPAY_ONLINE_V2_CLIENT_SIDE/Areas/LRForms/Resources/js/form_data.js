@@ -1,5 +1,19 @@
-﻿
+﻿var idleTime = 0;
+var idleInterval = 0;
 $(document).ready(function () {
+
+    idleInterval = setInterval(timerIncrement, 60000) //1min
+    //idleInterval = setInterval(timerIncrement, 1000)
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+    });
+    $(this).keypress(function (e) {
+        idleTime = 0;
+    });
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
     $("#cboxaccept").prop("checked", false)
     $(document).on('change', '#loanPurpose', function () {
         if ($("#loanPurpose option:selected").val() == "Others") {
@@ -9,10 +23,10 @@ $(document).ready(function () {
             $("#loanOthers").prop("hidden", "true");
         }
     });
-    
+
     $("#ExpiryDate").mim
     var form = $("#example-form");
-    
+
     $.validator.addMethod('checknum', function (value, element) { return value == 'Required'; }, 'Required');
     $.validator.addMethod("lessThanEqual", function (value, element, int) {
         return this.optional(element) || parseInt(value) <= int;
@@ -38,10 +52,10 @@ $(document).ready(function () {
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
         rules: {
             cboxregular: {
-                required : true
+                required: true
             },
             loanAmount: {
-                lessThanEqual : 1000000
+                lessThanEqual: 1000000
             },
             tenure: {
                 minyear: "0 YRS"
@@ -125,12 +139,12 @@ $(document).ready(function () {
         bodyTag: "section",
         transitionEffect: "slideLeft",
         onStepChanging: function (event, currentIndex, newIndex) {
-            
+
             if (currentIndex > newIndex) {
                 return true;
             }
             if (currentIndex == 3) {
-                
+
                 $(".wizard .actions a[href='#finish']").hide();
             }
             form.validate().settings.ignore = ":hidden";
@@ -150,10 +164,10 @@ $(document).ready(function () {
         }
         //,stepsOrientation: "vertical"
     });
-    $('#monthlyAmortization').change(function () {
-        $('#monthlyAmortization').validate();
-        $('#monthlyAmortization').valid()
-    });
+    //$('#monthlyAmortization').change(function () {
+    //    $('#monthlyAmortization').validate();
+    //    $('#monthlyAmortization').valid()
+    //});
     $("#birthDate").focusout(function () {
         //var dob = new Date($("#birthDate").val());
         //var diff_ms = Date.now() - dob.getTime();
@@ -218,6 +232,62 @@ $(document).ready(function () {
     });
 
     //loaddata
+    $(document).on('click', '#btncancelapplication', function () {
+        $.confirm({
+            title: 'Cancel application',
+            content: 'Are you sure?',
+            buttons: {
+                formSubmit: {
+                    text: 'Yes',
+                    btnClass: 'btn-orange',
+                    action: function () {
+                        var appID = $("label[id='appID']").html();
+                        var CIFno = $("label[id='CIFno']").html();
+                        console.log(appID)
+                        console.log(CIFno)
+                        $.ajax({
+                            url: FolderName + "/LRForms/Fillup/CancelApplication",
+                            contentType: false,
+                            type: "POST",
+                            contentType: 'application/json; charset=utf-8',
+                            data: JSON.stringify({ appID: appID, CIFno: CIFno }),
+                            async: true,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+                                if (data == "Success") {
+                                    setTimeout(function () {
+                                        ;
+                                        window.location.href = FolderName + "/LRForms/Message/InfoCancelled";
+                                    }, 2000);
+                                }
+
+                            },
+                            error: function (ex) {
+                                $('.modal').modal('hide');
+                            }
+                        });
+                    }
+                },
+                No: {
+                    btnClass: 'btn-orange',
+                    action: function () {
+                        //close
+                    }
+                },
+            },
+            onContentReady: function () {
+                // bind to events
+                var jc = this;
+                this.$content.find('form').on('submit', function (e) {
+                    // if the user submits the form by pressing enter in the field.
+                    e.preventDefault();
+                    jc.$$formSubmit.trigger('click'); // reference the button and click it
+                });
+            }
+        });
+    });
+
     $(document).on('click', '#btnproceed', function () {
         loaddata();
         $('#loadingmodal').modal('show');
@@ -301,16 +371,16 @@ $(document).ready(function () {
                     }
                 });
             }
-           
+
         }
-        
+
     })
 
     $("#submitOTP").on('click', function (e) {
         $("#loadingmodal").modal('show');
         e.preventDefault();
         let otp = $("input[id=OTP]").val();
-        
+
         $.ajax({
             url: FolderName + "/LRForms/Fillup/checkOTP",
             dataType: "json",
@@ -337,14 +407,14 @@ $(document).ready(function () {
                         'November',
                         'December'
                     ]
-                    
+
                     d = new Date();
                     utc = d.getTime() + (d.getTimezoneOffset() * 60000);
                     nd = new Date(utc + (3600000 * 8));
 
                     const monthIndex = d.getMonth();
                     const monthName = months[monthIndex];
-                    
+
                     var dateGranted = monthName + " " + d.getDate() + ", " + d.getFullYear();
                     $("i[name='signature']").text("(Electronically Signed via OTP) OTP: " + otp + " OTP EMAIL :  " + data.email);
                     $("i[name='otp']").text("OTP VERIFIED ON: " + dateGranted + " " + nd.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
@@ -363,12 +433,12 @@ $(document).ready(function () {
                         $("#loadingmodal").modal('hide');
                     }, 1000)
                     //alert(OTP)
-                    
+
                     ////clearInterval(mytimer);
                     //$("#timerdisplay").prop("hidden", true);
                     //// create all pdf
 
-                    
+
 
                 } else if (data.message == "invalid") {
                     alert("OTP is invalid");
@@ -613,7 +683,7 @@ $(document).on('change', '#cboxpermanent', function () {
             $("#Permanent_Barangay").val($("#Present_Barangay").val());
             $('#loadingmodal').modal('hide');
         }, 1000);
-        
+
 
     } else {
         $("#Permanent_Address").attr("readonly", false);
@@ -733,12 +803,12 @@ function loaddata() {
             elm.empty();
             elm.append(`<option disabled selected>--Please select--</option>`)
             var res = jQuery.parseJSON(data);
-            
+
             $.each(res, function (key, value) {
                 if (res[key].value != 'Small Business Financing') {
                     elm.append(`<option value="${res[key].value}"> ${res[key].display}</option>`)
                 }
-                
+
             });
         },
         error: function (ex) {
@@ -1190,7 +1260,7 @@ function loadpreview() {
         + $("#Permanent_Country").val() + " "
         + $("#Permanent_Zipcode").val();
     var permanentownership = $("#Permanent_Ownership option:selected").text().toUpperCase()
-    var permanentlos = $("#Permanent_Years").val() + "YEARS " + $("#Permanent_Months").val() + "MONTHS.";
+    var permanentlos = $("#Permanent_Years").val() + " YEARS and " + $("#Permanent_Months").val() + " MONTHS.";
     var permanenttel = $("#Permanent_Telephone").val();
 
     $("#dPermanentAddress").html(permanentaddress);
@@ -1216,12 +1286,13 @@ function loadpreview() {
     var monthlyallowance = $("#monthlyAllowance").val() || "N / A";
     var dSourceOFIncomeOthers = $("#sourceOfIncomeOthers").val() || "N / A";
     var dMonthlyIncomeOthers = $("#monthlyIncomeOthers").val() || "N / A";
-
+    var monthlyBasicSalary = $("#monthlyBasicSalary").val();
     $("#dDateHired").html(datehired);
     $("#dTenure").html(tenure);
     $("#dEmployeeNumber").html(employeenumber);
     //$("#dPosition").html(position);
     $("#dRank").html(rank);
+    $("#dMonthlyBasicSalary").html(monthlyBasicSalary);
     $("#dDepartment").html(department);
     $("#dNatureOfWork").html(natureofwork);
     $("#dEmployerAddress").html(employeraddress);
@@ -1233,8 +1304,8 @@ function loadpreview() {
     var creditOption = $("#creditOption").val();
     var credOption = $("#creditOption option:selected").text().toUpperCase();
     var bankName = "N / A";
-    var nameToDisplay =  "N / A";
-    var accountNumber =  "N / A";
+    var nameToDisplay = "N / A";
+    var accountNumber = "N / A";
     if (creditOption == "csbNew") {
         nameToDisplay = $("#nameToDisplay").val();
     } else if (creditOption == "csbOld") {
@@ -1287,7 +1358,7 @@ function loadpreview() {
     $("span[name='dsName']").html(sfullname)
     $("span[name='dsBirthDate']").html(sbirthdate)
     $("span[name='dsNumber']").html(sNumber)
-    $("span[name='dsEmployer']").html($("#spouseEmployer").val())
+    $("span[name='dsEmployer']").html(employer)
     $("span[name='dMothersMaidenName']").html(mothersMaidenName)
     $("span[name='dsMotherMaidenName']").html(mothersMaidenName)
     $("span[name='dsEmployerAddress']").html('N / A')
@@ -1299,7 +1370,7 @@ function loadpreview() {
     $("span[name='dLastName']").html($("#lastName").val())
     if (sss == 'N / A') {
         $("span[name='dSSSGSIS']").html(gsis)
-    } else{
+    } else {
         $("span[name='dSSSGSIS']").html(sss)
     }
 
@@ -1385,4 +1456,29 @@ function startTimer(duration, display) {
             $("#timerdisplay").prop("hidden", true);
         }
     }, 1000);
+}
+
+
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    console.log(idleTime + " min")
+    if (idleTime > 15) {
+        idleTime = 0;
+        $.confirm({
+            title: 'Logout?',
+            content: 'Due to nactivity, you will be automatically logged out in 60 seconds.',
+            autoClose: 'logoutUser|60000',
+            buttons: {
+                logoutUser: {
+                    text: 'logout myself',
+                    action: function () {
+                        clearInterval(idleInterval);
+                        window.location = FolderName + "/lrforms/Message/Timeout";
+                    }
+                },
+                cancel: function () {
+                }
+            }
+        });
+    }
 }

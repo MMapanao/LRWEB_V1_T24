@@ -1,60 +1,53 @@
 ﻿/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
-    h5{
-       font-size:18px;
+    h5 {
+        font-size: 18px;
     }
-    h4{
-        font-size:20px;
+
+    h4 {
+        font-size: 20px;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 
-    h5{
-       font-size:20px; 
+    h5 {
+        font-size: 20px;
     }
-    h4{
-        font-size:22px;
+
+    h4 {
+        font-size: 22px;
     }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
-
-
-} 
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
-
-
-} 
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
- 
-
-
 }
 
 
- 
 
-  .bd-example-modal-lg .modal-dialog{
+
+.bd-example-modal-lg .modal-dialog {
     display: table;
     position: relative;
     margin: 0 auto;
     top: calc(50% - 24px);
-  }
-  
-  .bd-example-modal-lg .modal-dialog .modal-content{
-    background-color: transparent;
-    border: none;
-  }
+}
+
+    .bd-example-modal-lg .modal-dialog .modal-content {
+        background-color: transparent;
+        border: none;
+    }
 
 /*
     Common 
@@ -183,7 +176,7 @@
         margin: 0.5em;
         /*min-height: 10em;*/
         overflow: auto;
-       /* position: relative;*/
+        /* position: relative;*/
         width: auto;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
