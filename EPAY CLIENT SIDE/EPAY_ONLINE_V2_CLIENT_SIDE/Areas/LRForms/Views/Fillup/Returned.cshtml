@@ -39,9 +39,9 @@
                                     <th colspan="6" class="text-center" style="background-color: #BEBDB8;">LOAN INFORMATION</th>
                                 </tr>
                                 @*<tr>
-            <th style="width:120px;text-align:left;font-size:10px;">DATE: </th>
-            <td colspan="5"><span name="dateCreated"></span></td>
-        </tr>*@
+                                        <th style="width:120px;text-align:left;font-size:10px;">DATE: </th>
+                                        <td colspan="5"><span name="dateCreated"></span></td>
+                                    </tr>*@
                                 <tr>
                                     <th style="width:120px;text-align:left;font-size:10px;">LOAN AMOUNT :</th>
                                     <td colspan="2"><span id="dLoanAmount"></span></td>
@@ -55,14 +55,16 @@
                                     <td colspan="2"><span id="dNetPay"></span></td>
                                 </tr>
                                 <tr>
-                                    <th style="width:120px;text-align:left;font-size:10px;">OTHER LOANS: </th>
-                                    <td colspan="2"><span id="dOtherLoans"></span></td>
+                                    <th style="width:120px;text-align:left;font-size:10px;">LOAN PURPOSE: OTHERS</th>
+                                    <td colspan="2"><span id="dLoanPurposeOthers"></span></td>
                                     <th style="width:120px;text-align:left;font-size:10px;">NTHP:</th>
                                     <td colspan="2"><span id="dNetIncome"></span></td>
                                 </tr>
                                 <tr>
-                                    <th style="width:120px;text-align:left;font-size:10px;">LOAN PURPOSE OTHERS: </th>
-                                    <td colspan="5"><span id="dLoanPurposeOthers"></span></td>
+                                    <th style="width:120px;text-align:left;font-size:10px;">OTHER LOANS:</th>
+                                    <td colspan="2"><span id="dOtherLoans"></span></td>
+                                    <th style="width:120px;text-align:left;font-size:10px;">LOAN TYPE:</th>
+                                    <td colspan="2"><span id="dLoanType">NEW LOAN</span></td>
                                 </tr>
                                 <tr>
                                     <th colspan="6" class="text-center" style="background-color: #BEBDB8;">PERSONAL INFORMATION</th>
@@ -102,11 +104,13 @@
                                 </tr>
                                 <tr>
                                     <th style="width:120px;text-align:left;font-size:10px;">GSIS: </th>
-                                    <td colspan="5"><span id="dGSIS"></span></td>
+                                    <td colspan="2"><span id="dGSIS"></span></td>
+                                    <th style="width:120px;text-align:left;font-size:10px;">SSS: </th>
+                                    <td colspan="2"><span id="dSSS"></span></td>
                                 </tr>
                                 <tr>
-                                    <th style="width:120px;text-align:left;font-size:10px;">SSS: </th>
-                                    <td colspan="5"><span id="dSSS"></span></td>
+                                    <th style="width:120px;text-align:left;font-size:10px;">EMAIL: </th>
+                                    <td colspan="5"><span id="dEmail">@Model.vm_EPAY_V2_CLIENT_EMPLOYEE.email</span></td>
                                 </tr>
                                 <tr>
                                     <th colspan="6" class="text-center" style="background-color: #BEBDB8;">SPOUSE INFORMATION</th>
@@ -178,11 +182,16 @@
                                     <th colspan="6" class="text-center" style="background-color: #BEBDB8;">EMPLOYMENT INFORMATION</th>
                                 </tr>
                                 <tr>
+                                    <th style="width:120px;text-align:left;font-size:10px;">EMPLOYER NAME: </th>
+                                    <td colspan="2"><span name="dEmployerName">TEST_EMPLOYER_NAME</span></td>
+                                    <th style="width:120px;text-align:left;font-size:10px;">EMPLOYMENT STATUS: </th>
+                                    <td colspan="2"><span name="">REGULAR/PERMANENT</span></td>
+                                </tr>
+                                <tr>
                                     <th style="width:120px;text-align:left;font-size:10px;">DATE HIRED: </th>
                                     <td colspan="2"><span id="dDateHired"></span></td>
                                     <th style="width:120px;text-align:left;font-size:10px;">TENURE: </th>
-                                    <td colspan="1"><span id="dTenure"></span></td>
-                                    <td colspan="1"><input type="checkbox" checked="checked" disabled /><span id=""> Are you a regular employee?</span></td>
+                                    <td colspan="2"><span id="dTenure"></span></td>
                                 </tr>
                                 <tr>
                                     <th style="width:120px;text-align:left;font-size:10px;">EMPLOYEE NUMBER: </th>
@@ -195,6 +204,10 @@
                                     <td colspan="2"><span id="dRank"></span></td>
                                     <th style="width:120px;text-align:left;font-size:10px;">DEPARTMENT: </th>
                                     <td colspan="2"><span id="dDepartment"></span></td>
+                                </tr>
+                                <tr>
+                                    <th style="width:120px;text-align:left;font-size:10px;">MONTHLY BASIC SALARY: </th>
+                                    <td colspan="5"><span id="dMonthlyBasicSalary"></span></td>
                                 </tr>
                                 <tr>
 
@@ -214,9 +227,9 @@
                                 </tr>
                                 <tr>
                                     <th style="width:120px;text-align:left;font-size:10px;">OTHER SOURCE OF INCOME: </th>
-                                    <td colspan="2"><span id="dSourceOFIncomeOthers"></span></td>
-                                    <th style="width:120px;text-align:left;font-size:10px;">MONTHLY INCOME: </th>
-                                    <td colspan="2"><span id="dMonthlyIncomeOthers"></span></td>
+                                    <td colspan="5"><span id="dSourceOFIncomeOthers"></span></td>
+                                    @*<th style="width:120px;text-align:left;font-size:10px;">MONTHLY INCOME: </th>
+                                        <td colspan="2"><span id="dMonthlyIncomeOthers"></span></td>*@
                                 </tr>
                                 <tr>
                                     <th colspan="6" class="text-center" style="background-color: #BEBDB8;">BANK INFORMATION</th>
@@ -252,7 +265,7 @@
                                 </tr>
                                 <tr>
                                     <th style="text-align:left;font-size:10px;">BRANCH CODE</th>
-                                    <td colspan="3"><span name="dBranchCode">TEST_BRANCH_CODE</span></td>
+                                    <td colspan="3"><span name="dBranchCode">@Model.vm_clients.sol_id</span></td>
                                     <th style="text-align:left;font-size:10px;">DATE </th>
                                     <td colspan="3"><span name="dDate">TEST_DATE</span></td>
                                 </tr>
@@ -308,10 +321,16 @@
                                     <th colspan="2" class="mini">EMAIL ADDRESS</th>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><span name="dSSS">TEST_GSIS_OR_SSS</span><span name="dGSIS"></span></td>
+                                    <td colspan="2"><span name="dSSSGSIS">TEST_GSIS_OR_SSS</span></td>
                                     <td colspan="2"><span name="dTIN">TEST_TIN_123</span></td>
-                                    <td colspan="2"><span name="dSourceOFIncomeOthers">TEST_SOURCE_OF_FUNDS</span></td>
+                                    <td colspan="2"><span name="">SALARY</span></td>
                                     <td colspan="2"><span name="dEmail">@Model.vm_EPAY_V2_CLIENT_EMPLOYEE.email</span></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="8" class="mini">MOTHER'S MAIDEN NAME</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="8"><span name="dMothersMaidenName">TEST_LASTNAME_FIRSTNAME_MIDDLENAME</span></td>
                                 </tr>
                                 <tr>
                                     <th colspan="4" class="mini">EMPLOYER NAME <i>(IF EMPLOYED)</i>/BUSINESS NAME<i>(IF SELF-EMPLOYED)</i></th>
@@ -353,13 +372,11 @@
                                 </tr>
                                 <tr>
                                     <th colspan="4" class="mini">MOBILE NUMBER</th>
-                                    <th colspan="2" class="mini">EMPLOYER / BUSINESS CONTACT NO.</th>
-                                    <th colspan="2" class="mini">MOTHER'S MAIDEN NAME</th>
+                                    <th colspan="4" class="mini">EMPLOYER / BUSINESS CONTACT NO.</th>
                                 </tr>
                                 <tr>
                                     <td colspan="4"><span name="dsNumber">TEST_MOBILE_NUMBER</span></td>
-                                    <td colspan="2"><span name="dsEmployer">TEST_SPOUSE_BIRTHDAY</span></td>
-                                    <td colspan="2"><span name="dsMaidenName"></span></td>
+                                    <td colspan="4"><span name="dsEmployer">TEST_SPOUSE_BIRTHDAY</span></td>
                                 </tr>
                                 <tr>
                                     <th colspan="8" class="mini">EMPLOYER BUSINESS/ADDRESS</th>
@@ -431,7 +448,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3"><span name="dTIN">TEST_TIN_123</span></td>
-                                    <td colspan="3"><span name="dSSS">TEST_GSIS_OR_SSS</span><span name="dGSIS"></span></td>
+                                    <td colspan="3"><span name="dSSSGSIS">TEST_GSIS_OR_SSS</span></span></td>
                                     <td colspan="2"><span name="dBirthplace">TEST_PLACE_OF_BIRTH</span></td>
                                 </tr>
                                 <tr>
@@ -724,7 +741,7 @@
                                 <tr>
                                     <td colspan="8" style="text-align: justify;">
                                         <span>
-                                            Depositor’s personal information including without limiting to his/her accounts, transactions, deposit accounts, credit relationships, and/or credit facilities (“information” or “data”) shall be treated as confidential by the Bank.
+                                            In compliance with Data Privacy Act of 2012, Depositor’s personal information including without limiting to his/her accounts, transactions, deposit accounts, credit relationships, and/or credit facilities (“information” or “data”) shall be treated as confidential by the Bank.
                                             <br>Depositor consents to the processing of said confidential information by the City Savings Bank, Inc., its directors, officers, employees, advisers, consultants, auditors, agents and representatives for purposes of (i) carrying out, management, performance and development of its products and services (ii) pursuit of its marketing, promotional, communication, commercial and research objectives, (iii) usual business transactions and (iv) compliance with the requirements of applicable laws and/or government regulators or supervisory bodies.
                                             <br>This constitutes as express consent under the applicable confidentiality and data privacy laws of the Philippines given by the Depositor specifically allows the City Savings Bank, Inc. to:
                                             <br>
@@ -810,6 +827,16 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th colspan="8" class="text-center">DATA PRIVACY NOTICE & CONSENT CLAUSE</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" style="text-align: justify;">
+                                        <span>
+                                            By filling up and submitting this form, I agree and explicitly consent to the use of my personal information and sensitive personal information transaction to any of the following for any of the specific purposes which in all cases are in compliance with or pursuant to our legal or contractual obligation such as but not limited to: KYC purposes, loan processing purposes, the conduct of credit assessments, checks and investigations. You are aware and can be assured that the personal information and sensitive personal information that you have provided us shall be used only in accordance with the purpose of the service and product delivery you consented to, subject to the T&C you agreed to, and in accordance with City Savings Bank's Privacy Policy (https://www.citysavings.com.ph/privacy).
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="8"><span name="dOTP"></span></td>
                                 </tr>
                             </table>
@@ -860,9 +887,9 @@
                     <br />
                     <h2 style="color:#3e3e3e;"><b><i>Welcome, @(Model.vm_EPAY_V2_CLIENT_EMPLOYEE.first_name +"!")</i></b></h2>
                     <br />
-                    <h3 style="color:#3e3e3e;" hidden><b><i>Application number: @(Model.vm_client_info.application_number)</i></b></h3>
+                    <h3 style="color:#3e3e3e;" hidden><b><i>Application number:<label id="appID">@(Model.vm_client_info.application_number)</label> </i></b></h3>
 
-                    <h3 style="color:#3e3e3e;" hidden><b><i>CIF key: @(Model.vm_client_info.CIFno)</i></b></h3>
+                    <h3 style="color:#3e3e3e;" hidden><b><i>CIF key: <label id="CIFno">@(Model.vm_client_info.CIFno)</label></i></b></h3>
 
 
                     <div style="text-align:justify;padding-left:15%;padding-right:15%;">
@@ -870,9 +897,10 @@
                         <br />
                         <p>Kindly prepare scanned copies of the following requirements before accomplishing your loan application:</p>
                         <ul>
-                            <li>Certificate of Employment</li>
-                            <li>Latest 1-month payslip</li>
-                            <li>Valid Government ID</li>
+                            <li>Certificate of Employment <i>(Note: should be signed by the authorized signatory/ies)</i></li>
+                            <li>Latest 2 month current payslip <i>(Note: Should be signed by the authorized signatory/ies)</i> </li>
+                            <li>Valid Government ID <i>(front and back)</i></li>
+                            <li>3 Specimen Signatures</li>
                             <li>Your photo</li>
                         </ul><br />
                         <p>This form will take approximately 15-30 minutes to complete. </p>
@@ -884,6 +912,7 @@
                     <br />
                     <br />
                     <button class="btn btn-yellow" id="btnproceed" style="padding-left:75px;padding-right:75px;" hidden><i class="fa fa-arrow-circle-right"></i> Proceed</button>
+                    <button class="btn btn-yellow" id="btncancelapplication" style="padding-left:75px;padding-right:75px;"><i class="fa fa-remove"></i>  Cancel Application</button>
                 </div>
                 <div id="loanpage" style="display:none;">
                     <form id="example-form" action="#">
@@ -928,13 +957,13 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="netPay" class="toplabel">NET PAY (BASED ON PAYSLIP) <b style="color:#eb0101; ">*</b></label>
-                                                        <input type="text" class="form-control" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode = 190" name="netPay" id="netPay" value="@Model.vm_client_info.netPay" placeholder="Enter Monthly Income" onkeyup="NTHP()" onfocus="removeCommas(this)" OnBlur="addCommas(this)" required />
+                                                        <input type="text" class="form-control" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode = 190" name="netPay" id="netPay" value="@Model.vm_client_info.netPay" placeholder="Enter Monthly Income" onkeyup="NTHP()" onfocus="removeCommas(this)" OnBlur="addCommas(this)" required data-toggle="tooltip" data-placement="top" title="Your monthly income, net of ALL monthly statutory and company deductions." />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="otherLoans" class="toplabel">Other Loans Total Monthly Amortization <b style="color:#eb0101; ">*</b></label>
-                                                        <input type="text" class="form-control" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode = 190" name="otherLoans" id="otherLoans" value="@Model.vm_client_info.otherLoans" placeholder="" onkeyup="NTHP()" onfocus="removeCommas(this)" OnBlur="addCommas(this)" required />
+                                                        <input type="text" class="form-control" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode = 190" name="otherLoans" id="otherLoans" value="@Model.vm_client_info.otherLoans" placeholder="" onkeyup="NTHP()" onfocus="removeCommas(this)" OnBlur="addCommas(this)" required data-toggle="tooltip" data-placement="top" title="Total monthly amortization of loans availed outside CitySavings. If none, type zero (0)." />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -985,7 +1014,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="toplabel">Monthly Amortization: </label>
-                                                <input class="form-control" type="text" name="monthlyAmortization" id="monthlyAmortization" value="0" readonly="readonly" onchange="addCommas(this)" />
+                                                <input class="form-control" type="text" name="monthlyAmortization" id="monthlyAmortization" value="0" readonly="readonly" onchange="addCommas(this)" data-toggle="tooltip" data-placement="top" title="Monthly amortization must be less than or equal to the credit ratio in order for the application to proceed." />
                                             </div>
                                             <div class="form-group">
                                                 <label class="toplabel">Bank Charges and Taxes: </label>
@@ -1068,7 +1097,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label for="usr1" class="toplabel">Date of Birth <b style="color:#eb0101;" id="txtfirstname_label">*</b></label>
-                                                    <input type="date" class="form-control" placeholder="" id="birthDate" name="birthDate" maxlength="32" min="1900-01-01" required value="@Model.vm_client_info.birthDate" />
+                                                    <input type="date" class="form-control" placeholder="" id="birthDate" name="birthDate" maxlength="32" min="1900-01-01" required value="@Model.vm_client_info.birthDate" disabled />
                                                     <small class="text-danger" id="BirthDate_msg" style="display:none;"></small>
                                                 </div>
                                             </div>
@@ -1077,7 +1106,7 @@
                                                     <label class="toplabel">AGE</label>
                                                     <input type="text" class="form-control" value="@Model.vm_client_info.age" id="age" name="age" readonly />
                                                     @*<label class="toplabel">Tenure</label>
-                <input class="form-control" type="text" id="tenure" name="tenure" value="" readonly />*@
+                                                        <input class="form-control" type="text" id="tenure" name="tenure" value="" readonly />*@
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
@@ -1118,13 +1147,13 @@
                                                     <select class="form-control" name="civilStatus" id="civilStatus" style="background-color:#fff;color:#4f2683;" required>
                                                         <option disabled selected>--Please select--</option>
                                                         @*<option value="DIVORCE">DIVORCE</option>
-                    <option value="LEGALLY SEPARATED">LEGALLY SEPARATED</option>
-                    <option value="LIVING WITH PARTNER">LIVING WITH PARTNER</option>
-                    <option value="MARRIED">MARIED</option>
-                    <option value="SINGLE">SINGLE</option>
-                    <option value="UNMARRIED">UNMARRIED</option>
-                    <option value="WIDOW">WIDOW</option>
-                    <option value="WIDOWER">WIDOWER</option>*@
+                                                            <option value="LEGALLY SEPARATED">LEGALLY SEPARATED</option>
+                                                            <option value="LIVING WITH PARTNER">LIVING WITH PARTNER</option>
+                                                            <option value="MARRIED">MARIED</option>
+                                                            <option value="SINGLE">SINGLE</option>
+                                                            <option value="UNMARRIED">UNMARRIED</option>
+                                                            <option value="WIDOW">WIDOW</option>
+                                                            <option value="WIDOWER">WIDOWER</option>*@
                                                         @*/<option value="OTHERS">OTHERS</option>*@
                                                     </select>
                                                     <small class="text-danger" id="Civil_Status_msg" style="display:none;"></small>
@@ -1536,13 +1565,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="toplabel">Employee # <b style="color:#eb0101; ">*</b></label>
-                                                <input class="form-control" type="text" id="employeeNumber" name="employeeNumber" value="@Model.vm_client_info.employeeNumber" required maxlength="32" />
+                                                <input class="form-control" type="text" id="employeeNumber" name="employeeNumber" value="@Model.vm_client_info.employeeNumber" required maxlength="15" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="toplabel">Rank <b style="color:#eb0101; ">*</b></label>
                                                 <input class="form-control" type="text" id="rank" name="rank" value="@Model.vm_client_info.rank" required maxlength="32" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="toplabel">Monthly Basic Salary <b style="color:#eb0101; ">*</b></label>
+                                                <input class="form-control" type="text" id="monthlyBasicSalary" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="monthlyBasicSalary" value="" required maxlength="32" data-toggle="tooltip" data-placement="top" title="Regular monthly salary before additions and deductions" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -1554,7 +1589,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="toplabel">Monthly Allowance <b style="color:#eb0101; ">*</b></label>
-                                                <input class="form-control" type="text" id="monthlyAllowance" name="monthlyAllowance" value="@Model.vm_client_info.monthlyAllowance" required />
+                                                <input class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="monthlyAllowance" name="monthlyAllowance" value="@Model.vm_client_info.monthlyAllowance" required />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -1652,7 +1687,7 @@
                                             </div>
                                             <div style="width:100%;height:1px;background-color:#aeaeae;margin-bottom:15px;"></div>
                                         </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="usr" class="toplabel">
                                                     IF yes please Specify
@@ -1660,12 +1695,12 @@
                                                 <input type="text" class="form-control" placeholder="" maxlength="32" id="sourceOfIncomeOthers" name="sourceOfIncomeOthers" value="@Model.vm_client_info.sourceOfIncomeOthers" />
                                             </div>
                                         </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12" hidden>
                                             <div class="form-group">
                                                 <label for="usr" class="toplabel">
                                                     Monthly Income
                                                 </label>
-                                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" placeholder="" maxlength="32" id="monthlyIncomeOthers" name="sourceOfIncomeOthers" value="@Model.vm_client_info.sourceOfIncomeOthers" />
+                                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" placeholder="" maxlength="32" id="monthlyIncomeOthers" name="sourceOfIncomeOthers" value="@Model.vm_client_info.monthlyIncomeOthers" />
                                             </div>
                                         </div>
                                     </div>
@@ -1683,8 +1718,8 @@
                                                     <select class="form-control" name="creditOption" id="creditOption" style="background-color:#fff;color:#4f2683;" required>
                                                         <option value="csbNew">NEW CSB Savings Account</option>
                                                         @*<option value="csbOld">OLD CSB Savings Account</option>
-                                            <option value="payrollUBP">PAYROLL - UNIONBANK</option>
-                                            <option value="others">PAYROLL - OTHER BANKS</option>*@
+                                                            <option value="payrollUBP">PAYROLL - UNIONBANK</option>
+                                                            <option value="others">PAYROLL - OTHER BANKS</option>*@
                                                     </select>
                                                 </div>
                                             </div>
@@ -1792,30 +1827,30 @@
                                                     </div>
                                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="" style="width:100%;border:1px solid #9e9e9e;min-height:100px;text-align:center;background-color:#e1e1e1;">
-                                                            <img class="idpicture" id="txtpicture2" style="width:100%;min-height:100px;vertical-align:middle;max-height:200px;object-fit:contain;" src="https://fakeimg.pl/350x200/?text=%2b" />
+                                                            <img class="idpicture" id="txtpicture2" style="width:100%;min-height:100px;vertical-align:middle;max-height:200px;object-fit:contain;" src="https://fakeimg.pl/350x200/?text=%2b" data-toggle="tooltip" data-placement="top" title="Note: should be signed by the authorized signatory/ies" />
                                                         </div>
 
-                                                        <label class="btn btn-violet" id="btnid1" style="margin-top:5px;width:100%;margin-bottom:15px;">
-                                                            <span class="glyphicon glyphicon-upload"></span> Payslip (Current)
+                                                        <label class="btn btn-violet" id="btnid1" style="margin-top:5px;width:100%;margin-bottom:15px;" data-toggle="tooltip" data-placement="top" title="Note: should be signed by the authorized signatory/ies">
+                                                            <span class="glyphicon glyphicon-upload"></span> Payslip (Latest 2 months current payslip)
                                                             <input type="file" onchange="ValidateSize(this)" style="display:none;" name="fileupload2" id="fileupload2" accept=".jpg,.png,.jpeg" required />
                                                         </label>
                                                     </div>
                                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="" style="width:100%;border:1px solid #9e9e9e;min-height:100px;background-color:#e1e1e1;text-align:center;">
-                                                            <img class="idpicture" id="txtpicture3" style="width:100%;min-height:100px;vertical-align:middle;text-align:center;max-height:200px;object-fit:contain;" src="https://fakeimg.pl/350x200/?text=%2b" />
+                                                            <img class="idpicture" id="txtpicture3" style="width:100%;min-height:100px;vertical-align:middle;text-align:center;max-height:200px;object-fit:contain;" src="https://fakeimg.pl/350x200/?text=%2b" data-toggle="tooltip" data-placement="top" title="Note: should be signed by the authorized signatory/ies" />
                                                         </div>
-                                                        <label class="btn btn-violet" id="btnid1" style="margin-top:5px;width:100%;margin-bottom:15px;">
-                                                            <span class="glyphicon glyphicon-upload"></span> Certificate of Employment / Company ID
+                                                        <label class="btn btn-violet" id="btnid1" style="margin-top:5px;width:100%;margin-bottom:15px;" data-toggle="tooltip" data-placement="top" title="Note: should be signed by the authorized signatory/ies">
+                                                            <span class="glyphicon glyphicon-upload"></span> Certificate of Employment (COE)
                                                             <input type="file" onchange="ValidateSize(this)" style="display:none;" name="fileupload3" id="fileupload3" accept=".jpg,.png,.jpeg" required />
                                                         </label>
                                                     </div>
                                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                         <div class="" style="width:100%;border:1px solid #9e9e9e;min-height:100px;background-color:#e1e1e1;text-align:center;">
-                                                            <img class="idpicture" id="txtpicture6" style="width:100%;min-height:100px;vertical-align:middle;text-align:center;max-height:200px;object-fit:contain;" src="https://fakeimg.pl/350x200/?text=%2b" />
+                                                            <img class="idpicture" id="txtpicture6" style="width:100%;min-height:100px;vertical-align:middle;text-align:center;max-height:200px;object-fit:contain;" src="https://fakeimg.pl/350x200/?text=%2b" data-toggle="tooltip" data-placement="top" title="Note: with 3 Specimen signature" />
                                                         </div>
                                                         <label class="btn btn-violet" id="btnid1" style="margin-top:5px;width:100%;margin-bottom:15px;">
                                                             <span class="glyphicon glyphicon-upload"></span> Signature (Take a photo of 3 specimen signatures)
-                                                            <input type="file" onchange="ValidateSize(this)" style="display:none;" name="fileupload6" id="fileupload6" accept=".jpg,.png,.jpeg" required />
+                                                            <input type="file" onchange="ValidateSize(this)" style="display:none;" name="fileupload6" id="fileupload6" accept=".jpg,.png,.jpeg" required data-toggle="tooltip" data-placement="top" title="Note: with 3 Specimen signature" />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -2067,6 +2102,7 @@
     th {
         font-size: 12px !important;
     }
+
     #page-content {
         height: 80vh;
         overflow-y: auto;
@@ -2309,6 +2345,7 @@
         model_state.append("employeeNumber", $("#employeeNumber").val());
         //model_state.append("position", $("#position").val());
         model_state.append("rank", $("#rank").val());
+        model_state.append("monthlyBasicSalary", $("#monthlyBasicSalary").val());
 
         model_state.append("department", $("#department").val());
         model_state.append("monthlyAllowance", $("#monthlyAllowance").val());

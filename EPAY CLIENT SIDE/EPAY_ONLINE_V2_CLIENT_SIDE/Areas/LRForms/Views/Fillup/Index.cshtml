@@ -469,6 +469,8 @@
                                     <td colspan="2"><span name="dCitizenship">FILIPINO</span></td>
                                     <td colspan="2"><span name="dMothersMaidenName"></span></td>
                                 </tr>
+                            </table>
+                            <table class="table table-bordered" id="secondTable" width="100%" cellspacing="0">
                                 <tr>
                                     <th colspan="8" class="text-center">TERMS AND CONDITIONS OF CitySavings ATM CARD</th>
                                 </tr>
@@ -745,7 +747,7 @@
                                 <tr>
                                     <td colspan="8" style="text-align: justify;">
                                         <span>
-                                            Depositor’s personal information including without limiting to his/her accounts, transactions, deposit accounts, credit relationships, and/or credit facilities (“information” or “data”) shall be treated as confidential by the Bank.
+                                            In compliance with Data Privacy Act of 2012, Depositor’s personal information including without limiting to his/her accounts, transactions, deposit accounts, credit relationships, and/or credit facilities (“information” or “data”) shall be treated as confidential by the Bank.
                                             <br>Depositor consents to the processing of said confidential information by the City Savings Bank, Inc., its directors, officers, employees, advisers, consultants, auditors, agents and representatives for purposes of (i) carrying out, management, performance and development of its products and services (ii) pursuit of its marketing, promotional, communication, commercial and research objectives, (iii) usual business transactions and (iv) compliance with the requirements of applicable laws and/or government regulators or supervisory bodies.
                                             <br>This constitutes as express consent under the applicable confidentiality and data privacy laws of the Philippines given by the Depositor specifically allows the City Savings Bank, Inc. to:
                                             <br>
@@ -827,6 +829,16 @@
                                             <br>The Bank’s non-receipt of advice from the Depositor within thirty (30) days from receipt of notice from the Bank  or thirty (30) days from issuance of public notice in relation to said changes shall be deemed the Depositor’s agreement to all such changes or modifications.
                                             <br>Where such Amendments are to the Fee Schedule or affect the fees and charges and the Depositor’s liabilities or obligations under the Deposit Account, the Depositor will be given not less than thirty (30) days’ notice before the Amendments take effect unless such changes are not within the Bank’s control.
                                             <br>By signing these general terms and conditions, I hereby undertake to indemnify and hold the Bank, its directors, stockholders, officers, employees, representatives, agents or relevant units of the Bank, free and harmless from and against all liabilities, claims, demands, actions, proceedings, losses, expenses and all other liabilities of whatsoever nature or description which may be suffered or incurred by the Bank, its directors, stockholders, officers, employees, representatives, agents or relevant units of the Bank, arising from or in connection with the implementation of the provision of these terms and conditions.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="8" class="text-center">DATA PRIVACY NOTICE & CONSENT CLAUSE</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" style="text-align: justify;">
+                                        <span>
+                                            By filling up and submitting this form, I agree and explicitly consent to the use of my personal information and sensitive personal information transaction to any of the following for any of the specific purposes which in all cases are in compliance with or pursuant to our legal or contractual obligation such as but not limited to: KYC purposes, loan processing purposes, the conduct of credit assessments, checks and investigations. You are aware and can be assured that the personal information and sensitive personal information that you have provided us shall be used only in accordance with the purpose of the service and product delivery you consented to, subject to the T&C you agreed to, and in accordance with City Savings Bank's Privacy Policy (https://www.citysavings.com.ph/privacy).
                                         </span>
                                     </td>
                                 </tr>
@@ -2423,7 +2435,8 @@
             return model_state;
         }
         var attachment7 = createCIF();
-        var attachment8 = createATM();
+        //var attachment8 = createATM();
+        var attachment8 = createATMTest();
         var attachment9 = createAPPFORM();
         var attachment10 = createCTF();
 
@@ -2501,6 +2514,7 @@
         //var file = URL.createObjectURL(sampl2);
         return sampl2;
     }
+
     function createATM() {
         var sample2 = new jsPDF('l', 'pt', 'a4');
         let halfX = sample2.internal.pageSize.width / 2;
@@ -2535,6 +2549,68 @@
                 sample2.text(str, data.settings.margin.left, pageHeight - 10)
             }
         })
+
+        if (typeof sample2.putTotalPages === 'function') {
+            sample2.putTotalPages(totalPagesExp);
+        }
+        var sampl2 = sample2.output('blob');
+        //window.open(URL.createObjectURL(sampl2))
+        //sample.save("wow.pdf")
+        //var file = URL.createObjectURL(sampl2);
+        return sampl2;
+    }
+    function createATMTest() {
+        var sample2 = new jsPDF('l', 'pt', 'a4');
+        let halfX = sample2.internal.pageSize.width / 2;
+        var totalPagesExp = "{total_pages_count_string}";
+        sample2.autoTable({
+            html: '#ATM',
+            startY: 20,
+            useCss: true,
+            styles: { overflow: 'linebreak', fontSize: 6 },
+            columnStyles: {
+                0: { cellWidth: 80 },
+                1: { cellWidth: 80 },
+                2: { cellWidth: 80 },
+                3: { cellWidth: 80 },
+                4: { cellWidth: 80 },
+                5: { cellWidth: 80 },
+                6: { cellWidth: 80 },
+                7: { cellWidth: 80 }
+            },
+            didDrawPage: function (data) {
+                // Footer
+                var str = 'Page ' + sample2.internal.getNumberOfPages()
+
+                if (typeof sample2.putTotalPages === 'function') {
+                    str = str + " of " + totalPagesExp;
+                }
+                sample2.setFontSize(6)
+
+                // jsPDF 1.4+ uses getWidth, <1.4 uses .width
+                var pageSize = sample2.internal.pageSize
+                var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight()
+                sample2.text(str, data.settings.margin.left, pageHeight - 10)
+            }
+        })
+
+        sample2.autoTable({
+            html: '#secondTable',
+            startY: sample2.lastAutoTable.finalY + 160,
+            useCss: true,
+            styles: { overflow: 'linebreak', fontSize: 6 },
+            columnStyles: {
+                0: { cellWidth: 80 },
+                1: { cellWidth: 80 },
+                2: { cellWidth: 80 },
+                3: { cellWidth: 80 },
+                4: { cellWidth: 80 },
+                5: { cellWidth: 80 },
+                6: { cellWidth: 80 },
+                7: { cellWidth: 80 }
+            }
+        });
+
         if (typeof sample2.putTotalPages === 'function') {
             sample2.putTotalPages(totalPagesExp);
         }
