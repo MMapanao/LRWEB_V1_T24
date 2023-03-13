@@ -1,6 +1,7 @@
 ﻿using BankAlertsBL;
 using BusinessObjectEntities.BankAlerts.Entity;
 using Dapper;
+using System.Net.Mail;
 using LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.ViewModel;
 using LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Models;
 using System;
@@ -14,6 +15,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -21,6 +23,7 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using static LRWEB_V1_CLIENT_SIDE_T24.Areas.HumanResource.Controllers.LoginController;
 
 namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
 {
@@ -35,8 +38,9 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         string centraluri = ConfigurationManager.ConnectionStrings["centralapi"].ToString();
         string centraluname = ConfigurationManager.ConnectionStrings["centraluname"].ToString();
         string centralpword = ConfigurationManager.ConnectionStrings["centralpword"].ToString();
-
         DateTime dateTime = DateTime.UtcNow.Date;
+        DateTime serverTime = DateTime.Now;
+        TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
         BLMapper blMapper = new BLMapper();
         public string authtoken = "";
         // GET: LRForms/Fillup
@@ -609,8 +613,84 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
             var path9 = obj.ToString() + "-E1.pdf";
             UploadPDF(model_state.attachment10, obj.ToString(), "F1");
             var path10 = obj.ToString() + "-F1.pdf";
+
+            //var EmailAddress = conn.Query<string>(@"SELECT email FROM LRWEB_V1_CLIENT_EMPLOYEE WHERE Tokens=@tokens", new { tokens = Session["Token"].ToString() }).Single();
+            ////var FName = conn.Query<string>(@"SELECT firstName FROM LRWEB_V1_CLIENT_EMPLOYEE WHERE Tokens=@tokens", new { tokens = Session["Token"].ToString() }).Single();
+            ////var Lname = conn.Query<string>(@"SELECT lastName FROM LRWEB_V1_CLIENT_EMPLOYEE WHERE Tokens=@tokens", new { tokens = Session["Token"].ToString() }).Single();
+
+            //string Friendlyname = model_state.firstName + " " + model_state.lastName;
+
+            //var zipPath = ZipThis(path7 , path8 , path9 , path10);
+
+            //string mailer, mailerpassword;
+            //mailer = ConfigurationManager.AppSettings["MAILER"].ToString();
+            //mailerpassword = ConfigurationManager.AppSettings["MAILERPASS"].ToString();
+            //MailMessage Mail = new MailMessage();
+            ////SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            //Mail.From = new MailAddress(mailer);
+            //Mail.To.Add(EmailAddress);
+            //Mail.IsBodyHtml = true;
+
+            //string NewExpirationDate;
+            //string cswhite, csviolet, lrlogo;
+            //lrlogo = "https://lh3.googleusercontent.com/W_117BS4HHOy365tu5oGQHNeFAPrRahs6peQsFateGiTZnwKba5lpYZ71WVUWkh0_oSmdj1S0BmjDDTKOEMsbS5WbsHpEOwBMZrm6MVGqCbcHQLdMHgfrXAPK5yv_h_KXlzIo-anpA=w2400";
+            //csviolet = "https://lh3.googleusercontent.com/OrJkM7THj_rQxtBWDk4fYk5q6Q9Q1JHLKcGHfZ36GOi8QkDe38G2j0xiTXRE68QJkKiazXFNvZ9fRCpUm-EC-32mjqkZ3s9yAwQQ5f2E2fKsIE4b6CxtbevCgSgDYSaXQbmv28IN-Q=w2400";
+            //cswhite = "https://lh3.googleusercontent.com/gJ5fyWWPO3iGHGdlrpQUIWNnh4bMmKqVodDDUlezZfkp8Nprf1sbV0ipQPLO5-WURxvNEsmdaZatjUdItxj0PvQZH7xVCBcpDnkzLfVrz__gu2OmIJ53p8SxpOmzptqZGSwFWglZyg=w2400";
+
+            //Mail.Subject = "Your CitySavings Loan has been verified and is being processed";
+
+            //string emailbody;
+            //emailbody = @"
+            //    < html >
+            //        < body style = 'padding-left: 15px;padding-right:15px; cursor:default;' >
+            //            < div style = 'width:100%;background-color: #4f2683;padding-top:10px;' >
+            //            < a href = '' style = 'cursor:default' >< img src = '" + csviolet + @"' style = 'width:200px;' /></ a >
+            //            </ div >
+            //            < div style = 'background-color: #fff;padding: 15px;font-family: Calibri; cursor:default;' >
+            //                < p style = 'font-size: 1.4rem;margin-top:5px;margin-bottom: 3px;font-family: Calibri;color:#4f2683;' > Dear < b > " + Friendlyname + @" ,</ b ></ p >
+            //                < br />
+            //                < p style = 'font-size: 1.2rem;margin-top:5px;margin-bottom: 3px;font-family: Calibri;color:#4f2683;' > Good day! Thank you for applying for a CitySavings Salary Loan.</ p >
+            //                < p style = 'font-size: 1.2rem;margin-top:5px;margin-bottom: 3px;font-family: Calibri;color:#4f2683;' > We are pleased to inform you that your loan application has been verified by your Company HR and is currently being evaluated by the bank. </ p >
+            //                < p style = 'font-size: 1.2rem;margin-top:5px;margin-bottom: 3px;color:#4f2683;margin-top: 25px;' > We will send you additional information once your loan application has been successfully processed.</ p > < br />
+            //                < p style = 'font-size: 1.2rem;margin-top:5px;margin-bottom: 3px;color:#4f2683;margin-top:15px;font-family: Calibri;' >
+            //                    For further inquiries or concerns, you may reach us through the following:< br />
+            //                Loan application status: " + ConfigurationManager.AppSettings["APPSTATUSURL"].ToString() + @" < br />
+            //                All other queries: " + ConfigurationManager.AppSettings["SIMPLEURL"].ToString() + @"
+            //                </ p >< br />< br />
+            //            </ div >
+            //            < div style = 'width:100%;height:auto;padding-top:10px; text-align: center;' >
+            //                < a href = '' >
+            //                    < img src = '" + cswhite + @"' style = 'width:300px;height:100px;display:inline-flex;margin-left:auto;margin-right:auto;padding-bottom:10px;padding-top:10px;' />
+            //                </ a >
+            //                < img src = '" + lrlogo + @"' style = 'width:100px;display:inline-flex;margin-left:auto;margin-right:auto;padding-bottom:10px;padding-top:10px;' />
+            //            </ div >
+            //            < div style = 'font-family: Calibri;text-align: center;color:#7e7e7e;' >
+            //            Please do not reply to this message.This is a system - generated email sent to < " + EmailAddress + @" >.< br />
+            //            Thank you for banking with us
+            //            </ div >
+            //            < div style = 'padding-left: 15px;padding-right:15px;' >
+            //                < div style = 'padding:10px;background-color:#fff;font-family:Calibri;text-align:justify;' >
+            //                    < h3 style = 'color:#4f2683;text-align:left;' > City Savings Bank, Inc. is an entity regulated by Bangko Sentral ng Pilipinas.</ h3 >
+            //                        < p style = 'font-size: 1.2rem;margin-top:5px;margin-bottom: 3px;color:#4f2683;margin-top:15px;font-family: Calibri;' >< b > DISCLAIMER: </ b > This message and any attachment hereto may contain privilege and / or confidential information and is meant solely for the purpose and use of the intended recipient.If you are not the addressee of this message, you may not copy, disclose, distribute or disseminate this message(and any attachment hereto) to anyone.Instead, please destroy this message(and any attachment hereto), delete the same from your computer, and notify the sender by reply e - mail.Unauthorized access, reproduction, disclosure and circulation of this e - mail and / or any of its attachments or any information therein by any unauthorized persons is strictly prohibited and is punishable under R.A.No. 8792, otherwise known as E - Commerce Act, and other related laws.
+            //                        < br />< br />
+            //                        < b > DISCLOUSURE:</ b > Pursuant to BSP Circular 957(Examination and Records of BSP Supervised Financial Institution), please be advised that the content of this communication and your reply thereto will form part of the formal documentation of CitySavings’s transactions and may be disclosed to regulations.</ p >< br />
+            //                </ div >
+            //            </ div >
+            //        </ body >
+            //    </ html > ";
+            //    Mail.Body = emailbody;
+            //Attachment attachment = new Attachment(zipPath);
+            //    Mail.Attachments.Add(attachment);
+
+            //SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
+            //SmtpServer.Credentials = new NetworkCredential(mailer, mailerpassword);
+            //SmtpServer.EnableSsl = true;
+            //SmtpServer.Send(Mail);
+
             //var path7 = "";
             //var path8 = "";
+
             conn.Execute("Insert into LRWEB_V1_CUSTOMER_APPLICATION (referenceNumber,CIFno,netIncome,loanAmount,loanTerms,loanPurpose,loanPurposeID,loanPurposeOthers,groupCode,creditOption,creditOptionID,nameToDisplay,accountNumber,bankName,attachment1,attachment2,attachment3,attachment4,attachment5,attachment6,attachment7,attachment8,attachment9,attachment10,legalID,nameOnID,documentName,documentNameID,issueAuth,issueAuthID,issueDate,expirationDate,sol_id,finacle_sol_id,dateCreated,netPay,otherLoans,OTPSend) values " +
                 "(@referenceNumber,@CIFno,@netIncome,@loanAmount,@loanTerms,@loanPurpose,@loanPurposeID,@loanPurposeOthers,@groupCode,@creditOption,@creditOptionID,@nameToDisplay,@accountNumber,@bankName,@attachment1,@attachment2,@attachment3,@attachment4,@attachment5,@attachment6,@attachment7,@attachment8,@attachment9,@attachment10,@legalID,@nameOnID,@documentName,@documentNameID,@issueAuth,@issueAuthID,@issueDate,@expirationDate,@sol_id,@finacle_sol_id,@dt2,@netPay,@otherLoans,@OTPSend)", new
                 {
@@ -658,6 +738,8 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
                         groupCode = Session["GroupCode"].ToString()
                     }).Single(),
                     dt2 = dt2
+
+
                 });
 
 
@@ -667,6 +749,7 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
             });
 
             return obj.ToString();
+
         }
 
         public string EditEmployeeData(_EMPLOYEE_DATA model_state)
@@ -929,22 +1012,42 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         [HttpGet]
         public JsonResult GetProvince()
         {
+                
+                using (var client = new HttpClient())
+                {
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            using (var client = new HttpClient())
-            {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                    client.BaseAddress = new Uri(Uristring);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("lookup/province").Result;
 
-                client.BaseAddress = new Uri(Uristring);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("lookup/province").Result;
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'GetProvince','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/province','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'GetProvince','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/province','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
+
             }
 
         }
@@ -954,20 +1057,39 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(Uristring);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                string address = "lookup/city/" + provinceId;
-                var response = client.GetAsync(address).Result;
+                    client.BaseAddress = new Uri(Uristring);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    string address = "lookup/city/" + provinceId;
+                    var response = client.GetAsync(address).Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getCity','" + res["message"].ToString() + "','" + address + "','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getCity','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/city/'" + provinceId + "','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -976,20 +1098,39 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(Uristring);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                string address = "lookup/brgy/" + cityId;
-                var response = client.GetAsync(address).Result;
+                    client.BaseAddress = new Uri(Uristring);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    string address = "lookup/brgy/" + cityId;
+                    var response = client.GetAsync(address).Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getBarangay','" + res["message"].ToString() + "','" + address + "','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getBarangay','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/brgy/'"+ cityId + "','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -998,19 +1139,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("09698665-6aa1-4e06-80bd-ea2227ccb7bc").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("09698665-6aa1-4e06-80bd-ea2227ccb7bc").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getIssueAuth','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/09698665-6aa1-4e06-80bd-ea2227ccb7bc','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getIssueAuth','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/09698665-6aa1-4e06-80bd-ea2227ccb7bc','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1019,19 +1179,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("63789a49-fba2-4ac6-91a3-173b0c2578db").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("63789a49-fba2-4ac6-91a3-173b0c2578db").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getOwnership','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/63789a49-fba2-4ac6-91a3-173b0c2578db','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getOwnership','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/63789a49-fba2-4ac6-91a3-173b0c2578db','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1040,19 +1219,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("c9ce10db-f067-4c87-91df-7b289b2a5e39").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("c9ce10db-f067-4c87-91df-7b289b2a5e39").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getCivilStatus','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/c9ce10db-f067-4c87-91df-7b289b2a5e39','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getCivilStatus','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/c9ce10db-f067-4c87-91df-7b289b2a5e39','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
         
@@ -1061,19 +1259,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("cabd75be-19c9-4e65-879f-adc361f57877").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("cabd75be-19c9-4e65-879f-adc361f57877").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getSourceOfIncome','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/cabd75be-19c9-4e65-879f-adc361f57877','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getSourceOfIncome','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/cabd75be-19c9-4e65-879f-adc361f57877','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1082,40 +1299,86 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("ce922ecb-1ba5-49c8-9b22-3b3ddc671125").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("ce922ecb-1ba5-49c8-9b22-3b3ddc671125").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getDocumentName','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/ce922ecb-1ba5-49c8-9b22-3b3ddc671125','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getDocumentName','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/ce922ecb-1ba5-49c8-9b22-3b3ddc671125','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
+
+        
         [HttpGet]
         public JsonResult getLoanPurpose()
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("d515b249-cedb-4361-b6db-152bde24515c").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("d515b249-cedb-4361-b6db-152bde24515c").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getLoanPurpose','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/d515b249-cedb-4361-b6db-152bde24515c','" + dt2 + "')";
+                    //var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getLoanPurpose','" + res["message"].ToString() + "','" + client.BaseAddress + "','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    //var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getLoanPurpose', @message, @apiUrl, @date)";
+                    //conn.Execute(strquery, new { message = res["message"].ToString(), @apiUrl = client.BaseAddress, date = dt2 });
+
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getLoanPurpose','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/d515b249-cedb-4361-b6db-152bde24515c','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1124,19 +1387,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("dd567703-588b-4e9d-88bf-7cb354dc42b2").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("dd567703-588b-4e9d-88bf-7cb354dc42b2").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getNationality','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/dd567703-588b-4e9d-88bf-7cb354dc42b2','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getNationality','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/dd567703-588b-4e9d-88bf-7cb354dc42b2','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1145,19 +1427,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("fb3808b9-5adc-4cfd-9adc-42a84fa2e53c").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("fb3808b9-5adc-4cfd-9adc-42a84fa2e53c").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getNatureOfWork','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/fb3808b9-5adc-4cfd-9adc-42a84fa2e53c','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getNatureOfWork','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/fb3808b9-5adc-4cfd-9adc-42a84fa2e53c','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1166,19 +1467,38 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
         {
             using (var client = new HttpClient())
             {
-                authtoken = token;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                try
+                {
+                    authtoken = token;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                client.BaseAddress = new Uri(lookup);
-                client.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("authtoken", authtoken);
-                var response = client.GetAsync("feb13a9e-6e9a-4511-8faa-81af9a144a99").Result;
+                    client.BaseAddress = new Uri(lookup);
+                    client.DefaultRequestHeaders
+                        .Accept
+                        .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("authtoken", authtoken);
+                    var response = client.GetAsync("feb13a9e-6e9a-4511-8faa-81af9a144a99").Result;
 
-                var contents = response.Content.ReadAsStringAsync().Result;
-                JObject res = JObject.Parse(contents);
-                return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                    var contents = response.Content.ReadAsStringAsync().Result;
+                    JObject res = JObject.Parse(contents);
+
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getCreditType','" + res["message"].ToString() + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/feb13a9e-6e9a-4511-8faa-81af9a144a99','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(res["data"].ToString(), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception e)
+                {
+                    DateTime dt2 = TimeZoneInfo.ConvertTime(serverTime, TimeZoneInfo.Local, tst);
+
+                    var strquery = "INSERT INTO API_LOGS (application_number, api, message, params, Date) values ('0', 'getCreditType','" + e.Message + "','new-los-api-dev.citysavings.com.ph/v1/newlos/lookup/values/feb13a9e-6e9a-4511-8faa-81af9a144a99','" + dt2 + "')";
+                    conn.Execute(strquery);
+
+                    return Json(new { error = e.Message });
+                }
+
             }
         }
 
@@ -1550,6 +1870,28 @@ namespace LRWEB_V1_CLIENT_SIDE_T24.Areas.LRForms.Controllers
             {
                 return Json(new { message = "invalid", email = email }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public static string ZipThis(string path7, string path8, string path9, string path10)
+        {
+            var path = HostingEnvironment.ApplicationPhysicalPath + "\\Areas\\ID_Storage\\";
+            var zipPath = path + "-attachment.zip";
+            System.IO.File.Delete(zipPath);
+            // Create FileStream for output ZIP archive
+            using (ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Update))
+            {
+                //zip.CreateEntryFromFile(path1, "picture" + Path.GetExtension(path1));
+                //zip.CreateEntryFromFile(path2, "payslip" + Path.GetExtension(path2));
+                //zip.CreateEntryFromFile(path3, "COE" + Path.GetExtension(path3));
+                //zip.CreateEntryFromFile(path4, "IDfront" + Path.GetExtension(path4));
+                //zip.CreateEntryFromFile(path5, "IDBack" + Path.GetExtension(path5));
+                //zip.CreateEntryFromFile(path6, "Signature" + Path.GetExtension(path6));
+                zip.CreateEntryFromFile(path7, "CIFform" + Path.GetExtension(path7));
+                zip.CreateEntryFromFile(path8, "ATMform" + Path.GetExtension(path8));
+                zip.CreateEntryFromFile(path9, "APPform" + Path.GetExtension(path9));
+                zip.CreateEntryFromFile(path10, "Terms&Condition" + Path.GetExtension(path10));
+            }
+            return zipPath;
         }
 
         class auth

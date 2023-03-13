@@ -1466,7 +1466,7 @@ function timerIncrement() {
         idleTime = 0;
         $.confirm({
             title: 'Logout?',
-            content: 'Due to nactivity, you will be automatically logged out in 60 seconds.',
+            content: 'Due to inactivity, you will be automatically logged out in 60 seconds.',
             autoClose: 'logoutUser|60000',
             buttons: {
                 logoutUser: {
